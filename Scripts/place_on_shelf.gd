@@ -14,7 +14,7 @@ signal add_item_to_inventory
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var ranNum = randi_range(0, 4)
+	var ranNum = randi_range(1, 4)
 	for i in range(ranNum):
 		var shelf: CollisionShape2D = [shelfshape_0, shelfshape_1][randi() % 2]
 		var itemTexture: CompressedTexture2D = ITEMS[randi() % ITEMS.size()]
@@ -62,7 +62,7 @@ func _ready() -> void:
 
 func _button_pressed(item: Sprite2D, button: Button) -> void:
 	GameManager.add_item_to_inventory(item)
-	item.queue_free()
+	delete_all_descendants(item)
 	button.pressed.disconnect(_button_pressed)
 	button.queue_free()
 
@@ -70,3 +70,9 @@ func _toggle_button_visibility(_body: PhysicsBody2D,button: Button) -> void:
 	print("Toggled visibility!")
 	button.disabled = not button.disabled
 	button.visible = not button.visible
+
+# Tar bort alla ättlingar från noden
+func delete_all_descendants(node: Node):
+	for child in node.get_children():
+		node.remove_child(child)
+		child.queue_free()
