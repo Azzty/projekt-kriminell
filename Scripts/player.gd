@@ -6,8 +6,12 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var _following_items := []
+var itemOffsetLength = 8
 
-func _physics_process(_delta: float) -> void:
+func _ready():
+	GameManager.connect("item_added_to_inventory", _add_following_item)
+
+func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var directionX := Input.get_axis("move_left", "move_right")
 	var directionY := Input.get_axis("move_up", "move_down")
@@ -21,6 +25,7 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = directionY * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+	velocity = velocity.normalized() * SPEED
 	
 	# Flip sprite if moving to right
 	if directionX > 0:
@@ -36,16 +41,31 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	
-	for item: Sprite2D in _following_items:
+	for index in _following_items.size():
+		var item: Sprite2D = _following_items[index]
+		var rotateIncrement = (2 * PI) / _following_items.size()
+		var offsetVector = Vector2(0, itemOffsetLength).rotated(index * rotateIncrement)
+		
+		# This is where we want to be at
+		var targetPosition = global_position + offsetVector
+		
+		# This is how were gonna move
+		var deltaPosition = targetPosition - item.global_position
+		
+		# Skip if too close
+		if deltaPosition.length() < 5: continue
+		
+		# Move and look at player
+		item.global_position += deltaPosition.normalized() * SPEED * delta * 0.95
 		item.look_at(position)
-		item.position += (position - item.position).normalized() * SPEED
 
 func add_item_to_inventory(item: Sprite2D) -> void:
-	GameManager.inventory.append(item)
+	GameManager.add_item_to_inventory(item)
 
 func remove_item_from_inventory(item: Sprite2D) -> void:
-	GameManager.inventory.erase(item)
+	GameManager.remove_item_from_inventory(item)
 
-func _add_following_item(item: Sprite2D) -> void:
-	item.position = position
-	GameManager.append(item)
+func _add_following_item(item: Sprite2D):
+	_following_items.append(item)
+	itemOffsetLength = 8 + _following_items.size() * 2
+	print("Added item to following items!")
