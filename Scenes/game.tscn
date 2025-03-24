@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://tyeseuem6nsq"]
+
+[ext_resource type="Script" uid="uid://cj8gooxm1s7wu" path="res://Scripts/game_manager.gd" id="1_3dryh"]
+[ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/shelf.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://ci5vd1nks0708" path="res://Scenes/pickup_test.tscn" id="3_wrm1d"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_3dryh")
+
+[node name="Player" parent="." instance=ExtResource("1_ebmjs")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 254)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="shelf" parent="." instance=ExtResource("2_qxrlw")]
+position = Vector2(55, 157)
+
+[node name="shelf2" parent="." instance=ExtResource("2_qxrlw")]
+position = Vector2(190, 168)
+
+[node name="shelf3" parent="." instance=ExtResource("2_qxrlw")]
+position = Vector2(141, 79)
+
+[node name="PickupTest" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(44, 69)
+scale = Vector2(0.261618, 0.261618)
+
+[node name="PickupTest2" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(238, 121)
+scale = Vector2(0.261618, 0.261618)
+
+[node name="PickupTest3" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(116, 195)
+scale = Vector2(0.261618, 0.261618)

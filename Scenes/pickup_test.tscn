@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci5vd1nks0708"]
+
+[ext_resource type="Script" uid="uid://byxt26ayeh72w" path="res://Scripts/pickup_test.gd" id="1_ghy8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ao41"]
+size = Vector2(202, 176)
+
+[sub_resource type="Gradient" id="Gradient_iq0km"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u0r70"]
+gradient = SubResource("Gradient_iq0km")
+
+[sub_resource type="InputEventKey" id="InputEventKey_1y24m"]
+device = -1
+keycode = 69
+unicode = 101
+
+[sub_resource type="Shortcut" id="Shortcut_263de"]
+events = [SubResource("InputEventKey_1y24m")]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_ghy8c")
+
+[node name="PickupArea" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6ao41")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_u0r70")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -72.0
+offset_top = -68.0
+offset_right = 71.0
+offset_bottom = -37.0
+disabled = true
+shortcut = SubResource("Shortcut_263de")
+text = "Press E to pick up"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
