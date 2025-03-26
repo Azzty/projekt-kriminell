@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy3hndwwgd8fh"]
+
+[ext_resource type="PackedScene" uid="uid://pgle26v0aoqn" path="res://Scenes/customer.tscn" id="1_c3i85"]
+[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/apple.png" id="2_j65sj"]
+[ext_resource type="Texture2D" uid="uid://btxnkmuyohk2k" path="res://Assets/sprites/crowbar.png" id="3_w6sp3"]
+[ext_resource type="Texture2D" uid="uid://lmlu5h7ow51e" path="res://Assets/sprites/revolver.png" id="4_m7h4d"]
+
+[sub_resource type="Gradient" id="Gradient_i3rh0"]
+colors = PackedColorArray(0, 0, 0, 1, 0.548963, 0.548963, 0.548963, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_voxcw"]
+gradient = SubResource("Gradient_i3rh0")
+fill_from = Vector2(0.0331492, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_c3i85"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.546, 0.563333, 0.65, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkwxl"]
+gradient = SubResource("Gradient_c3i85")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkwxl"]
+size = Vector2(166, 32)
+
+[node name="Store" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(4.5, 2.53125)
+texture = SubResource("GradientTexture2D_voxcw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Customer" parent="." instance=ExtResource("1_c3i85")]
+position = Vector2(-70, 1)
+
+[node name="Counter" type="Area2D" parent="."]
+position = Vector2(0, 48)
+scale = Vector2(1.52, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Counter"]
+scale = Vector2(2.6, 0.519999)
+texture = SubResource("GradientTexture2D_lkwxl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Counter"]
+shape = SubResource("RectangleShape2D_lkwxl")
+
+[node name="Crowbar" type="Sprite2D" parent="."]
+position = Vector2(-85, 55)
+scale = Vector2(2, 2)
+texture = ExtResource("3_w6sp3")
+
+[node name="Apple" type="Sprite2D" parent="."]
+position = Vector2(26, 38)
+scale = Vector2(2, 2)
+texture = ExtResource("2_j65sj")
+
+[node name="Revolver" type="Sprite2D" parent="."]
+position = Vector2(-21, 47)
+scale = Vector2(2, 2)
+texture = ExtResource("4_m7h4d")
