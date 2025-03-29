@@ -1,0 +1,37 @@
+{
+	"Default" : {
+		"greeting": [
+			"Hello!",
+			"Greetings.",
+			"Sup."
+		],
+		"request_gun": [
+			"You got any guns here?",
+			"Do you know where I could get a gun?"
+		],
+		"request_melee": [
+			"I am in need of some sort of hand-to-hand weapon.",
+			"I need a bat, crowbar, whatever. You got anything I can hit someone with?"
+		],
+		"request_accepted": [
+			"Thanks!",
+			"Great, I'll be back.",
+			"Good."
+		],
+		"request_denied": [
+			"Hmph.",
+			"Your loss.",
+			"Really? Alright then."
+		],
+		"item_given_correct": [
+			"Ah yes, good good good. Thank you!",
+			"Just what I wanted, thanks.",
+			"Awesome, this place is great!"
+		],
+		"item_given_incorrect": [
+			"What is this? I don't want this.",
+			"Wrong item buddy, I didn't ask for this.",
+			"Huh? I don't want that!"
+		]
+	}
+}

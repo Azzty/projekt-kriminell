@@ -6,8 +6,8 @@ const REVOLVER = preload("res://Assets/sprites/revolver.png")
 
 const ITEMS = [APPLE, CROWBAR, REVOLVER]
 
-@onready var shelfshape_0: CollisionShape2D = $shelf/shelfshape0
-@onready var shelfshape_1: CollisionShape2D = $shelf/shelfshape1
+@onready var shelfshape_0: CollisionShape2D = $Shelf/Shelfshape0
+@onready var shelfshape_1: CollisionShape2D = $Shelf/Shelfshape1
 const font = preload("res://Assets/fonts/dogicapixel.ttf")
 
 signal add_item_to_inventory
