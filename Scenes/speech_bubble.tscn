@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=5 format=3 uid="uid://ij0pcjia8vks"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://cxdsc1k7v8j0a"]
+>>>>>>> Stashed changes
 
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="1_0ss60"]
 [ext_resource type="Script" path="res://Scripts/speech_bubble.gd" id="1_f4c0y"]

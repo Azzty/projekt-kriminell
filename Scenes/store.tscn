@@ -1,7 +1,13 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [gd_scene load_steps=10 format=3 uid="uid://cy3hndwwgd8fh"]
 
 [ext_resource type="PackedScene" uid="uid://pgle26v0aoqn" path="res://Scenes/customer.tscn" id="1_c3i85"]
+=======
+[gd_scene load_steps=10 format=3 uid="uid://c1aaqf7xcl2yl"]
+
+[ext_resource type="PackedScene" uid="uid://bcopoany7t2k3" path="res://Scenes/customer.tscn" id="1_c3i85"]
+>>>>>>> Stashed changes
 =======
 [gd_scene load_steps=10 format=3 uid="uid://c1aaqf7xcl2yl"]
 
