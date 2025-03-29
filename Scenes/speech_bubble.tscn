@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://deum0uskaguoj"]
+[gd_scene load_steps=5 format=3 uid="uid://ij0pcjia8vks"]
 
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="1_0ss60"]
-[ext_resource type="Script" uid="uid://mcnqw8wnd507" path="res://Scripts/speech_bubble.gd" id="1_f4c0y"]
+[ext_resource type="Script" path="res://Scripts/speech_bubble.gd" id="1_f4c0y"]
 
 [sub_resource type="Gradient" id="Gradient_f4c0y"]
 colors = PackedColorArray(0.42, 0.42, 0.42, 1, 1, 1, 1, 1)
