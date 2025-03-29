@@ -1,15 +1,21 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [gd_scene load_steps=4 format=3 uid="uid://1iltckb8nmrr"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_0v30w"]
 [ext_resource type="Texture2D" uid="uid://c0jjgn88ttecf" path="res://Assets/sprites/Ugly guy.png" id="1_fp685"]
 [ext_resource type="PackedScene" uid="uid://ij0pcjia8vks" path="res://Scenes/speech_bubble.tscn" id="2_7c3kf"]
 =======
+=======
+>>>>>>> Stashed changes
 [gd_scene load_steps=4 format=3 uid="uid://bcopoany7t2k3"]
 
 [ext_resource type="Script" path="res://Scripts/customer.gd" id="1_0v30w"]
 [ext_resource type="Texture2D" path="res://Assets/sprites/Ugly guy.png" id="1_fp685"]
 [ext_resource type="PackedScene" uid="uid://cxdsc1k7v8j0a" path="res://Scenes/speech_bubble.tscn" id="2_7c3kf"]
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 [node name="Customer" type="Node2D"]
