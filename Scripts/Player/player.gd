@@ -9,7 +9,13 @@ var _following_items := []
 var itemOffsetLength = 8
 
 func _ready():
-	GameManager.connect("item_added_to_inventory", _add_following_item)
+	GameState.connect("item_added_to_inventory", _add_following_item)
+	for item_data: Dictionary in GameState.inventory:
+		var item = Sprite2D.new()
+		item.texture = item_data.texture
+		add_child(item)
+		item.name = item_data.name
+		_add_following_item(item)
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -60,12 +66,15 @@ func _physics_process(delta: float) -> void:
 		item.look_at(position)
 
 func add_item_to_inventory(item: Sprite2D) -> void:
-	GameManager.add_item_to_inventory(item)
+	GameState.add_item_to_inventory(item)
 
 func remove_item_from_inventory(item: Sprite2D) -> void:
-	GameManager.remove_item_from_inventory(item)
+	GameState.remove_item_from_inventory(item)
 
 func _add_following_item(item: Sprite2D):
+	var item_name = item.name
+	if item.get_parent() != self:
+		item.reparent(self)
+	item.name = item_name # Rename to fix name conflicts
 	_following_items.append(item)
 	itemOffsetLength = 8 + _following_items.size() * 2
-	print("Added item to following items!")

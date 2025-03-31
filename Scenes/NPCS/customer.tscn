@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bcopoany7t2k3"]
 
-[ext_resource type="Script" path="res://Scripts/customer.gd" id="1_0v30w"]
-[ext_resource type="Texture2D" path="res://Assets/sprites/Ugly guy.png" id="1_fp685"]
-[ext_resource type="PackedScene" uid="uid://cxdsc1k7v8j0a" path="res://Scenes/speech_bubble.tscn" id="2_7c3kf"]
+[ext_resource type="Script" uid="uid://df0hkwcriuamj" path="res://Scripts/NPCS/customer.gd" id="1_0v30w"]
+[ext_resource type="Texture2D" uid="uid://c0jjgn88ttecf" path="res://Assets/sprites/Ugly guy.png" id="1_fp685"]
+[ext_resource type="PackedScene" uid="uid://deum0uskaguoj" path="res://Scenes/NPCS/speech_bubble.tscn" id="2_7c3kf"]
 
 [node name="Customer" type="Node2D"]
 script = ExtResource("1_0v30w")

@@ -24,10 +24,6 @@ func _ready() -> void:
 	speech_bubble.char_name = char_name
 	speech_bubble.text = greetText
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 # Asks for something
 func _make_request():
 	var choice = ["Heads", "Tails"][randi() % 2]

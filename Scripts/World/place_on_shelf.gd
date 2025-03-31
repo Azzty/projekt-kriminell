@@ -10,8 +10,6 @@ const ITEMS = [APPLE, CROWBAR, REVOLVER]
 @onready var shelfshape_1: CollisionShape2D = $Shelf/Shelfshape1
 const font = preload("res://Assets/fonts/dogicapixel.ttf")
 
-signal add_item_to_inventory
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var ranNum = randi_range(1, 4)
@@ -23,11 +21,12 @@ func _ready() -> void:
 		# Skapa ett föremål
 		var item := Sprite2D.new()
 		item.texture = itemTexture
-		item.name = "Item"
 		item.position = shelfRect.get_center() + Vector2(0, randf_range(-shelfRect.size.y/2, shelfRect.size.y/2))
 		item.rotate(randf_range(0, PI))
 		item.z_index = 2
 		shelf.add_child(item)
+		var item_name = itemTexture.resource_path.get_file().get_basename().capitalize()
+		item.name = item_name # Do this here so godot adds a suffix instead of breaking name
 		
 		# Skapa en knapp
 		var button := Button.new()
@@ -43,8 +42,8 @@ func _ready() -> void:
 		# Lägger till en ruta för att se om man är tillräckligt nära för att plocka upp sak
 		var pickupZone := Area2D.new()
 		var pickupZoneCollisionShape := CollisionShape2D.new()
-		pickupZoneCollisionShape.shape = RectangleShape2D.new()
-		pickupZoneCollisionShape.shape.extents = Vector2(10, 10)
+		pickupZoneCollisionShape.shape = CircleShape2D.new()
+		pickupZoneCollisionShape.shape.radius = 10
 		pickupZoneCollisionShape.position = item.position
 		pickupZone.add_child(pickupZoneCollisionShape)
 		item.add_child(pickupZone)
@@ -61,13 +60,12 @@ func _ready() -> void:
 		button.shortcut.events.append(hotkey)
 
 func _button_pressed(item: Sprite2D, button: Button) -> void:
-	GameManager.add_item_to_inventory(item)
+	GameState.add_item_to_inventory(item)
 	delete_all_descendants(item)
 	button.pressed.disconnect(_button_pressed)
 	button.queue_free()
 
 func _toggle_button_visibility(_body: PhysicsBody2D,button: Button) -> void:
-	print("Toggled visibility!")
 	button.disabled = not button.disabled
 	button.visible = not button.visible
 

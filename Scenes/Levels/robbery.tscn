@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnr1exbd78fih"]
+
+[ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
+[ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="3_qi1i4"]
+[ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="4_nqmpn"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+
+[node name="Robbery" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_g468e")]
+motion_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 254)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="Shelf" parent="." instance=ExtResource("2_evns0")]
+position = Vector2(55, 157)
+
+[node name="Shelf2" parent="." instance=ExtResource("2_evns0")]
+position = Vector2(190, 168)
+
+[node name="Shelf3" parent="." instance=ExtResource("2_evns0")]
+position = Vector2(141, 79)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 113.0
+offset_top = 10.0
+offset_right = 162.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("3_qi1i4")
+theme_override_font_sizes/font_size = 4
+text = "Change scene"
+script = ExtResource("4_nqmpn")
+scene_to_switch_to = "uid://c1aaqf7xcl2yl"

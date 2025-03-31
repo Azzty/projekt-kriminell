@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dgo3tcs1787nv" path="res://Assets/spritesheets/stickman_idle.png" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ert1pqx0xh0w" path="res://Assets/spritesheets/stickman_running.png" id="2_6t5aa"]
-[ext_resource type="Script" uid="uid://cqyewnircb0ut" path="res://Scripts/player.gd" id="2_vgqql"]
+[ext_resource type="Script" uid="uid://cqyewnircb0ut" path="res://Scripts/Player/player.gd" id="2_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("1_cvnsp")
