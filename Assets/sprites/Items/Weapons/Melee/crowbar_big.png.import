@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmapvo4el8cvo"
-path="res://.godot/imported/crowbar_big.png-6a67d43cf656739a30554168ab5ac587.ctex"
+path="res://.godot/imported/crowbar_big.png-7f60ded28443c7d65d2bab8db8650346.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/crowbar_big.png"
-dest_files=["res://.godot/imported/crowbar_big.png-6a67d43cf656739a30554168ab5ac587.ctex"]
+source_file="res://Assets/sprites/Items/Weapons/Melee/crowbar_big.png"
+dest_files=["res://.godot/imported/crowbar_big.png-7f60ded28443c7d65d2bab8db8650346.ctex"]
 
 [params]
 

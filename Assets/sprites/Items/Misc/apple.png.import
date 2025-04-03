@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lmlu5h7ow51e"
-path="res://.godot/imported/revolver.png-7ad3ac06ae65ae7de309d3aecc401378.ctex"
+uid="uid://b31o3k82w6koe"
+path="res://.godot/imported/apple.png-63a6e6c58a228f341e3d6c5b22987aa3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/revolver.png"
-dest_files=["res://.godot/imported/revolver.png-7ad3ac06ae65ae7de309d3aecc401378.ctex"]
+source_file="res://Assets/sprites/Items/Misc/apple.png"
+dest_files=["res://.godot/imported/apple.png-63a6e6c58a228f341e3d6c5b22987aa3.ctex"]
 
 [params]
 

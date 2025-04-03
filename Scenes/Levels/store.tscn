@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://lcb04qf5xy68" path="res://Scripts/World/store.gd" id="1_kt606"]
 [ext_resource type="Script" uid="uid://d072qu4i70x61" path="res://Scripts/Items/movable_item.gd" id="2_fju7s"]
 [ext_resource type="PackedScene" uid="uid://bcopoany7t2k3" path="res://Scenes/NPCS/customer.tscn" id="3_prq2a"]
-[ext_resource type="Texture2D" uid="uid://bmapvo4el8cvo" path="res://Assets/sprites/crowbar_big.png" id="4_fs4vs"]
-[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/apple.png" id="5_wvc5b"]
-[ext_resource type="Texture2D" uid="uid://ckkuj38vmpyvo" path="res://Assets/sprites/revolver_big.png" id="6_tjm8q"]
+[ext_resource type="Texture2D" uid="uid://bmapvo4el8cvo" path="res://Assets/sprites/Items/Weapons/Melee/crowbar_big.png" id="4_fs4vs"]
+[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/Items/Misc/apple.png" id="5_wvc5b"]
+[ext_resource type="Texture2D" uid="uid://ckkuj38vmpyvo" path="res://Assets/sprites/Items/Weapons/Guns/revolver_big.png" id="6_tjm8q"]
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="7_ky2bn"]
 [ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="8_x2760"]
 

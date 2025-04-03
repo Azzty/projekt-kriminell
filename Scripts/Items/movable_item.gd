@@ -52,7 +52,9 @@ func _keep_within_bounds():
 	
 	# If released out of bounds
 	if Input.is_action_just_released("left_click") and (outX or outY):
-		if customer_drop_shape.shape.get_rect().has_point(get_local_mouse_position()):
+		var local_mouse_pos = customer_drop_shape.to_local(get_global_mouse_position())
+		
+		if customer_drop_shape.shape.get_rect().has_point(local_mouse_pos):
 			GameState.money += 10
 			GameState.remove_item_from_inventory(self)
 			queue_free()
