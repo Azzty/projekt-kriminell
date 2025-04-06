@@ -2,6 +2,9 @@ extends Sprite2D
 
 @export var bounds_cshape: CollisionShape2D
 @export var customer_drop_shape: CollisionShape2D
+@export var sold_particle_effect: GPUParticles2D
+
+const PURCHASE_SOUND = preload("res://Assets/Audio/SFX/purchase.mp3")
 
 const SPEED := 20
 const STIFFNESS := 0.06
@@ -55,6 +58,14 @@ func _keep_within_bounds():
 		if customer_drop_shape.shape.get_rect().has_point(get_local_mouse_position()):
 			GameState.money += 10
 			GameState.remove_item_from_inventory(self)
+			var effect = sold_particle_effect.duplicate()
+			effect.emitting = true
+			add_sibling(effect)
+			effect.global_position = global_position
+			var sound_effect = AudioStreamPlayer.new()
+			sound_effect.stream = PURCHASE_SOUND
+			effect.add_child(sound_effect)
+			sound_effect.play()
 			queue_free()
 		released_out_of_bounds = true
 		velocity = Vector2.ZERO

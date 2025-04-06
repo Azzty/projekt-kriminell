@@ -4,6 +4,7 @@ extends Node2D
 @onready var counter_collisionshape: CollisionShape2D = $Counter/Counter_shape
 
 @export var item_move_script: Script
+@export var sold_particle_effect: GPUParticles2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +31,7 @@ func _ready() -> void:
 		item.set_script(item_move_script)
 		item.bounds_cshape = get_node("Counter/Counter_shape")
 		item.customer_drop_shape = get_node("Customer/CustomerDropArea/CustomerDropShape")
+		item.sold_particle_effect = sold_particle_effect
 		counter.add_child(item)
 		item.name = item_data.name
 

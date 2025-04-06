@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://byr6kguuaclem"]
+
+[ext_resource type="Texture2D" uid="uid://wjbv32n1287s" path="res://Assets/sprites/particle.png" id="1_yhaxg"]
+[ext_resource type="Script" uid="uid://cu8v58c1qdwl8" path="res://Scripts/Effects/particle_play_once.gd" id="2_28wp0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_28wp0"]
+particle_flag_disable_z = true
+angle_min = -407.0
+angle_max = 525.8
+spread = 180.0
+initial_velocity_min = 58.9
+initial_velocity_max = 198.89
+gravity = Vector3(0, 98, 0)
+scale_max = 1.5
+scale_over_velocity_min = 133.52
+scale_over_velocity_max = 209.61
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="SparkleExplosion" type="GPUParticles2D"]
+emitting = false
+amount = 64
+texture = ExtResource("1_yhaxg")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_28wp0")
+script = ExtResource("2_28wp0")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
