@@ -19,20 +19,23 @@ signal money_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
+	print(ItemManager.Melee.new() is ItemManager.Item)
 	for i in range(2):
 		var item := Sprite2D.new()
 		item.name = "Crowbar"
-		item.texture = preload("res://Assets/sprites/crowbar.png")
+		item.texture = preload("res://Assets/sprites/Items/Weapons/Melee/crowbar.png")
+		item.set_meta("item_properties", ItemManager.Melee.new("Crowbar", item.texture))
 		add_item_to_inventory(item)
 	for i in range(2):
 		var item := Sprite2D.new()
 		item.name = "Revolver"
-		item.texture = preload("res://Assets/sprites/revolver.png")
+		item.texture = preload("res://Assets/sprites/Items/Weapons/Guns/revolver.png")
+		item.set_meta("item_properties", ItemManager.Gun.new("Revolver"))
 		add_item_to_inventory(item)
 
 
 func add_item_to_inventory(item: Sprite2D) -> void:
-	var item_data = {"name": item.name, "texture": item.texture}
+	var item_data = {"name": item.name, "texture": item.texture, "item_properties": get_meta("item_properties")}
 	
 	item_data.name = _remove_number_suffix(item_data.name)
 	inventory.append(item_data)
@@ -40,7 +43,7 @@ func add_item_to_inventory(item: Sprite2D) -> void:
 	item_added_to_inventory.emit(item)
 
 func remove_item_from_inventory(item: Sprite2D) -> void:
-	var item_data = {"name": item.name, "texture": item.texture}
+	var item_data = {"name": item.name}
 	
 	# Fix name (remove digits)
 	item_data.name = _remove_number_suffix(item_data.name)

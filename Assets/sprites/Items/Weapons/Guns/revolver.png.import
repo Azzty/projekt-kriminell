@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btxnkmuyohk2k"
-path="res://.godot/imported/crowbar.png-69f05c297597f59fff104c2322a56131.ctex"
+uid="uid://lmlu5h7ow51e"
+path="res://.godot/imported/revolver.png-a226dbc37461450f0c955d05cd6fccad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/crowbar.png"
-dest_files=["res://.godot/imported/crowbar.png-69f05c297597f59fff104c2322a56131.ctex"]
+source_file="res://Assets/sprites/Items/Weapons/Guns/revolver.png"
+dest_files=["res://.godot/imported/revolver.png-a226dbc37461450f0c955d05cd6fccad.ctex"]
 
 [params]
 

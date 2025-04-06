@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce1e6off6xfnt"]
 
-[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/apple.png" id="1_fxa2p"]
+[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/Items/Misc/apple.png" id="1_fxa2p"]
 [ext_resource type="Script" uid="uid://d072qu4i70x61" path="res://Scripts/Items/movable_item.gd" id="2_hpxu4"]
 
 [node name="movable_item" type="Sprite2D"]
