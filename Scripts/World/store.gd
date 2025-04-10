@@ -31,6 +31,7 @@ func _ready() -> void:
 		item.set_script(item_move_script)
 		item.bounds_cshape = get_node("Counter/Counter_shape")
 		item.customer_drop_shape = get_node("Customer/CustomerDropArea/CustomerDropShape")
+		item.customer = get_node("Customer")
 		item.sold_particle_effect = sold_particle_effect
 		counter.add_child(item)
 		item.name = item_data.name

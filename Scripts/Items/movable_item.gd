@@ -2,7 +2,10 @@ extends Sprite2D
 
 @export var bounds_cshape: CollisionShape2D
 @export var customer_drop_shape: CollisionShape2D
+@export var customer: Node
 @export var sold_particle_effect: GPUParticles2D
+
+@onready var customer_requested_tags: Array[String] = customer.requested_item_tags
 
 const PURCHASE_SOUND = preload("res://Assets/Audio/SFX/purchase.mp3")
 
@@ -57,18 +60,10 @@ func _keep_within_bounds():
 	if Input.is_action_just_released("left_click") and (outX or outY):
 		var local_mouse_pos = customer_drop_shape.to_local(get_global_mouse_position())
 		
+		# If dropped on customer
 		if customer_drop_shape.shape.get_rect().has_point(local_mouse_pos):
-			GameState.money += get_meta("item_properties").value
-			GameState.remove_item_from_inventory(self)
-			var effect = sold_particle_effect.duplicate()
-			effect.emitting = true
-			add_sibling(effect)
-			effect.global_position = global_position
-			var sound_effect = AudioStreamPlayer.new()
-			sound_effect.stream = PURCHASE_SOUND
-			effect.add_child(sound_effect)
-			sound_effect.play()
-			queue_free()
+			_sell_item()
+			
 		released_out_of_bounds = true
 		velocity = Vector2.ZERO
 	
@@ -82,6 +77,29 @@ func _keep_within_bounds():
 		isOutOfBounds = true
 	else: # We are not out of bounds
 		isOutOfBounds = false
+
+func _sell_item():
+	if customer_requested_tags.size() == 0:
+		print("No requested items")
+		return
+	# If requested tags not in item tags, skip
+	for tag in customer_requested_tags:
+		if not tag in get_meta("item_properties").tags:
+			print(tag, " not in ", get_meta("item_properties").tags)
+			customer.state = customer.States.ITEM_GIVEN_INCORRECT
+			return
+	GameState.money += get_meta("item_properties").value
+	GameState.remove_item_from_inventory(self)
+	var effect = sold_particle_effect.duplicate()
+	effect.emitting = true
+	add_sibling(effect)
+	effect.global_position = global_position
+	var sound_effect = AudioStreamPlayer.new()
+	sound_effect.stream = PURCHASE_SOUND
+	effect.add_child(sound_effect)
+	sound_effect.play()
+	customer.state = customer.States.ITEM_GIVEN_CORRECT
+	queue_free()
 
 # Set holding_mouse0 to true if clicked on item
 func _unhandled_input(event: InputEvent) -> void:
