@@ -27,6 +27,8 @@ func _ready() -> void:
 		item.z_index = 2
 		shelf.add_child(item)
 		var item_name = itemTexture.resource_path.get_file().get_basename().capitalize()
+		var item_data = GameItem.new(item_name)
+		item.set_meta("item_properties", item_data)
 		item.name = item_name # Do this here so godot adds a suffix instead of breaking name
 		
 		# Skapa en knapp

@@ -10,7 +10,7 @@ var itemOffsetLength = 8
 
 func _ready():
 	GameState.connect("item_added_to_inventory", _add_following_item)
-	for item_data: Dictionary in GameState.inventory:
+	for item_data: Object in GameState.inventory:
 		var item = Sprite2D.new()
 		item.texture = item_data.texture
 		add_child(item)

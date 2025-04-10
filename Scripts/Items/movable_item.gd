@@ -58,7 +58,7 @@ func _keep_within_bounds():
 		var local_mouse_pos = customer_drop_shape.to_local(get_global_mouse_position())
 		
 		if customer_drop_shape.shape.get_rect().has_point(local_mouse_pos):
-			GameState.money += 10
+			GameState.money += get_meta("item_properties").value
 			GameState.remove_item_from_inventory(self)
 			var effect = sold_particle_effect.duplicate()
 			effect.emitting = true

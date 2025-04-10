@@ -8,7 +8,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for item_data:Dictionary in GameState.inventory:
+	for item_data: Object in GameState.inventory:
 		var texture := CompressedTexture2D.new()
 		var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
 		
@@ -34,6 +34,7 @@ func _ready() -> void:
 		item.sold_particle_effect = sold_particle_effect
 		counter.add_child(item)
 		item.name = item_data.name
+		item.set_meta("item_properties", item_data)
 
 func get_bigger_texture_version(resource_path:String):
 	# Get path and file name
