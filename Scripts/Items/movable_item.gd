@@ -48,8 +48,7 @@ func _process(delta: float) -> void:
 
 # Keep within bounds and move back to grabbed spot if released in air
 func _keep_within_bounds():
-	if holding_mouse0:
-		return
+	if holding_mouse0: return
 	
 	var bounds = bounds_cshape.shape.get_rect()
 	# Check if out of bounds
@@ -58,14 +57,15 @@ func _keep_within_bounds():
 	
 	# If released out of bounds
 	if Input.is_action_just_released("left_click") and (outX or outY):
+		released_out_of_bounds = true
+		velocity = Vector2.ZERO
+		if not customer_drop_shape:	return
 		var local_mouse_pos = customer_drop_shape.to_local(get_global_mouse_position())
 		
 		# If dropped on customer
 		if customer_drop_shape.shape.get_rect().has_point(local_mouse_pos):
 			_sell_item()
 			
-		released_out_of_bounds = true
-		velocity = Vector2.ZERO
 	
 	# If not yet out of bounds then reverse velocity (avoids getting stuck on edge)
 	if outX and not isOutOfBounds:
@@ -79,6 +79,9 @@ func _keep_within_bounds():
 		isOutOfBounds = false
 
 func _sell_item():
+	if customer.recieved_item:
+		print("Customer already recieved item!")
+		return
 	if customer_requested_tags.size() == 0:
 		print("No requested items")
 		return

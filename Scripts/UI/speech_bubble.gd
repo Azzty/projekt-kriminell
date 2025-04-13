@@ -1,9 +1,13 @@
 extends Panel
 
+const TEXT_SPEED = 25.0 # ms / letter
+
 signal char_name_changed
 signal text_changed
 signal user_clicked
+signal finished_writing
 
+var writing_id = 0
 var fade_in_playing = false
 
 @export var char_name: String = "NAME":
@@ -33,6 +37,29 @@ func _ready() -> void:
 func _update_textbox():
 	character_name_label.text = char_name
 	speech_label.text = text
+
+
+func write_text(new_text: String, clear: bool = true):
+	writing_id += 1 # New text = new ID
+	var local_id = writing_id
+
+	if clear:
+		speech_label.text = ""
+	var current_text := speech_label.text
+	if not current_text.ends_with("\n") and current_text.length() > 0:
+		current_text += "\n"
+
+
+	for letter in new_text:
+		# If ID is outdated, stop writing
+		if local_id != writing_id:
+			return
+		await get_tree().create_timer(TEXT_SPEED / 1000.0).timeout
+
+		current_text += letter
+		speech_label.text = current_text
+	
+	finished_writing.emit()
 
 func _on_button_pressed() -> void:
 	user_clicked.emit()

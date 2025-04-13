@@ -19,6 +19,8 @@ enum States {
 	LEAVING
 }
 
+var recieved_item = false
+
 @export var state: States:
 	set(value):
 		state = value
@@ -35,10 +37,13 @@ func state_changed():
 	match state:
 		States.ITEM_GIVEN_CORRECT: # Purchased a requested item
 			_write_response(CHARACTER_RESPONSES.Default.item_given_correct)
+			recieved_item = true
+			await speech_bubble.finished_writing
 			state = States.LEAVING
 		
 		States.ITEM_GIVEN_INCORRECT: # Given a non-requested item
 			_write_response(CHARACTER_RESPONSES.Default.item_given_incorrect)
+			await speech_bubble.finished_writing
 			state = States.REQUESTING
 		
 		States.REQUESTING:
@@ -46,31 +51,26 @@ func state_changed():
 			_write_response(CHARACTER_RESPONSES.Default["_".join(["request", request.to_lower()])], false)
 		
 		States.LEAVING:
-			_write_response(CHARACTER_RESPONSES.Default.leaving)
-			var timer = Timer.new()
-			get_parent().add_child(timer)
-			timer.start(1)
-			await timer.timeout
+			_write_response(CHARACTER_RESPONSES.Default.leaving, false)
+			await speech_bubble.finished_writing
+			await get_tree().create_timer(1).timeout
 			queue_free()
 
 func _write_response(response, clear: bool = true):
+	if recieved_item and not state == States.LEAVING: return
 	var responseText = response[randi() % response.size()]
-	if clear:
-		speech_bubble.text = responseText
-	else:
-		speech_bubble.text += "\n \n"
-		speech_bubble.text += responseText
+	speech_bubble.write_text(responseText, clear)
 
 # Asks for something
 func _make_request():
 	if request: return
 	var choice = ["Heads", "Tails"][randi() % 2]
 	if choice == "Heads":
-		_write_response(CHARACTER_RESPONSES.Default.request_gun)
+		#_write_response(CHARACTER_RESPONSES.Default.request_gun)
 		request = "Gun"
 		requested_item_tags.append(request)
 	else:
-		_write_response(CHARACTER_RESPONSES.Default.request_melee)
+		#_write_response(CHARACTER_RESPONSES.Default.request_melee)
 		request = "Melee"
 		requested_item_tags.append(request)
 

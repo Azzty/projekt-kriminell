@@ -18,7 +18,6 @@ func _ready() -> void:
 		var shelf: CollisionShape2D = [shelfshape_0, shelfshape_1][randi() % 2]
 		var itemTexture: CompressedTexture2D = ITEMS[randi() % ITEMS.size()]
 		var shelfRect = shelf.shape.get_rect()
-
 		# Skapa ett föremål
 		var item := Sprite2D.new()
 		item.texture = itemTexture
