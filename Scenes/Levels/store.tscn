@@ -45,6 +45,7 @@ scale = Vector2(4.5, 2.53125)
 texture = SubResource("GradientTexture2D_voxcw")
 
 [node name="Customer" parent="." instance=ExtResource("3_prq2a")]
+z_index = -1
 position = Vector2(-70, 1)
 
 [node name="CustomerDropArea" type="Area2D" parent="Customer"]

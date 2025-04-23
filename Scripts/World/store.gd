@@ -6,8 +6,12 @@ extends Node2D
 @export var item_move_script: Script
 @export var sold_particle_effect: GPUParticles2D
 
+var customer: Node
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	get_node("Customer").customer_leaving.connect(customer_left)
+	customer = get_node("Customer").duplicate()
 	for item_data: Object in GameState.inventory:
 		var texture := CompressedTexture2D.new()
 		var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
@@ -36,6 +40,10 @@ func _ready() -> void:
 		counter.add_child(item)
 		item.name = item_data.name
 		item.set_meta("item_properties", item_data)
+
+func customer_left():
+	add_child(customer)
+	customer = customer.duplicate()
 
 func get_bigger_texture_version(resource_path:String):
 	# Get path and file name

@@ -7,6 +7,8 @@ const CHARACTER_NAMES: Array = preload("res://Assets/Characters/character_names.
 @export var requested_item_tags: Array[String] = []
 var request: String
 
+signal customer_leaving
+
 # The diffrerent states the customer can be in
 enum States {
 	GREETING,
@@ -24,26 +26,33 @@ var recieved_item = false
 @export var state: States:
 	set(value):
 		state = value
-		state_changed()
+		handle_state_changed()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var char_name = CHARACTER_NAMES[randi() % CHARACTER_NAMES.size()]
 	var greetText = CHARACTER_RESPONSES.Default.greeting[randi() % CHARACTER_RESPONSES.Default.greeting.size()]
+	await $AnimationPlayer.animation_finished
 	speech_bubble.char_name = char_name
 	speech_bubble.text = greetText
+	await speech_bubble.finished_writing
+	await get_tree().create_timer(0.5).timeout
+	state = States.REQUESTING
 
-func state_changed():
+# Handles what the customer does when the state changes
+func handle_state_changed():
 	match state:
 		States.ITEM_GIVEN_CORRECT: # Purchased a requested item
 			_write_response(CHARACTER_RESPONSES.Default.item_given_correct)
 			recieved_item = true
 			await speech_bubble.finished_writing
+			await get_tree().create_timer(0.25).timeout
 			state = States.LEAVING
 		
 		States.ITEM_GIVEN_INCORRECT: # Given a non-requested item
 			_write_response(CHARACTER_RESPONSES.Default.item_given_incorrect)
 			await speech_bubble.finished_writing
+			await get_tree().create_timer(0.25).timeout
 			state = States.REQUESTING
 		
 		States.REQUESTING:
@@ -53,7 +62,11 @@ func state_changed():
 		States.LEAVING:
 			_write_response(CHARACTER_RESPONSES.Default.leaving, false)
 			await speech_bubble.finished_writing
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(0.25).timeout
+			print("customer is leaving!")
+			customer_leaving.emit()
+			$AnimationPlayer.play("customer_leave")
+			await $AnimationPlayer.animation_finished
 			queue_free()
 
 func _write_response(response, clear: bool = true):
@@ -79,4 +92,6 @@ func _on_speech_bubble_user_clicked() -> void:
 	if state == States.GREETING: # If has greeted then request something
 		state = States.REQUESTING
 		_make_request()
-	pass # Replace with function body.
+
+func show_speech_bubble():
+	speech_bubble.fade_in()
