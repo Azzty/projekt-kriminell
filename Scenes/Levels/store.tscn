@@ -31,10 +31,11 @@ gradient = SubResource("Gradient_c3i85")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkwxl"]
 size = Vector2(230, 48)
 
-[node name="Store" type="Node2D" node_paths=PackedStringArray("sold_particle_effect")]
+[node name="Store" type="Node2D" node_paths=PackedStringArray("sold_particle_effect", "customer_drop_shape")]
 script = ExtResource("1_kt606")
 item_move_script = ExtResource("2_fju7s")
 sold_particle_effect = NodePath("SparkleExplosion")
+customer_drop_shape = NodePath("CustomerDropArea/CustomerDropShape")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -48,9 +49,10 @@ texture = SubResource("GradientTexture2D_voxcw")
 z_index = -1
 position = Vector2(-70, 1)
 
-[node name="CustomerDropArea" type="Area2D" parent="Customer"]
+[node name="CustomerDropArea" type="Area2D" parent="."]
+position = Vector2(-70, 1)
 
-[node name="CustomerDropShape" type="CollisionShape2D" parent="Customer/CustomerDropArea"]
+[node name="CustomerDropShape" type="CollisionShape2D" parent="CustomerDropArea"]
 position = Vector2(0, -25)
 shape = SubResource("RectangleShape2D_a54sg")
 
@@ -70,7 +72,7 @@ shape = SubResource("RectangleShape2D_lkwxl")
 position = Vector2(67, 4)
 scale = Vector2(2, 2)
 bounds_cshape = NodePath("../Counter_shape")
-customer_drop_shape = NodePath("../../Customer/CustomerDropArea/CustomerDropShape")
+customer_drop_shape = NodePath("../../CustomerDropArea/CustomerDropShape")
 sold_particle_effect = NodePath("../../SparkleExplosion")
 
 [node name="Crowbar" type="Sprite2D" parent="."]

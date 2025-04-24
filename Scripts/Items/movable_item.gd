@@ -9,6 +9,8 @@ extends Sprite2D
 
 const PURCHASE_SOUND = preload("res://Assets/Audio/SFX/purchase.mp3")
 
+signal item_sold(item: Sprite2D)
+
 const SPEED := 20
 const STIFFNESS := 0.06
 var dampning := 0.9
@@ -101,6 +103,7 @@ func _sell_item():
 	sound_effect.stream = PURCHASE_SOUND
 	effect.add_child(sound_effect)
 	sound_effect.play()
+	item_sold.emit()
 	customer.state = customer.States.ITEM_GIVEN_CORRECT
 	queue_free()
 

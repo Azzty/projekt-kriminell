@@ -55,11 +55,11 @@ func handle_state_changed():
 			await get_tree().create_timer(0.25).timeout
 			state = States.REQUESTING
 		
-		States.REQUESTING:
+		States.REQUESTING: # Requests an item
 			if not request: _make_request()
 			_write_response(CHARACTER_RESPONSES.Default["_".join(["request", request.to_lower()])], false)
 		
-		States.LEAVING:
+		States.LEAVING: # Recieved all requested items and is now leaving
 			_write_response(CHARACTER_RESPONSES.Default.leaving, false)
 			await speech_bubble.finished_writing
 			await get_tree().create_timer(0.25).timeout
