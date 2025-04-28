@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1aaqf7xcl2yl"]
+[gd_scene load_steps=17 format=3 uid="uid://c1aaqf7xcl2yl"]
 
 [ext_resource type="Script" uid="uid://lcb04qf5xy68" path="res://Scripts/World/store.gd" id="1_kt606"]
 [ext_resource type="Script" uid="uid://d072qu4i70x61" path="res://Scripts/Items/movable_item.gd" id="2_fju7s"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="7_ky2bn"]
 [ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="8_x2760"]
 [ext_resource type="PackedScene" uid="uid://byr6kguuaclem" path="res://Scenes/Effects/sparkle_explosion.tscn" id="9_fju7s"]
+[ext_resource type="AudioStream" uid="uid://bwjhrtytvinmd" path="res://Assets/Audio/Music/Shop.wav" id="10_prq2a"]
 
 [sub_resource type="Gradient" id="Gradient_i3rh0"]
 colors = PackedColorArray(0, 0, 0, 1, 0.548963, 0.548963, 0.548963, 1)
@@ -106,3 +107,8 @@ scene_to_switch_to = "uid://cnr1exbd78fih"
 
 [node name="SparkleExplosion" parent="." instance=ExtResource("9_fju7s")]
 position = Vector2(-285, -14)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["music"]]
+stream = ExtResource("10_prq2a")
+volume_db = -4.0
+autoplay = true

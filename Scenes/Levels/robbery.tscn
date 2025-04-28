@@ -11,7 +11,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqmpn"]
 shader = ExtResource("5_qi1i4")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqmpn"]
+size = Vector2(3, 501)
 
 [node name="Robbery" type="Node2D"]
 
@@ -25,8 +26,10 @@ offset_right = 312.0
 offset_bottom = 258.0
 texture = ExtResource("2_nqmpn")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_g468e")]
+unique_name_in_owner = true
 position = Vector2(152, 157)
 motion_mode = 1
 
@@ -34,23 +37,59 @@ motion_mode = 1
 zoom = Vector2(4, 4)
 position_smoothing_speed = 2.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Shelves" type="Node" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 254)
-shape = SubResource("WorldBoundaryShape2D_qxrlw")
-
-[node name="Shelf" parent="." instance=ExtResource("2_evns0")]
+[node name="Shelf" parent="Shelves" instance=ExtResource("2_evns0")]
 position = Vector2(68, 175)
 
-[node name="Shelf4" parent="." instance=ExtResource("2_evns0")]
+[node name="Shelf4" parent="Shelves" instance=ExtResource("2_evns0")]
 position = Vector2(68, 119)
 
-[node name="Shelf2" parent="." instance=ExtResource("2_evns0")]
+[node name="Shelf2" parent="Shelves" instance=ExtResource("2_evns0")]
 position = Vector2(209, 178)
 
-[node name="Shelf3" parent="." instance=ExtResource("2_evns0")]
+[node name="Shelf3" parent="Shelves" instance=ExtResource("2_evns0")]
 position = Vector2(210, 118)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -561.0
+offset_top = -330.0
+offset_right = -553.0
+offset_bottom = -92.0
+
+[node name="Wall3" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -316.0
+offset_top = -330.0
+offset_right = -308.0
+offset_bottom = -92.0
+
+[node name="Wall2" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -561.0
+offset_top = -322.0
+offset_right = -553.0
+offset_bottom = -69.0
+rotation = -1.57079
+
+[node name="Wall4" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -561.0
+offset_top = -92.0
+offset_right = -553.0
+offset_bottom = 17.0
+rotation = -1.57079
+
+[node name="Wall5" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -418.0
+offset_top = -92.0
+offset_right = -410.0
+offset_bottom = 18.0
+rotation = -1.57079
 
 [node name="Button" type="Button" parent="."]
 offset_left = 113.0
@@ -63,40 +102,34 @@ text = "Change scene"
 script = ExtResource("4_nqmpn")
 scene_to_switch_to = "uid://c1aaqf7xcl2yl"
 
-[node name="Wall" parent="." instance=ExtResource("7_nqmpn")]
-modulate = Color(0.87, 0.969667, 1, 1)
-offset_left = 15.0
-offset_top = -6.0
-offset_right = 23.0
-offset_bottom = 232.0
+[node name="Button2" parent="." instance_placeholder="res://Scenes/UI Elements/hold_button.tscn"]
+offset_left = 145.0
+offset_top = 88.0
+offset_right = 155.0
+offset_bottom = 99.0
 
-[node name="Wall3" parent="." instance=ExtResource("7_nqmpn")]
-modulate = Color(0.87, 0.969667, 1, 1)
-offset_left = 260.0
-offset_top = -6.0
-offset_right = 268.0
-offset_bottom = 232.0
+[node name="Bounds" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
 
-[node name="Wall2" parent="." instance=ExtResource("7_nqmpn")]
-modulate = Color(0.87, 0.969667, 1, 1)
-offset_left = 15.0
-offset_top = 2.0
-offset_right = 23.0
-offset_bottom = 255.0
-rotation = -1.57079
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-188.5, 93)
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
 
-[node name="Wall4" parent="." instance=ExtResource("7_nqmpn")]
-modulate = Color(0.87, 0.969667, 1, 1)
-offset_left = 15.0
-offset_top = 232.0
-offset_right = 23.0
-offset_bottom = 341.0
-rotation = -1.57079
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(61.5, 257)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
 
-[node name="Wall5" parent="." instance=ExtResource("7_nqmpn")]
-modulate = Color(0.87, 0.969667, 1, 1)
-offset_left = 158.0
-offset_top = 232.0
-offset_right = 166.0
-offset_bottom = 342.0
-rotation = -1.57079
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(64, -75)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(314, 88.9998)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true

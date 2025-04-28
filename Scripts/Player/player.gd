@@ -6,9 +6,10 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var _following_items := []
-var itemOffsetLength = 8
+var item_offset_length = 8 # Distance between player and items
 
 func _ready():
+	add_to_group("player")
 	GameState.connect("item_added_to_inventory", _add_following_item)
 	for item_data: Object in GameState.inventory:
 		var item = Sprite2D.new()
@@ -47,10 +48,11 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
+	# Move following items to the player
 	for index in _following_items.size():
 		var item: Sprite2D = _following_items[index]
 		var rotateIncrement = (2 * PI) / _following_items.size()
-		var offsetVector = Vector2(0, itemOffsetLength).rotated(index * rotateIncrement)
+		var offsetVector = Vector2(0, item_offset_length).rotated(index * rotateIncrement)
 		
 		# This is where we want to be at
 		var targetPosition = global_position + offsetVector
@@ -64,6 +66,11 @@ func _physics_process(delta: float) -> void:
 		# Move and look at player
 		item.global_position += deltaPosition.normalized() * SPEED * delta * 0.95
 		item.look_at(position)
+	
+	var closest_button = GameState.get_closest_button_to_player()
+	for button in GameState.buttons_in_range:
+		button.visible = false
+		if button == closest_button: button.visible = true
 
 func add_item_to_inventory(item: Sprite2D) -> void:
 	GameState.add_item_to_inventory(item)
@@ -77,4 +84,4 @@ func _add_following_item(item: Sprite2D):
 		item.reparent(self)
 	item.name = item_name # Rename to fix name conflicts
 	_following_items.append(item)
-	itemOffsetLength = 8 + _following_items.size() * 2
+	item_offset_length = 8 + _following_items.size() * 2
