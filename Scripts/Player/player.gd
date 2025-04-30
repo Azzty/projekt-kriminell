@@ -2,8 +2,9 @@ extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-const SPEED = 300.0
+const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
+const PUSH_FORCE = 80.0
 
 var _following_items := []
 var item_offset_length = 8 # Distance between player and items
@@ -47,6 +48,12 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("Idle")
 	
 	move_and_slide()
+	
+	# Apply forces to collisions
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody2D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * PUSH_FORCE)
 	
 	# Move following items to the player
 	for index in _following_items.size():

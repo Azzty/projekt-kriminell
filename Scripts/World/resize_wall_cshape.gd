@@ -2,6 +2,7 @@
 extends NinePatchRect
 
 var cshape: CollisionShape2D
+var wall_part: NinePatchRect
 
 func _ready() -> void:
 	resized.connect(_update_cshape)
@@ -9,6 +10,7 @@ func _ready() -> void:
 
 func _update_cshape():
 	cshape = get_node("StaticBody2D/CollisionShape2D")
+	wall_part = get_node("NinePatchRect")
 	
 	if cshape.shape:
 		cshape.shape = cshape.shape.duplicate()  # gör unik kopia
@@ -18,3 +20,4 @@ func _update_cshape():
 	if shape:
 		shape.size = rect.size
 		cshape.position = rect.size / 2.0
+		wall_part.size = rect.size
