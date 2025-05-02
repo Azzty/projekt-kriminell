@@ -22,10 +22,12 @@ texture = ExtResource("1_ba8gm")
 position = Vector2(-1, 0)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_ba8gm")
+debug_color = Color(0, 0.595, 0.7, 0.121569)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9, 0)
 shape = SubResource("CircleShape2D_ba8gm")
+debug_color = Color(0, 0.595, 0.7, 0.290196)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
 visible = false
@@ -37,6 +39,7 @@ angular_limit_lower = -1.5708
 angular_limit_upper = 1.5708
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+visible = false
 position = Vector2(-9, 0)
 rotation = 3.14159
 node_a = NodePath("..")

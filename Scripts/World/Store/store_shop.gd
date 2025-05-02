@@ -22,7 +22,7 @@ func _ready() -> void:
 	current_customer.customer_leaving.connect(customer_left)
 	for item_data: Object in GameState.inventory:
 		var texture := CompressedTexture2D.new()
-		var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
+		var big_file_path: String = Utilities.get_bigger_texture_version(item_data.texture.resource_path)
 		
 		# Change to larger texture version if exists
 		if FileAccess.file_exists(big_file_path):
@@ -66,17 +66,3 @@ func customer_left():
 
 func _on_item_sold(item: Sprite2D):
 	spawned_items.erase(item)
-
-func get_bigger_texture_version(resource_path:String):
-	# Get path and file name
-	var path := resource_path.rsplit("/", false, 1)
-	var item_texture_path := path[0]
-	var item_texture_name := path[1]
-
-	# Construct new path
-	var base_path = item_texture_path + "/"
-	var file_name = item_texture_name.split(".", false)[0]
-	var file_extension = item_texture_name.split(".", false)[1]
-	var big_file_path: String = base_path + file_name + "_big." + file_extension
-	
-	return big_file_path

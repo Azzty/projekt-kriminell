@@ -7,6 +7,9 @@ const DOCUMENT = preload("res://Assets/sprites/Items/Special/document.png")
 ## TODO: ^^ Add and reference these items to the inventory singleton or something because
 ## this looks like it could get very problematic very fast
 
+@export var min_item_amount: int = 0
+@export var max_item_amount: int = 2
+
 const ITEMS = [APPLE, CROWBAR, REVOLVER, DOCUMENT]
 
 @onready var shelfshape_0: CollisionShape2D = $Shelf/Shelfshape0
@@ -17,7 +20,7 @@ const hold_button := preload("res://Scenes/UI Elements/hold_button.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var ranNum = randi_range(1, 4)
+	var ranNum = randi_range(min_item_amount, max_item_amount)
 	for i in range(ranNum):
 		var shelf: CollisionShape2D = [shelfshape_0, shelfshape_1][randi() % 2]
 		var itemTexture: CompressedTexture2D = ITEMS[randi() % ITEMS.size()]

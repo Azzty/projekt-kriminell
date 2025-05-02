@@ -40,13 +40,13 @@ autowrap_mode = 2
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 105.0
+offset_left = 80.0
 offset_top = 81.0
 offset_right = 150.0
 offset_bottom = 93.0
 theme_override_fonts/font = ExtResource("2_hv8s5")
 theme_override_font_sizes/font_size = 4
-text = "Continue"
+text = "<CHANGE THIS TO Y/N>"
 icon = SubResource("GradientTexture1D_5ioj6")
 alignment = 2
 expand_icon = true

@@ -5,7 +5,7 @@ extends Sprite2D
 @export var customer: Node
 @export var sold_particle_effect: GPUParticles2D
 
-@onready var customer_requested_tags: Array[String] = customer.requested_item_tags
+@onready var customer_requested_tags: Array[String]
 
 const PURCHASE_SOUND = preload("res://Assets/Audio/SFX/purchase.mp3")
 
@@ -23,6 +23,9 @@ var grab_position: Vector2
 
 var isOutOfBounds = false
 var released_out_of_bounds = false
+
+func _ready() -> void:
+	if customer: customer_requested_tags = customer.requested_item_tags
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -100,6 +103,7 @@ func _sell_item():
 	add_sibling(effect)
 	effect.global_position = global_position
 	var sound_effect = AudioStreamPlayer.new()
+	sound_effect.volume_db = -8.0
 	sound_effect.stream = PURCHASE_SOUND
 	effect.add_child(sound_effect)
 	sound_effect.play()

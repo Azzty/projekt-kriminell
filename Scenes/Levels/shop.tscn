@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://b8hv88k5gv4k0"]
+
+[ext_resource type="Script" uid="uid://lcb04qf5xy68" path="res://Scripts/World/Store/store_shop.gd" id="1_6cqx3"]
+[ext_resource type="Script" uid="uid://d072qu4i70x61" path="res://Scripts/Items/movable_item.gd" id="2_atc1h"]
+[ext_resource type="PackedScene" uid="uid://bcopoany7t2k3" path="res://Scenes/NPCS/customer.tscn" id="3_so00b"]
+[ext_resource type="Texture2D" uid="uid://bmapvo4el8cvo" path="res://Assets/sprites/Items/Weapons/Melee/crowbar_big.png" id="4_qeyp3"]
+[ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/Items/Misc/apple.png" id="5_y64e2"]
+[ext_resource type="Texture2D" uid="uid://ckkuj38vmpyvo" path="res://Assets/sprites/Items/Weapons/Guns/revolver_big.png" id="6_gm4dq"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="7_1o4dj"]
+[ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="8_vkau3"]
+[ext_resource type="PackedScene" uid="uid://byr6kguuaclem" path="res://Scenes/Effects/sparkle_explosion.tscn" id="9_v6o73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a54sg"]
+size = Vector2(50, 90)
+
+[sub_resource type="Gradient" id="Gradient_c3i85"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.546, 0.563333, 0.65, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkwxl"]
+gradient = SubResource("Gradient_c3i85")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkwxl"]
+size = Vector2(230, 48)
+
+[node name="Shop" type="Node2D" node_paths=PackedStringArray("sold_particle_effect", "customer_drop_shape")]
+script = ExtResource("1_6cqx3")
+item_move_script = ExtResource("2_atc1h")
+sold_particle_effect = NodePath("SparkleExplosion")
+customer_drop_shape = NodePath("CustomerDropArea/CustomerDropShape")
+
+[node name="Customer" parent="." instance=ExtResource("3_so00b")]
+z_index = -1
+position = Vector2(-70, 1)
+
+[node name="CustomerDropArea" type="Area2D" parent="."]
+position = Vector2(-70, 1)
+
+[node name="CustomerDropShape" type="CollisionShape2D" parent="CustomerDropArea"]
+position = Vector2(0, -25)
+shape = SubResource("RectangleShape2D_a54sg")
+
+[node name="Counter" type="Area2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="CounterSprite" type="Sprite2D" parent="Counter"]
+position = Vector2(0, 3)
+scale = Vector2(3.84375, 0.9375)
+texture = SubResource("GradientTexture2D_lkwxl")
+
+[node name="Counter_shape" type="CollisionShape2D" parent="Counter"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_lkwxl")
+
+[node name="movable_item" parent="Counter" node_paths=PackedStringArray("bounds_cshape", "customer_drop_shape", "sold_particle_effect") instance_placeholder="res://Scenes/Objects/Interactable Objects/movable_item.tscn"]
+position = Vector2(67, 4)
+scale = Vector2(2, 2)
+bounds_cshape = NodePath("../Counter_shape")
+customer_drop_shape = NodePath("../../CustomerDropArea/CustomerDropShape")
+sold_particle_effect = NodePath("../../SparkleExplosion")
+
+[node name="Crowbar" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-79, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("4_qeyp3")
+
+[node name="Apple" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(26, 38)
+scale = Vector2(2, 2)
+texture = ExtResource("5_y64e2")
+
+[node name="Revolver" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-21, 47)
+scale = Vector2(2, 2)
+texture = ExtResource("6_gm4dq")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -140.0
+offset_top = -38.0
+offset_right = -91.0
+offset_bottom = -26.0
+theme_override_fonts/font = ExtResource("7_1o4dj")
+theme_override_font_sizes/font_size = 4
+text = "Change scene"
+script = ExtResource("8_vkau3")
+scene_to_switch_to = "uid://cnr1exbd78fih"
+
+[node name="SparkleExplosion" parent="." instance=ExtResource("9_v6o73")]
+position = Vector2(-285, -14)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

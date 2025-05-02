@@ -51,7 +51,6 @@ func _process(delta: float) -> void:
 	
 	if _time_held >= hold_duration and not _is_activated:
 		_is_activated = true
-		print("Activated")
 		activated.emit()
 
 # If it doesnt want to draw a border, ill do it myself
@@ -72,7 +71,6 @@ func _on_button_up() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		GameState.buttons_in_range.append(self)
-		print("Added ", self, " to buttons_in_range")
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player": GameState.buttons_in_range.erase(self)

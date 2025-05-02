@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1xc35r82e6cr"
-path="res://.godot/imported/wood_floor.png-8e5a7740073b697145685633e7f64399.ctex"
+uid="uid://4jet1eyoym8i"
+path="res://.godot/imported/carpet_floor.png-f3ea9bebaf61c1a4933d7b9a994d95a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/wood_floor.png"
-dest_files=["res://.godot/imported/wood_floor.png-8e5a7740073b697145685633e7f64399.ctex"]
+source_file="res://Assets/sprites/Floors/carpet_floor.png"
+dest_files=["res://.godot/imported/carpet_floor.png-f3ea9bebaf61c1a4933d7b9a994d95a0.ctex"]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1

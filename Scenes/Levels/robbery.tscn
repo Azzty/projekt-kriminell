@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnr1exbd78fih"]
+[gd_scene load_steps=13 format=3 uid="uid://cnr1exbd78fih"]
 
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
-[ext_resource type="Texture2D" uid="uid://4jet1eyoym8i" path="res://Assets/sprites/carpet_floor.png" id="2_i2k26"]
-[ext_resource type="Texture2D" uid="uid://c1xc35r82e6cr" path="res://Assets/sprites/wood_floor.png" id="2_nqmpn"]
+[ext_resource type="Texture2D" uid="uid://4jet1eyoym8i" path="res://Assets/sprites/Floors/carpet_floor.png" id="2_i2k26"]
+[ext_resource type="Texture2D" uid="uid://c1xc35r82e6cr" path="res://Assets/sprites/Floors/planks_floor.png" id="2_nqmpn"]
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="3_qi1i4"]
+[ext_resource type="Texture2D" uid="uid://cs2ajh3dx2gg4" path="res://Assets/sprites/Floors/tiles_floor.png" id="4_5fxgd"]
 [ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="4_nqmpn"]
 [ext_resource type="Shader" uid="uid://cehvvev2uys40" path="res://Scripts/World/tilable.tres" id="5_qi1i4"]
 [ext_resource type="PackedScene" uid="uid://byhyuahc0670n" path="res://Scenes/Objects/Static Objects/wall.tscn" id="7_nqmpn"]
@@ -46,6 +47,7 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="TextureRect3" type="TextureRect" parent="Floors"]
+modulate = Color(0.429, 0.5522, 0.66, 1)
 z_index = -10
 texture_repeat = 3
 material = SubResource("ShaderMaterial_nqmpn")
@@ -53,8 +55,9 @@ offset_left = -169.0
 offset_top = -38.0
 offset_right = -68.0
 offset_bottom = 228.0
-texture = ExtResource("2_nqmpn")
+texture = ExtResource("4_5fxgd")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_g468e")]
 unique_name_in_owner = true
@@ -91,9 +94,16 @@ offset_bottom = -92.0
 [node name="Wall11" parent="Walls" instance=ExtResource("7_nqmpn")]
 modulate = Color(0.87, 0.969667, 1, 1)
 offset_left = -648.0
-offset_top = -366.0
+offset_top = -317.0
 offset_right = -640.0
 offset_bottom = -92.0
+
+[node name="Wall12" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -648.0
+offset_top = -365.0
+offset_right = -640.0
+offset_bottom = -337.0
 
 [node name="Wall3" parent="Walls" instance=ExtResource("7_nqmpn")]
 modulate = Color(0.87, 0.969667, 1, 1)
@@ -176,6 +186,10 @@ position = Vector2(148, 228)
 [node name="Door3" parent="Doors" instance=ExtResource("8_esq8r")]
 position = Vector2(128, 228)
 rotation = -3.14159
+
+[node name="Door4" parent="Doors" instance=ExtResource("8_esq8r")]
+position = Vector2(-68, -3)
+rotation = -1.57079
 
 [node name="Button" type="Button" parent="."]
 offset_left = 113.0

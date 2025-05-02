@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*res://Scripts/Managers/game_state.gd"
 SceneManager="*res://Scripts/Managers/scene_manager.gd"
+Utilities="*res://Scripts/Utilities/Utils.gd"
 
 [global_group]
 
