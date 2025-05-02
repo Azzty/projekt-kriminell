@@ -9,6 +9,9 @@ const PUSH_FORCE = 80.0
 var _following_items := []
 var item_offset_length = 8 # Distance between player and items
 
+var is_picking_up_item := false
+var last_picked_up_item_position: Vector2 = Vector2.ZERO
+
 func _ready():
 	add_to_group("player")
 	GameState.connect("item_added_to_inventory", _add_following_item)
@@ -35,18 +38,26 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	velocity = velocity.normalized() * SPEED
 	
+	look_at(position + velocity)
+	if velocity.length() > 0: rotate(0.5 * PI)
+	
 	# Flip sprite if moving to right
 	if directionX > 0:
 		animated_sprite.flip_h = false
 	elif directionX < 0:
 		animated_sprite.flip_h = true
 	
-	# Play correct animation
-	if directionX or directionY:
-		animated_sprite.play("Run")
+	# Play correct move animation
+	if not is_picking_up_item:
+		if directionX or directionY:
+			animated_sprite.play("Run")
+		else:
+			animated_sprite.play("Idle")
 	else:
-		animated_sprite.play("Idle")
-	
+		look_at(last_picked_up_item_position)
+		rotate(0.5 * PI)
+		animated_sprite.play("Pickup")
+		
 	move_and_slide()
 	
 	# Apply forces to collisions
@@ -86,9 +97,16 @@ func remove_item_from_inventory(item: Sprite2D) -> void:
 	GameState.remove_item_from_inventory(item)
 
 func _add_following_item(item: Sprite2D):
+	is_picking_up_item = true
+	last_picked_up_item_position = item.global_position
+	
 	var item_name = item.name
 	if item.get_parent() != self:
 		item.reparent(self)
 	item.name = item_name # Rename to fix name conflicts
 	_following_items.append(item)
 	item_offset_length = 8 + _following_items.size() * 2
+
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	if animated_sprite.animation == "Pickup": is_picking_up_item = false
