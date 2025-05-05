@@ -3,6 +3,8 @@ extends Node2D
 @onready var counter: Area2D = $Counter
 @onready var counter_collisionshape: CollisionShape2D = $Counter/Counter_shape
 
+const movable_item_scene = preload("res://Scenes/Objects/Interactable Objects/movable_item.tscn")
+
 @export var item_move_script: Script
 @export var sold_particle_effect: GPUParticles2D
 @export var customer_drop_shape: CollisionShape2D
@@ -30,7 +32,7 @@ func _ready() -> void:
 		else:
 			texture = item_data.texture
 		
-		var item := Sprite2D.new()
+		var item := movable_item_scene.instantiate()
 		item.texture = texture
 		
 		var counterRect = counter_collisionshape.shape.get_rect()
@@ -50,6 +52,7 @@ func _ready() -> void:
 		item.set_meta("item_properties", item_data)
 		item.item_sold.connect(_on_item_sold.bind(item))
 		spawned_items.append(item)
+		item.add_to_group("shop_items")
 
 func update_item_customer(item: Sprite2D):
 	item.customer = current_customer

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://yxwb4g3hklg7"]
+
+[ext_resource type="Texture2D" uid="uid://ghkrp0aax12d" path="res://Assets/sprites/anvil.png" id="1_dbjif"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbjif"]
+size = Vector2(16, 7)
+
+[node name="Anvil" type="Sprite2D"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_dbjif")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_dbjif")
+debug_color = Color(0, 0.941176, 0.0313726, 0.321569)

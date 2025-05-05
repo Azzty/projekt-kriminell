@@ -6,6 +6,8 @@ var name: String
 var value: float
 var tags: Array
 
+## TODO: Add materials to items, for example: {"iron": 2, "wood": 1}
+
 static var item_data = {
 	"Revolver": {
 		"tags": ["Weapon", "Gun"],

@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwxucpdl0c6tb"]
+
+[ext_resource type="Texture2D" uid="uid://bt8w6yq8repob" path="res://Assets/spritesheets/furnace.png" id="1_8qxmj"]
+[ext_resource type="Script" uid="uid://b81icrwck86sq" path="res://Scripts/Items/furnace.gd" id="2_vy0ry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjikw"]
+atlas = ExtResource("1_8qxmj")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aag5i"]
+atlas = ExtResource("1_8qxmj")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uw30"]
+atlas = ExtResource("1_8qxmj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt3hl"]
+atlas = ExtResource("1_8qxmj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqspi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjikw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aag5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uw30")
+}],
+"loop": true,
+"name": &"active",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt3hl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8qxmj"]
+size = Vector2(10, 10.1383)
+
+[node name="Furnace" type="AnimatedSprite2D"]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_yqspi")
+animation = &"active"
+autoplay = "active"
+frame_progress = 0.865892
+script = ExtResource("2_vy0ry")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="DropShape" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+position = Vector2(-1, -7)
+shape = SubResource("RectangleShape2D_8qxmj")
+debug_color = Color(0, 0.94, 0.0313333, 0.321569)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

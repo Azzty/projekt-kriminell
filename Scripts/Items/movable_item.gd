@@ -4,6 +4,7 @@ extends Sprite2D
 @export var customer_drop_shape: CollisionShape2D
 @export var customer: Node
 @export var sold_particle_effect: GPUParticles2D
+@export var target_position: Vector2
 
 @onready var customer_requested_tags: Array[String]
 
@@ -40,10 +41,21 @@ func _process(delta: float) -> void:
 	# If out of bounds happened on this frame, bounce back
 	_keep_within_bounds()
 	
-	if global_position.distance_to(grab_position) < 1.0 or holding_mouse0:
+	if holding_mouse0:
 		released_out_of_bounds = false
 	if released_out_of_bounds:
-		global_position = global_position.lerp(grab_position, 0.1)
+		print("Grab position out of bounds")
+		var rect = bounds_cshape.shape.get_rect()
+		
+		if not rect.has_point(grab_position):
+			grab_position = Vector2(
+				0.3 * randi_range(-rect.size.x, rect.size.x),
+				0.3 * randi_range(-rect.size.y, rect.size.y)
+				)
+		
+		print("Going to: ", grab_position)
+		position = position.lerp(grab_position, 0.1)
+		if position.distance_to(grab_position) < 1.0: released_out_of_bounds = false
 	# Move item towards mouse
 	acceleration = delta_position * STIFFNESS
 	velocity += acceleration
@@ -57,6 +69,7 @@ func _keep_within_bounds():
 	
 	var bounds = bounds_cshape.shape.get_rect()
 	# Check if out of bounds
+	
 	var outX = position.x < bounds.position.x or position.x > bounds.end.x
 	var outY = position.y < bounds.position.y or position.y > bounds.end.y
 	
@@ -71,7 +84,6 @@ func _keep_within_bounds():
 		if customer_drop_shape.shape.get_rect().has_point(local_mouse_pos):
 			_sell_item()
 			
-	
 	# If not yet out of bounds then reverse velocity (avoids getting stuck on edge)
 	if outX and not isOutOfBounds:
 		velocity.x *= -0.8
@@ -123,3 +135,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		holding_mouse0 = true
 		grab_position = get_global_mouse_position()
 		get_viewport().set_input_as_handled()
+
+func _on_texture_changed() -> void:
+	var shape: RectangleShape2D = $%CollisionShape2D.shape
+	shape.size = get_rect().size

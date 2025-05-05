@@ -13,3 +13,13 @@ func get_bigger_texture_version(resource_path:String):
 	var big_file_path: String = base_path + file_name + "_big." + file_extension
 	
 	return big_file_path
+
+func find_first_parent_of_class(node:Node, class_type: String):
+	var parent = node.get_parent()
+	if parent:
+		if parent.get_class() == class_type:
+			return parent
+		else:
+			find_first_parent_of_class(parent, class_type)
+	else:
+		return null

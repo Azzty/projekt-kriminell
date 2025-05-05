@@ -1,8 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce1e6off6xfnt"]
+[gd_scene load_steps=4 format=3 uid="uid://ce1e6off6xfnt"]
 
 [ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/Items/Misc/apple.png" id="1_fxa2p"]
 [ext_resource type="Script" uid="uid://d072qu4i70x61" path="res://Scripts/Items/movable_item.gd" id="2_hpxu4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r35oa"]
+size = Vector2(8, 8)
+
 [node name="movable_item" type="Sprite2D"]
 texture = ExtResource("1_fxa2p")
 script = ExtResource("2_hpxu4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_r35oa")
+
+[connection signal="texture_changed" from="." to="." method="_on_texture_changed"]
