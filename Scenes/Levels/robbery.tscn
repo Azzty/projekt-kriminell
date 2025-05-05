@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cnr1exbd78fih"]
+[gd_scene load_steps=14 format=3 uid="uid://cnr1exbd78fih"]
 
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://cehvvev2uys40" path="res://Scripts/World/tilable.tres" id="5_qi1i4"]
 [ext_resource type="PackedScene" uid="uid://byhyuahc0670n" path="res://Scenes/Objects/Static Objects/wall.tscn" id="7_nqmpn"]
 [ext_resource type="PackedScene" uid="uid://dd7kp4ek1a2yf" path="res://Scenes/Objects/Interactable Objects/door.tscn" id="8_esq8r"]
+[ext_resource type="PackedScene" uid="uid://f7qp4pcjhsr1" path="res://Scenes/Objects/Interactable Objects/locked_door.tscn" id="11_ea7rc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqmpn"]
 shader = ExtResource("5_qi1i4")
@@ -233,3 +234,6 @@ position = Vector2(314, 88.9998)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_nqmpn")
 metadata/_edit_lock_ = true
+
+[node name="LockedDoor" parent="." instance=ExtResource("11_ea7rc")]
+position = Vector2(-18, 157)
