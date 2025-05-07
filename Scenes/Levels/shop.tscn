@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://byr6kguuaclem" path="res://Scenes/Effects/sparkle_explosion.tscn" id="9_v6o73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a54sg"]
-size = Vector2(50, 90)
+size = Vector2(82, 90)
 
 [sub_resource type="Gradient" id="Gradient_c3i85"]
 offsets = PackedFloat32Array(1)

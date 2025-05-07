@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://deum0uskaguoj"]
+[gd_scene load_steps=6 format=3 uid="uid://deum0uskaguoj"]
 
 [ext_resource type="Script" uid="uid://mcnqw8wnd507" path="res://Scripts/UI/speech_bubble.gd" id="1_233bx"]
+[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="1_hv8s5"]
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="2_hv8s5"]
 
 [sub_resource type="Gradient" id="Gradient_f4c0y"]
@@ -14,6 +15,7 @@ width = 4
 custom_minimum_size = Vector2(150, 80)
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("1_hv8s5")
 script = ExtResource("1_233bx")
 
 [node name="CharacterName" type="Label" parent="."]
@@ -22,7 +24,9 @@ layout_mode = 0
 offset_left = 10.0
 offset_right = 140.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 6
 text = "Dumbass"
+vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Speech" type="Label" parent="."]

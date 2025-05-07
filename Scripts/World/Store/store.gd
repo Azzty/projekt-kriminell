@@ -39,7 +39,7 @@ func move_scenes(delta_position: Vector2):
 	await move_tween.finished
 	
 	for item in shop_items:
-		item.position += Vector2(MOVE_AMOUNT)
+		#item.position += Vector2(MOVE_AMOUNT)
 		var tween := item.create_tween()
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_CIRC)
