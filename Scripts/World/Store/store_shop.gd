@@ -46,7 +46,6 @@ func _ready() -> void:
 		item.bounds_cshape = get_node("Counter/Counter_shape")
 		item.customer_drop_shape = customer_drop_shape
 		update_item_customer(item)
-		item.sold_particle_effect = sold_particle_effect
 		counter.add_child(item)
 		item.name = item_data.name
 		item.set_meta("item_properties", item_data)

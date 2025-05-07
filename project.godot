@@ -21,9 +21,19 @@ GameState="*res://Scripts/Managers/game_state.gd"
 SceneManager="*res://Scripts/Managers/scene_manager.gd"
 Utilities="*res://Scripts/Utilities/Utils.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [global_group]
 
 music="Things that play music"
+shop_items=""
+
+[gui]
+
+theme/default_theme_scale=0.5
 
 [input]
 

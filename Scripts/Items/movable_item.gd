@@ -3,10 +3,10 @@ extends Sprite2D
 @export var bounds_cshape: CollisionShape2D
 @export var customer_drop_shape: CollisionShape2D
 @export var customer: Node
-@export var sold_particle_effect: GPUParticles2D
 @export var target_position: Vector2
 
 @onready var customer_requested_tags: Array[String]
+@onready var remove_effect = $SparkleExplosion
 
 const PURCHASE_SOUND = preload("res://Assets/Audio/SFX/purchase.mp3")
 
@@ -30,6 +30,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	delta_position = Vector2.ZERO
 	
 	if holding_mouse0:
@@ -66,6 +67,7 @@ func _process(delta: float) -> void:
 # Keep within bounds and move back to grabbed spot if released in air
 func _keep_within_bounds():
 	if holding_mouse0: return
+	if not bounds_cshape: return
 	
 	var bounds = bounds_cshape.shape.get_rect()
 	# Check if out of bounds
@@ -110,14 +112,10 @@ func _sell_item():
 			return
 	GameState.money += get_meta("item_properties").value
 	GameState.remove_item_from_inventory(self)
-	var effect = sold_particle_effect.duplicate()
-	effect.emitting = true
-	add_sibling(effect)
-	effect.global_position = global_position
 	var sound_effect = AudioStreamPlayer.new()
 	sound_effect.volume_db = -8.0
 	sound_effect.stream = PURCHASE_SOUND
-	effect.add_child(sound_effect)
+	get_parent().add_child(sound_effect)
 	sound_effect.play()
 	item_sold.emit()
 	customer.state = customer.States.ITEM_GIVEN_CORRECT
@@ -139,3 +137,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_texture_changed() -> void:
 	var shape: RectangleShape2D = $%CollisionShape2D.shape
 	shape.size = get_rect().size
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		remove_effect.emitting = true
+		remove_effect.reparent(get_parent())
+		remove_effect.global_position = global_position

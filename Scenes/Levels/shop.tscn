@@ -52,12 +52,11 @@ texture = SubResource("GradientTexture2D_lkwxl")
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_lkwxl")
 
-[node name="movable_item" parent="Counter" node_paths=PackedStringArray("bounds_cshape", "customer_drop_shape", "sold_particle_effect") instance_placeholder="res://Scenes/Objects/Interactable Objects/movable_item.tscn"]
+[node name="movable_item" parent="Counter" node_paths=PackedStringArray("bounds_cshape", "customer_drop_shape") instance_placeholder="res://Scenes/Objects/Interactable Objects/movable_item.tscn"]
 position = Vector2(67, 4)
 scale = Vector2(2, 2)
 bounds_cshape = NodePath("../Counter_shape")
 customer_drop_shape = NodePath("../../CustomerDropArea/CustomerDropShape")
-sold_particle_effect = NodePath("../../SparkleExplosion")
 
 [node name="Crowbar" type="Sprite2D" parent="."]
 visible = false
