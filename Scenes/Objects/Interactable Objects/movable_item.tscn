@@ -8,6 +8,7 @@
 size = Vector2(8, 8)
 
 [node name="movable_item" type="Sprite2D" groups=["shop_items"]]
+z_index = 1
 texture = ExtResource("1_fxa2p")
 script = ExtResource("2_hpxu4")
 

@@ -42,6 +42,9 @@ func _process(delta: float) -> void:
 	# If out of bounds happened on this frame, bounce back
 	_keep_within_bounds()
 	
+	## This littearly worked 5 mins ago then broke for no fucking reason
+	## I dont know what to do, fuck this im out
+	
 	if holding_mouse0:
 		released_out_of_bounds = false
 	if released_out_of_bounds:

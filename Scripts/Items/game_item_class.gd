@@ -7,33 +7,41 @@ var value: float
 var tags: Array
 var materials: Dictionary
 
+const ITEMS_FOLDER := "res://Assets/sprites/Items"
+
 static var item_data = {
 	"Revolver": {
 		"tags": ["Weapon", "Gun"],
-		"texture": load("res://Assets/sprites/Items/Weapons/Guns/revolver.png"),
+		"texture": load(ITEMS_FOLDER + "/Weapons/Guns/revolver.png"),
 		"name": "Revolver",
 		"value": 200,
 		"materials": {"iron": 1, "wood": 0.5}
 	},
 	"Crowbar": {
 		"tags": ["Weapon", "Melee"],
-		"texture": load("res://Assets/sprites/Items/Weapons/Melee/crowbar.png"),
+		"texture": load(ITEMS_FOLDER + "/Weapons/Melee/crowbar.png"),
 		"name": "Crowbar",
 		"value": 100,
 		"materials": {"iron": 4}
 	},
 	"Document": {
 		"tags": ["Special", "QuestItem"],
-		"texture": load("res://Assets/sprites/Items/Special/document.png"),
+		"texture": load(ITEMS_FOLDER + "/Special/document.png"),
 		"name": "Document",
 		"value": 100,
 		"materials": {"paper": 0.1}
 	},
 	"Apple": {
 		"tags": ["Misc", "Food"],
-		"texture": load("res://Assets/sprites/Items/Misc/apple.png"),
+		"texture": load(ITEMS_FOLDER + "/Misc/apple.png"),
 		"name": "Apple",
 		"value": 5
+	},
+	"Iron ingot": {
+		"tags": ["Resource", "Metal"],
+		"texture": load(ITEMS_FOLDER + "/Resources/iron_ingot.png"),
+		"name": "Iron ingot",
+		"value": 20
 	}
 }
 
