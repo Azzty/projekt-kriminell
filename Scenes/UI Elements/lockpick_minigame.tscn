@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhln3qk5x1ssi"]
+
+[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="1_52qv8"]
+[ext_resource type="Script" uid="uid://dhmfnw6ag3y8e" path="res://Scripts/UI/lockpick_minigame.gd" id="2_6td8c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52qv8"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_75yt0"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6td8c"]
+bg_color = Color(0.646029, 0.646029, 0.646029, 0.337)
+
+[node name="LockpickMinigame" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(8, 8)
+theme = ExtResource("1_52qv8")
+script = ExtResource("2_6td8c")
+
+[node name="SpacebarButton" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 26.0
+offset_right = 35.0
+offset_bottom = 36.0
+focus_mode = 0
+theme = ExtResource("1_52qv8")
+theme_type_variation = &"small"
+theme_override_font_sizes/font_size = 2
+text = "Space"
+
+[node name="Instructions" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 9.0
+theme_override_font_sizes/font_size = 2
+text = "Click when cursor on green part"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="MinigameWindow" type="Panel" parent="."]
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 38.0
+offset_bottom = 24.0
+
+[node name="Cursor" type="Panel" parent="MinigameWindow"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 0
+offset_left = 17.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 11.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_52qv8")
+
+[node name="GreenPart" type="Panel" parent="MinigameWindow"]
+unique_name_in_owner = true
+modulate = Color(0.0166667, 1, 0, 1)
+z_index = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 19.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_75yt0")
+
+[node name="Track" type="Panel" parent="MinigameWindow"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 34.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6td8c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(20.1197, 15.2015)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 42.0
+offset_top = -0.125
+offset_right = 52.0
+offset_bottom = 9.875
+focus_mode = 0
+theme_override_font_sizes/font_size = 2
+text = "x"
+
+[connection signal="pressed" from="Button" to="." method="_on_x_button_pressed"]

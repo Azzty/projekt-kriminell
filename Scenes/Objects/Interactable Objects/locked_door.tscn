@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://f7qp4pcjhsr1"]
+[gd_scene load_steps=5 format=3 uid="uid://f7qp4pcjhsr1"]
 
 [ext_resource type="Texture2D" uid="uid://7ed0ytg4bspo" path="res://Assets/sprites/door.png" id="1_eltoj"]
-[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="2_yf321"]
+[ext_resource type="PackedScene" uid="uid://dhln3qk5x1ssi" path="res://Scenes/UI Elements/lockpick_minigame.tscn" id="2_yf321"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ba8gm"]
 radius = 1.0
@@ -9,18 +9,6 @@ height = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ba8gm"]
 radius = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf321"]
-bg_color = Color(0.611761, 0.798185, 1, 1)
-anti_aliasing = false
-
-[sub_resource type="InputEventKey" id="InputEventKey_yf321"]
-device = -1
-keycode = 32
-unicode = 32
-
-[sub_resource type="Shortcut" id="Shortcut_57o83"]
-events = [SubResource("InputEventKey_yf321")]
 
 [node name="Door" type="StaticBody2D"]
 
@@ -61,21 +49,8 @@ node_b = NodePath("../Door")
 length = 1.0
 damping = 0.2
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -20.0
-offset_top = -42.0
-offset_right = 20.0
-offset_bottom = -2.0
-theme = ExtResource("2_yf321")
-
-[node name="Button" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 25.0
-offset_right = 36.0
-offset_bottom = 36.0
-theme_override_font_sizes/font_size = 3
-theme_override_styles/pressed = SubResource("StyleBoxFlat_yf321")
-shortcut = SubResource("Shortcut_57o83")
-shortcut_feedback = false
-text = "Space"
+[node name="LockpickMinigame" parent="." instance=ExtResource("2_yf321")]
+offset_left = -57.0
+offset_top = -126.0
+offset_right = -17.0
+offset_bottom = -86.0
