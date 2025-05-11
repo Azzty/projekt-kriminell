@@ -30,7 +30,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	delta_position = Vector2.ZERO
 	
 	if holding_mouse0:
@@ -42,24 +41,23 @@ func _process(delta: float) -> void:
 	# If out of bounds happened on this frame, bounce back
 	_keep_within_bounds()
 	
-	## This littearly worked 5 mins ago then broke for no fucking reason
-	## I dont know what to do, fuck this im out
-	
 	if holding_mouse0:
 		released_out_of_bounds = false
 	if released_out_of_bounds:
-		print("Grab position out of bounds")
 		var rect = bounds_cshape.shape.get_rect()
 		
-		if not rect.has_point(grab_position):
+		# If not released inside bounds, set grab_position inside bounds
+		if not rect.has_point(bounds_cshape.to_local(grab_position)):
 			grab_position = Vector2(
 				0.3 * randi_range(-rect.size.x, rect.size.x),
 				0.3 * randi_range(-rect.size.y, rect.size.y)
 				)
+			grab_position = to_global(grab_position)
 		
-		print("Going to: ", grab_position)
-		position = position.lerp(grab_position, 0.1)
-		if position.distance_to(grab_position) < 1.0: released_out_of_bounds = false
+		## Go to the grab position
+		#print("Going to: ", grab_position)
+		global_position = global_position.lerp(grab_position, 0.1)
+		if global_position.distance_to(grab_position) < 1.0: released_out_of_bounds = false
 	# Move item towards mouse
 	acceleration = delta_position * STIFFNESS
 	velocity += acceleration
@@ -132,7 +130,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		holding_mouse0 = false
 		return
 
-	if abs(get_global_mouse_position() - global_position) < get_rect().size:
+	if get_rect().has_point(get_local_mouse_position()):
 		holding_mouse0 = true
 		grab_position = get_global_mouse_position()
 		get_viewport().set_input_as_handled()

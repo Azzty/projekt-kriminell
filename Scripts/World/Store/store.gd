@@ -57,7 +57,7 @@ func move_scenes(delta_position: Vector2):
 				item.released_out_of_bounds = true
 		-MOVE_AMOUNT:
 			current_scene = "workshop"
-			var bounds_cshape = find_child("ItemZone").find_child("ItemCollisionShape")
+			var bounds_cshape = find_child("ItemZone", true).find_child("ItemCollisionShape")
 			for item in shop_items:
 				item.reparent(find_child("ItemZone"), true)
 				item.bounds_cshape = bounds_cshape
