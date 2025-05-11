@@ -45,16 +45,17 @@ func _process(delta: float) -> void:
 		released_out_of_bounds = false
 	if released_out_of_bounds:
 		var rect = bounds_cshape.shape.get_rect()
+		rect.position = bounds_cshape.to_global(rect.position) # Convert position to global space
 		
 		# If not released inside bounds, set grab_position inside bounds
-		if not rect.has_point(bounds_cshape.to_local(grab_position)):
-			grab_position = Vector2(
+		if not rect.has_point(grab_position):
+			grab_position = rect.get_center()
+			grab_position += Vector2(
 				0.3 * randi_range(-rect.size.x, rect.size.x),
 				0.3 * randi_range(-rect.size.y, rect.size.y)
 				)
-			grab_position = to_global(grab_position)
 		
-		## Go to the grab position
+		# Go to the grab position
 		#print("Going to: ", grab_position)
 		global_position = global_position.lerp(grab_position, 0.1)
 		if global_position.distance_to(grab_position) < 1.0: released_out_of_bounds = false
@@ -70,11 +71,14 @@ func _keep_within_bounds():
 	if holding_mouse0: return
 	if not bounds_cshape: return
 	
-	var bounds = bounds_cshape.shape.get_rect()
-	# Check if out of bounds
+	## This is the problem, ts is in its own local space, need to convert to our local space
+	# relative to parent, which is the same? Could be different problem?
+	var bounds := bounds_cshape.shape.get_rect()
+	bounds.position = bounds_cshape.to_global(bounds.position) # Convert position to global space
 	
-	var outX = position.x < bounds.position.x or position.x > bounds.end.x
-	var outY = position.y < bounds.position.y or position.y > bounds.end.y
+	# Check if out of bounds
+	var outX = global_position.x < bounds.position.x or global_position.x > bounds.end.x
+	var outY = global_position.y < bounds.position.y or global_position.y > bounds.end.y
 	
 	# If released out of bounds
 	if Input.is_action_just_released("left_click") and (outX or outY):

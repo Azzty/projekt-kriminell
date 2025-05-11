@@ -6,10 +6,12 @@ const item_template := preload("res://Scenes/Objects/Interactable Objects/movabl
 @onready var drop_cshape := %DropShape
 @onready var hum_sound_effect := $%HumSoundEffect
 @onready var ding_sound_effect := $%DingSoundEffect
+@onready var pop_sound_effect := $%PopSoundEffect
+@onready var decline_sound_effect := $%DeclineSoundEffect
 @onready var recipe_button := $%OptionButton
 
 var items_in_drop_area := []
-var materials_in_machine := {}
+var materials_in_machine := {"iron": 10.0}
 var smelt_queue := []
 var is_smelting := false
 
@@ -60,35 +62,46 @@ func dispense_recipe():
 	var recipe: String = recipe_button.get_item_text(recipe_button.selected)
 	if not recipes.has(recipe):
 		print(recipe, " is not a valid recipe")
+		decline_sound_effect.play()
 		return
 	if not GameItem.item_data.has(recipe):
 		print(recipe, " not item in game_item_class.gd!")
+		decline_sound_effect.play()
 		return
 	
 	# See if we have all required materals
 	for material_name in recipes[recipe]:
 		if not materials_in_machine.has(material_name):
 			print(material_name, " not in machine!")
+			decline_sound_effect.play()
 			return
 		if materials_in_machine[material_name] - recipes[recipe][material_name] < 0:
 			print("Insufficent materails! Needs: ", recipes[recipe][material_name],
 			" ", material_name, ". Has: ", materials_in_machine[material_name], " ", material_name)
+			decline_sound_effect.play()
 			return
 	
 	# Actually remove the materials now that we know we have them
 	for material_name in recipes[recipe]:
 		materials_in_machine[material_name] -= recipes[recipe][material_name]
 	
+	# Create the item
 	var result_data := GameItem.new("Iron ingot")
 	var result_item := item_template.instantiate()
 	result_item.set_meta("item_properties", result_data)
-	result_item.bounds_cshape = get_tree().get_first_node_in_group("shop_items").bounds_cshape
-	result_item.global_position = global_position
+	result_item.bounds_cshape = get_parent().find_child("MaterialZone").find_child("MaterialCollisionShape")
 	result_item.texture = result_data.texture
 	result_item.scale = Vector2(2,2)
 	result_item.bounds_cshape.add_sibling(result_item)
+	result_item.global_position = global_position
 	result_item.name = result_data.name
-	result_item.add_to_group("shop_items")
+	result_item.released_out_of_bounds = true
+	result_item.remove_from_group("shop_items")
+	result_item.add_to_group("resource_items")
+	
+	# Play pop sound
+	pop_sound_effect.pitch_scale = randf_range(0.9, 1.1) 
+	pop_sound_effect.play()
 
 # Smelts materials and add to machine inventory
 func _smelt_materials(item_materials: Dictionary) -> void:

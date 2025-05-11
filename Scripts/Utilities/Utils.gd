@@ -1,5 +1,7 @@
 extends Node
 
+## Returns a file path that is the same path but with a _big suffix to the file name
+## Used to get more detailed versions of sprites
 func get_bigger_texture_version(resource_path:String):
 	# Get path and file name
 	var path := resource_path.rsplit("/", false, 1)
@@ -14,6 +16,7 @@ func get_bigger_texture_version(resource_path:String):
 	
 	return big_file_path
 
+## Returns a rect in [b]global[/b] space for the given animated sprite
 func get_animated_sprite_rect(sprite: AnimatedSprite2D) -> Rect2:
 	if not sprite.sprite_frames or not sprite.animation:
 		return Rect2() # Return empty if no frames/animation
@@ -29,6 +32,7 @@ func get_animated_sprite_rect(sprite: AnimatedSprite2D) -> Rect2:
 	
 	return Rect2(rect_position, rect_size)
 
+## Returns a rect in [b]global[/b] space for the given sprite
 func get_sprite_rect(sprite: Sprite2D) -> Rect2:
 	if not sprite.texture:
 		return Rect2() # Return empty rect if no texture
@@ -38,6 +42,7 @@ func get_sprite_rect(sprite: Sprite2D) -> Rect2:
 	var rect_size = texture_size * sprite.scale
 	return Rect2(rect_position, rect_size)
 
+## Walks up the ancestry and finds the first ancestor of a given class
 func find_first_parent_of_class(node:Node, class_type: String):
 	var parent = node.get_parent()
 	if parent:

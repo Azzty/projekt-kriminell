@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwxucpdl0c6tb"]
+[gd_scene load_steps=16 format=3 uid="uid://dwxucpdl0c6tb"]
 
 [ext_resource type="Texture2D" uid="uid://bt8w6yq8repob" path="res://Assets/spritesheets/furnace.png" id="1_8qxmj"]
 [ext_resource type="Script" uid="uid://b81icrwck86sq" path="res://Scripts/Items/furnace.gd" id="2_vy0ry"]
 [ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="3_glnvt"]
 [ext_resource type="AudioStream" uid="uid://gl0n4dknbk6s" path="res://Assets/Audio/SFX/microwave hum.mp3" id="4_jc0np"]
 [ext_resource type="AudioStream" uid="uid://mlu5166nbdhe" path="res://Assets/Audio/SFX/microwave ding.mp3" id="5_3fkuu"]
+[ext_resource type="AudioStream" uid="uid://dx8tnbecnryo6" path="res://Assets/Audio/SFX/pop sound effect.mp3" id="6_3fkuu"]
+[ext_resource type="AudioStream" uid="uid://c5yruchx4tah1" path="res://Assets/Audio/SFX/error.mp3" id="7_80s6x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xjikw"]
 atlas = ExtResource("1_8qxmj")
@@ -100,14 +102,27 @@ popup/item_1/id = 1
 popup/item_2/text = "I am steve"
 popup/item_2/id = 2
 
-[node name="HumSoundEffect" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="Node" parent="."]
+
+[node name="HumSoundEffect" type="AudioStreamPlayer" parent="SFX"]
 unique_name_in_owner = true
 stream = ExtResource("4_jc0np")
 volume_db = -10.0
 
-[node name="DingSoundEffect" type="AudioStreamPlayer2D" parent="."]
+[node name="DingSoundEffect" type="AudioStreamPlayer2D" parent="SFX"]
 unique_name_in_owner = true
+scale = Vector2(4, 4)
 stream = ExtResource("5_3fkuu")
+
+[node name="PopSoundEffect" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+stream = ExtResource("6_3fkuu")
+
+[node name="DeclineSoundEffect" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+stream = ExtResource("7_80s6x")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
