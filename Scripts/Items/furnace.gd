@@ -1,6 +1,5 @@
 extends AnimatedSprite2D
 
-const SMELTING_TIME := 1.0
 const item_template := preload("res://Scenes/Objects/Interactable Objects/movable_item.tscn")
 
 @onready var drop_cshape := %DropShape
@@ -9,6 +8,7 @@ const item_template := preload("res://Scenes/Objects/Interactable Objects/movabl
 @onready var pop_sound_effect := $%PopSoundEffect
 @onready var decline_sound_effect := $%DeclineSoundEffect
 @onready var recipe_button := $%OptionButton
+@onready var furnace_sprite_bounds := Utilities.get_animated_sprite_rect(get_node("."))
 
 var items_in_drop_area := []
 var materials_in_machine := {"iron": 10.0}
@@ -17,6 +17,7 @@ var is_smelting := false
 
 signal item_smelted
 
+@export var SMELTING_TIME := 1.0
 @export var SMELT_EFFICENCY := 0.75 # Yield from smelting items
 @export var resource_cshape: CollisionShape2D # Place where resources will be placed
 
@@ -53,9 +54,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_released():
 		for item: Sprite2D in items_in_drop_area:
 			_add_to_smelt_queue(item)
+			GameState.remove_item_from_inventory(item)
 			item.queue_free()
 		items_in_drop_area.clear()
-	elif Utilities.get_animated_sprite_rect(get_node(".")).has_point(get_global_mouse_position()):
+	elif furnace_sprite_bounds.has_point(get_global_mouse_position()):
 		dispense_recipe()
 
 func dispense_recipe():
@@ -75,6 +77,7 @@ func dispense_recipe():
 			print(material_name, " not in machine!")
 			decline_sound_effect.play()
 			return
+		# Not enough materials
 		if materials_in_machine[material_name] - recipes[recipe][material_name] < 0:
 			print("Insufficent materails! Needs: ", recipes[recipe][material_name],
 			" ", material_name, ". Has: ", materials_in_machine[material_name], " ", material_name)
@@ -108,12 +111,15 @@ func _smelt_materials(item_materials: Dictionary) -> void:
 	is_smelting = true
 	play("active")
 	hum_sound_effect.play()
-	await get_tree().create_timer(SMELTING_TIME).timeout
+	await get_tree().create_timer(SMELTING_TIME).timeout # Wait for it to smelt
+	
+	# Add smelted materials to furnace
 	for material_name in item_materials:
 		var material_amount = item_materials[material_name]
 		if not materials_in_machine.has(material_name):
 			materials_in_machine[material_name] = 0.0
 		materials_in_machine[material_name] += material_amount * SMELT_EFFICENCY
+	
 	print("smelted an item")
 	is_smelting = false
 	play("idle")
@@ -121,6 +127,8 @@ func _smelt_materials(item_materials: Dictionary) -> void:
 	ding_sound_effect.play()
 	item_smelted.emit()
 
+## Repeatedly pops the first item in smelt_queue and smelts it
+## until smelt_queue is empty
 func smelt_all_items() -> void:
 	if is_smelting: await item_smelted # Wait for the furnace to be ready
 	
@@ -137,3 +145,14 @@ func _add_to_smelt_queue(item) -> void:
 	smelt_queue.append(item_materials)
 	
 	if not is_smelting: smelt_all_items()
+
+func _process(delta: float) -> void:
+	if is_smelting: return
+	if furnace_sprite_bounds.has_point(get_global_mouse_position()):
+		self_modulate.r = 1.2
+		self_modulate.g = 1.2
+		self_modulate.b = 1.2
+	else:
+		self_modulate.r = 1.0
+		self_modulate.g = 1.0
+		self_modulate.b = 1.0

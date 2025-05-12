@@ -66,6 +66,7 @@ sprite_frames = SubResource("SpriteFrames_yqspi")
 animation = &"idle"
 autoplay = "idle"
 script = ExtResource("2_vy0ry")
+SMELTING_TIME = 4.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

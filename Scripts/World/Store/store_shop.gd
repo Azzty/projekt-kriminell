@@ -42,7 +42,6 @@ func _ready() -> void:
 		item.z_index = 2
 		item.rotate(randf_range(-PI, PI))
 		item.scale = Vector2(2,2)
-		#item.set_script(item_move_script)
 		item.bounds_cshape = get_node("Counter/Counter_shape")
 		item.customer_drop_shape = customer_drop_shape
 		update_item_customer(item)
