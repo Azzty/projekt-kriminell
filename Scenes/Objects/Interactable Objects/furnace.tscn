@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://dwxucpdl0c6tb"]
 
 [ext_resource type="Texture2D" uid="uid://bt8w6yq8repob" path="res://Assets/spritesheets/furnace.png" id="1_8qxmj"]
-[ext_resource type="Script" uid="uid://b81icrwck86sq" path="res://Scripts/Items/furnace.gd" id="2_vy0ry"]
+[ext_resource type="Script" uid="uid://b81icrwck86sq" path="res://Scripts/Objects/furnace.gd" id="2_vy0ry"]
 [ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="3_glnvt"]
 [ext_resource type="AudioStream" uid="uid://gl0n4dknbk6s" path="res://Assets/Audio/SFX/microwave hum.mp3" id="4_jc0np"]
 [ext_resource type="AudioStream" uid="uid://mlu5166nbdhe" path="res://Assets/Audio/SFX/microwave ding.mp3" id="5_3fkuu"]

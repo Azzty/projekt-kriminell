@@ -188,9 +188,10 @@ position = Vector2(148, 228)
 position = Vector2(128, 228)
 rotation = -3.14159
 
-[node name="Door4" parent="Doors" instance=ExtResource("8_esq8r")]
+[node name="LockedDoor" parent="Doors" instance=ExtResource("11_ea7rc")]
 position = Vector2(-68, -3)
 rotation = -1.57079
+required_wins = 1
 
 [node name="Button" type="Button" parent="."]
 offset_left = 113.0
@@ -234,6 +235,3 @@ position = Vector2(314, 88.9998)
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_nqmpn")
 metadata/_edit_lock_ = true
-
-[node name="LockedDoor" parent="." instance=ExtResource("11_ea7rc")]
-position = Vector2(-18, 157)

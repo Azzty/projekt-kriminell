@@ -87,7 +87,7 @@ offset_left = 1.0
 offset_top = 2.0
 offset_right = 55.0
 offset_bottom = 6.0
-text = "Pick up <item>"
+text = "ts text pmo"
 horizontal_alignment = 1
 
 [connection signal="button_up" from="." to="." method="_on_button_up"]

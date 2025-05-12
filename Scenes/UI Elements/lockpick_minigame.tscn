@@ -13,6 +13,7 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0.646029, 0.646029, 0.646029, 0.337)
 
 [node name="LockpickMinigame" type="Panel"]
+process_mode = 2
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(8, 8)
@@ -20,6 +21,7 @@ theme = ExtResource("1_52qv8")
 script = ExtResource("2_6td8c")
 
 [node name="SpacebarButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 6.0
 offset_top = 26.0
 offset_right = 35.0
@@ -31,6 +33,7 @@ theme_override_font_sizes/font_size = 2
 text = "Space"
 
 [node name="Instructions" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 9.0
 theme_override_font_sizes/font_size = 2
@@ -40,6 +43,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="MinigameWindow" type="Panel" parent="."]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 8.0
 offset_right = 38.0
@@ -78,7 +82,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6td8c")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(20.1197, 15.2015)
 
-[node name="Button" type="Button" parent="."]
+[node name="XButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 42.0
 offset_top = -0.125
@@ -88,4 +92,17 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 2
 text = "x"
 
-[connection signal="pressed" from="Button" to="." method="_on_x_button_pressed"]
+[node name="PointsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -0.125
+offset_top = 37.0
+offset_right = 39.875
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 3
+text = "Pins: 0/4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="SpacebarButton" to="." method="_on_spacebar_button_pressed"]
+[connection signal="pressed" from="XButton" to="." method="_on_x_button_pressed"]

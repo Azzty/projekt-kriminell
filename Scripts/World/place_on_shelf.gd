@@ -39,7 +39,7 @@ func _ready() -> void:
 		item.name = item_name # Do this here so godot adds a suffix instead of breaking name
 		
 		var button = hold_button.instantiate()
-		button.item_name = str(item_name)
+		button.prompt_text = "Pick up " + str(item_name)
 		item.add_child(button)
 		button.top_level = true
 		button.position = item.global_position - Vector2(0, item.get_rect().size.y)

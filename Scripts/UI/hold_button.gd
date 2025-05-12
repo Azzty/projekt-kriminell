@@ -2,9 +2,9 @@ extends Button
 
 @export var hold_duration: float = 1.0
 @export var action_name: String = "interact_e"
-@export var item_name := "itemname":
+@export var prompt_text := "text to be displayed":
 	set(value):
-		item_name = value
+		prompt_text = value
 		if not label: call_deferred("update_label_text", value)
 		else: update_label_text(value)
 
@@ -21,7 +21,10 @@ var border_color = get_theme_stylebox("normal").border_color
 
 func _ready() -> void:
 	visible = false
-	label.text = "Pick up " + item_name
+	label.text = prompt_text
+	shortcut.events.clear()
+	var shortcut_keys := InputMap.action_get_events(action_name)
+	shortcut.events.append_array(shortcut_keys)
 	
 	progress_stylebox = StyleBoxTexture.new()
 	var style_texture = GradientTexture2D.new()
@@ -76,5 +79,5 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "Player": GameState.buttons_in_range.erase(self)
 	visible = false
 
-func update_label_text(name_of_item: String):
-	label.text = "Pick up " + name_of_item
+func update_label_text(new_text: String):
+	label.text = new_text

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://f7qp4pcjhsr1"]
+[gd_scene load_steps=6 format=3 uid="uid://f7qp4pcjhsr1"]
 
+[ext_resource type="Script" uid="uid://da6ahvgv2oied" path="res://Scripts/Objects/locked_door.gd" id="1_57o83"]
 [ext_resource type="Texture2D" uid="uid://7ed0ytg4bspo" path="res://Assets/sprites/door.png" id="1_eltoj"]
-[ext_resource type="PackedScene" uid="uid://dhln3qk5x1ssi" path="res://Scenes/UI Elements/lockpick_minigame.tscn" id="2_yf321"]
+[ext_resource type="PackedScene" uid="uid://dnnfmc4o2qab6" path="res://Scenes/UI Elements/hold_button.tscn" id="3_8kt2l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ba8gm"]
 radius = 1.0
@@ -10,9 +11,11 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ba8gm"]
 radius = 1.0
 
-[node name="Door" type="StaticBody2D"]
+[node name="DoorFrame" type="StaticBody2D"]
+script = ExtResource("1_57o83")
 
 [node name="Door" type="RigidBody2D" parent="."]
+unique_name_in_owner = true
 mass = 2.0
 gravity_scale = 0.0
 freeze = true
@@ -32,6 +35,7 @@ shape = SubResource("CircleShape2D_ba8gm")
 debug_color = Color(0, 0.595, 0.7, 0.290196)
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2(9, 0)
 node_a = NodePath("..")
@@ -41,6 +45,7 @@ angular_limit_lower = -1.5708
 angular_limit_upper = 1.5708
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2(-9, 0)
 rotation = 3.14159
@@ -49,8 +54,15 @@ node_b = NodePath("../Door")
 length = 1.0
 damping = 0.2
 
-[node name="LockpickMinigame" parent="." instance=ExtResource("2_yf321")]
-offset_left = -57.0
-offset_top = -126.0
-offset_right = -17.0
-offset_bottom = -86.0
+[node name="HoldButton" parent="." instance=ExtResource("3_8kt2l")]
+unique_name_in_owner = true
+visible = false
+offset_top = -13.0
+offset_bottom = -3.0
+text = "F
+"
+action_name = "interact_f"
+prompt_text = "Pick door lock"
+
+[connection signal="unlocked_signal" from="." to="." method="_on_unlocked_signal"]
+[connection signal="activated" from="HoldButton" to="." method="_on_hold_button_activated"]
