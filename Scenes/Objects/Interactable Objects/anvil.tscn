@@ -18,7 +18,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_dbjif")
 script = ExtResource("2_oxtwu")
 
-[node name="ItemSlot0" type="Area2D" parent="."]
+[node name="ItemSlot0" type="Area2D" parent="." groups=["item_slots"]]
 position = Vector2(-5.75, -5.5)
 
 [node name="SlotShape" type="CollisionShape2D" parent="ItemSlot0"]
@@ -32,7 +32,7 @@ scale = Vector2(0.0703125, 0.03125)
 texture = SubResource("GradientTexture2D_4263j")
 metadata/_edit_lock_ = true
 
-[node name="ItemSlot1" type="Area2D" parent="."]
+[node name="ItemSlot1" type="Area2D" parent="." groups=["item_slots"]]
 position = Vector2(0, -6.5)
 
 [node name="SlotShape" type="CollisionShape2D" parent="ItemSlot1"]
@@ -46,7 +46,7 @@ scale = Vector2(0.0703125, 0.03125)
 texture = SubResource("GradientTexture2D_4263j")
 metadata/_edit_lock_ = true
 
-[node name="ItemSlot2" type="Area2D" parent="."]
+[node name="ItemSlot2" type="Area2D" parent="." groups=["item_slots"]]
 position = Vector2(5.75, -6.5)
 
 [node name="SlotShape" type="CollisionShape2D" parent="ItemSlot2"]

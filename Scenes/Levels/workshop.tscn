@@ -49,9 +49,8 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
-[node name="Furnace" parent="." node_paths=PackedStringArray("resource_cshape") instance=ExtResource("3_vt3hl")]
+[node name="Furnace" parent="." instance=ExtResource("3_vt3hl")]
 position = Vector2(-100, 30)
-resource_cshape = NodePath("../MaterialZone/MaterialCollisionShape")
 
 [node name="Anvil" parent="." instance=ExtResource("4_vt3hl")]
 position = Vector2(-8, 50)

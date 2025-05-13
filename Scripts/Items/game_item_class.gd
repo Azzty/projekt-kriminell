@@ -41,7 +41,8 @@ static var item_data = {
 		"tags": ["Resource", "Metal"],
 		"texture": load(ITEMS_FOLDER + "/Resources/iron_ingot.png"),
 		"name": "Iron ingot",
-		"value": 20
+		"value": 20,
+		"materials": {"iron": 2}
 	}
 }
 

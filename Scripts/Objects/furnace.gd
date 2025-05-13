@@ -19,7 +19,7 @@ signal item_smelted
 
 @export var SMELTING_TIME := 1.0
 @export var SMELT_EFFICENCY := 0.75 # Yield from smelting items
-@export var resource_cshape: CollisionShape2D # Place where resources will be placed
+#@export var resource_cshape: CollisionShape2D # Place where resources will be placed
 
 const recipes := {
 	"Iron ingot": {"iron": 2},
@@ -146,7 +146,7 @@ func _add_to_smelt_queue(item) -> void:
 	
 	if not is_smelting: smelt_all_items()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_smelting: return
 	if furnace_sprite_bounds.has_point(get_global_mouse_position()):
 		self_modulate.r = 1.2
