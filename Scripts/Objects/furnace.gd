@@ -39,7 +39,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	var item: Sprite2D = Utilities.find_first_parent_of_class(area, "Sprite2D")
-	if not item.has_meta("item_properties"): return
+	if not item.has_meta("item_properties") or not item.is_in_group("shop_items"): return
 	
 	self_modulate.r = 1
 	self_modulate.g = 1

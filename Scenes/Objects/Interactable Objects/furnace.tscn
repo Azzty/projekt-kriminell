@@ -69,6 +69,7 @@ script = ExtResource("2_vy0ry")
 SMELTING_TIME = 4.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="DropShape" type="CollisionShape2D" parent="Area2D"]
 unique_name_in_owner = true

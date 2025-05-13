@@ -1,17 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://yxwb4g3hklg7"]
+[gd_scene load_steps=6 format=3 uid="uid://yxwb4g3hklg7"]
 
 [ext_resource type="Texture2D" uid="uid://ghkrp0aax12d" path="res://Assets/sprites/anvil.png" id="1_dbjif"]
+[ext_resource type="Script" uid="uid://bigligp4kews4" path="res://Scripts/Objects/anvil.gd" id="2_oxtwu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbjif"]
-size = Vector2(16, 7)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxtwu"]
+size = Vector2(4.5, 2.0625)
+
+[sub_resource type="Gradient" id="Gradient_oxtwu"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0.63, 0.4515, 0.588235)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4263j"]
+gradient = SubResource("Gradient_oxtwu")
 
 [node name="Anvil" type="Sprite2D"]
 scale = Vector2(4, 4)
 texture = ExtResource("1_dbjif")
+script = ExtResource("2_oxtwu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="ItemSlot0" type="Area2D" parent="."]
+position = Vector2(-5.75, -5.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -7)
-shape = SubResource("RectangleShape2D_dbjif")
-debug_color = Color(0, 0.941176, 0.0313726, 0.321569)
+[node name="SlotShape" type="CollisionShape2D" parent="ItemSlot0"]
+visible = false
+shape = SubResource("RectangleShape2D_oxtwu")
+metadata/_edit_lock_ = true
+
+[node name="Color" type="Sprite2D" parent="ItemSlot0"]
+position = Vector2(1.78814e-07, 2.38419e-07)
+scale = Vector2(0.0703125, 0.03125)
+texture = SubResource("GradientTexture2D_4263j")
+metadata/_edit_lock_ = true
+
+[node name="ItemSlot1" type="Area2D" parent="."]
+position = Vector2(0, -6.5)
+
+[node name="SlotShape" type="CollisionShape2D" parent="ItemSlot1"]
+visible = false
+shape = SubResource("RectangleShape2D_oxtwu")
+metadata/_edit_lock_ = true
+
+[node name="Color" type="Sprite2D" parent="ItemSlot1"]
+position = Vector2(1.78814e-07, 2.38419e-07)
+scale = Vector2(0.0703125, 0.03125)
+texture = SubResource("GradientTexture2D_4263j")
+metadata/_edit_lock_ = true
+
+[node name="ItemSlot2" type="Area2D" parent="."]
+position = Vector2(5.75, -6.5)
+
+[node name="SlotShape" type="CollisionShape2D" parent="ItemSlot2"]
+visible = false
+shape = SubResource("RectangleShape2D_oxtwu")
+metadata/_edit_lock_ = true
+
+[node name="Color" type="Sprite2D" parent="ItemSlot2"]
+position = Vector2(1.78814e-07, 2.38419e-07)
+scale = Vector2(0.0703125, 0.03125)
+texture = SubResource("GradientTexture2D_4263j")
+metadata/_edit_lock_ = true
