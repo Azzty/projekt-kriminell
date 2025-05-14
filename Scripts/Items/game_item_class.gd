@@ -22,7 +22,7 @@ static var item_data = {
 		"texture": load(ITEMS_FOLDER + "/Weapons/Melee/crowbar.png"),
 		"name": "Crowbar",
 		"value": 100,
-		"materials": {"iron": 4}
+		"materials": {"iron": 6}
 	},
 	"Document": {
 		"tags": ["Special", "QuestItem"],

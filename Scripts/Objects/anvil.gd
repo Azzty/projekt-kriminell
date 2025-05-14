@@ -2,12 +2,16 @@ extends Sprite2D
 
 @onready var anvil_sprite_bounds: Rect2 = get_node(".").get_rect()
 
+const recipes := {
+	"Crowbar": ["Iron ingot", "Iron ingot", "Iron ingot"]
+}
+
 var active_slots: Array[Area2D] = [] # Slots that an item is hovering over
 var held_item: Sprite2D
 var materials_in_machine := {}
-var items_in_slots := {}
+var items_in_slots := {} ## key = slot object, value = item object
 
-var has_crafted := false
+var can_craft := false
 
 func _ready() -> void:
 	# Connect slots to their functions
@@ -40,6 +44,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	var mouse_position = get_global_mouse_position()
 	
+	# Remove item from slot when clicking on it
 	for slot: Area2D in items_in_slots:
 		var item: Sprite2D = items_in_slots[slot]
 		if not item: continue
@@ -47,13 +52,30 @@ func _unhandled_input(event: InputEvent) -> void:
 		var item_rect := item.get_rect()
 		if item_rect.has_point(item.to_local(mouse_position)):
 			item.set_process(true)
+			item.modulate = Color(1,1,1,1)
 			slot.monitoring = true
+			items_in_slots[slot] = null
 	
-	if active_slots.size() == 0: return
+	if can_craft and anvil_sprite_bounds.has_point(to_local(mouse_position)):
+		pass # Craft the item (find it in game_item_class)
 	
 	place_held_item_in_slot()
+	
+	# Check current setup for matching recipes
+	var items_in_slot_names = []
+	for item in items_in_slots.values():
+		if not item: continue
+		items_in_slot_names.append(item.get_meta("item_properties").name)
+	for recipe in recipes.values():
+		if recipe == items_in_slot_names:
+			print("Current setup matches recipe!")
+			can_craft = true
+			break
+		else:
+			can_craft = false
 
 func place_held_item_in_slot():
+	if active_slots.size() == 0: return
 	items_in_slots[active_slots[0]] = held_item
 	_add_item_materials(held_item)
 	held_item.reparent(get_node("."))
@@ -76,7 +98,7 @@ func _add_item_materials(item: Sprite2D):
 # Highlight when hovering
 func _process(_delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
-	if anvil_sprite_bounds.has_point(to_local(mouse_position)):
+	if can_craft and anvil_sprite_bounds.has_point(to_local(mouse_position)):
 		self_modulate.r = 1.2
 		self_modulate.g = 1.2
 		self_modulate.b = 1.2
