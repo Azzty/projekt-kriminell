@@ -35,4 +35,4 @@ volume_db = -5.0
 autoplay = true
 
 [connection signal="start_screen_override" from="." to="Button" method="_start_button_pressed" flags=6]
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_start_button_pressed"]
