@@ -146,5 +146,6 @@ func _on_texture_changed() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		remove_effect.emitting = true
+		remove_effect.owner = null
 		remove_effect.reparent(get_parent())
 		remove_effect.global_position = global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwxucpdl0c6tb"]
+[gd_scene load_steps=18 format=3 uid="uid://dwxucpdl0c6tb"]
 
 [ext_resource type="Texture2D" uid="uid://bt8w6yq8repob" path="res://Assets/spritesheets/furnace.png" id="1_8qxmj"]
 [ext_resource type="Script" uid="uid://b81icrwck86sq" path="res://Scripts/Objects/furnace.gd" id="2_vy0ry"]
@@ -52,6 +52,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8qxmj"]
 size = Vector2(10, 10.1383)
 
+[sub_resource type="Gradient" id="Gradient_80s6x"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.283333, 1, 0, 0.509804)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q25j2"]
+gradient = SubResource("Gradient_80s6x")
+
 [sub_resource type="Gradient" id="Gradient_glnvt"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -69,13 +76,19 @@ script = ExtResource("2_vy0ry")
 SMELTING_TIME = 4.0
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="DropShape" type="CollisionShape2D" parent="Area2D"]
 unique_name_in_owner = true
 position = Vector2(-1, -7)
 shape = SubResource("RectangleShape2D_8qxmj")
 debug_color = Color(0, 0.94, 0.0313333, 0.321569)
+
+[node name="DropSprite" type="Sprite2D" parent="Area2D"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1, -7)
+scale = Vector2(0.15625, 0.15625)
+texture = SubResource("GradientTexture2D_q25j2")
 
 [node name="OptionButton" type="OptionButton" parent="."]
 unique_name_in_owner = true

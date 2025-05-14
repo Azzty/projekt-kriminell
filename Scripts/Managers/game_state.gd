@@ -8,6 +8,7 @@ signal item_added_to_inventory
 signal item_removed_from_inventory
 
 # Change of scene
+@warning_ignore("unused_signal")
 signal change_scene(file_path: String)
 
 # Money !!! 🦀🦀🦀😈😈🤸🦽🏌️

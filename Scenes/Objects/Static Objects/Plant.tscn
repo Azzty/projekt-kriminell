@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bciwcinivtowc"]
+
+[ext_resource type="Texture2D" uid="uid://7fwm5yh6hpyp" path="res://Assets/spritesheets/plants_0.png" id="1_ij2iw"]
+[ext_resource type="Script" uid="uid://bf4ylt26ypjrq" path="res://Scripts/Objects/plant.gd" id="2_qqgqg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xb3fs"]
+radius = 5.0
+
+[node name="Plant" type="Sprite2D"]
+texture = ExtResource("1_ij2iw")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+script = ExtResource("2_qqgqg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_xb3fs")
+debug_color = Color(0.69, 0.4945, 0, 0.196078)

@@ -8,6 +8,7 @@ const item_template := preload("res://Scenes/Objects/Interactable Objects/movabl
 @onready var pop_sound_effect := $%PopSoundEffect
 @onready var decline_sound_effect := $%DeclineSoundEffect
 @onready var recipe_button := $%OptionButton
+@onready var drop_sprite := $%DropSprite
 @onready var furnace_sprite_bounds := Utilities.get_animated_sprite_rect(get_node("."))
 
 var items_in_drop_area := []
@@ -31,11 +32,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var item: Sprite2D = Utilities.find_first_parent_of_class(area, "Sprite2D")
 	if not item.has_meta("item_properties") or not item.is_in_group("shop_items"): return
 	
-	self_modulate.r = 1.5
-	self_modulate.g = 1.5
-	self_modulate.b = 1.5
+	self_modulate = Color(1.5,1.5,1.5,1)
 	
 	items_in_drop_area.append(item)
+	#drop_sprite.visible = true
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	var item: Sprite2D = Utilities.find_first_parent_of_class(area, "Sprite2D")
@@ -46,6 +46,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	self_modulate.b = 1
 	
 	items_in_drop_area.erase(item)
+	if items_in_drop_area.size() == 0: drop_sprite.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
@@ -150,6 +151,7 @@ func _add_to_smelt_queue(item) -> void:
 
 func _process(_delta: float) -> void:
 	if is_smelting: return
+	if items_in_drop_area.size() > 0: return
 	if furnace_sprite_bounds.has_point(get_global_mouse_position()):
 		self_modulate.r = 1.2
 		self_modulate.g = 1.2

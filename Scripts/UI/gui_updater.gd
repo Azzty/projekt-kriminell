@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var money_label: Label = $MoneyLabel
 
+@warning_ignore("unused_signal")
 signal start_screen_override
 
 func _ready() -> void:
