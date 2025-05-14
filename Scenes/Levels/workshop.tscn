@@ -83,6 +83,7 @@ texture = SubResource("GradientTexture2D_3uw30")
 position = Vector2(84.5, 42)
 
 [node name="MaterialCollisionShape" type="CollisionShape2D" parent="MaterialZone"]
+unique_name_in_owner = true
 position = Vector2(0, -87)
 shape = SubResource("RectangleShape2D_yqspi")
 debug_color = Color(0.611172, 0.361054, 1, 0.42)

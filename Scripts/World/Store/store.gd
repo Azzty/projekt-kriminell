@@ -67,6 +67,10 @@ func move_scenes(delta_position: Vector2):
 		_:
 			current_scene = "unknown"
 	is_switching_scenes = false
+	var furnace = workshop_node.find_child("Furnace")
+	if furnace: furnace.update_rect()
+	var anvil = workshop_node.find_child("Anvil")
+	if anvil: anvil.update_rect()
 
 func _input(event: InputEvent) -> void:
 	if not is_switching_scenes: return

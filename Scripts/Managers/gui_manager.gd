@@ -22,3 +22,6 @@ func spawn_lockpick_minigame(unlocked_signal: Signal, required_wins := 4, initia
 	scene.minigame_lost.connect(func ():
 		get_tree().paused = false
 		)
+
+func override_start_gui():
+	gui.start_screen_override.emit()

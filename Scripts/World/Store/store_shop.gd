@@ -23,6 +23,7 @@ func _ready() -> void:
 	}
 	current_customer.customer_leaving.connect(customer_left)
 	for item_data: Object in GameState.inventory:
+		if "Resource" in item_data.tags: continue
 		var texture := CompressedTexture2D.new()
 		var big_file_path: String = Utilities.get_bigger_texture_version(item_data.texture.resource_path)
 		
@@ -62,7 +63,7 @@ func customer_left():
 	for property in customer_properties:
 		current_customer[property] = customer_properties[property]
 	current_customer.customer_leaving.connect(customer_left)
-	for item: Sprite2D in spawned_items:
+	for item: Sprite2D in get_tree().get_nodes_in_group("shop_items"):
 		update_item_customer(item)
 
 func _on_item_sold(item: Sprite2D):

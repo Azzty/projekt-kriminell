@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var money_label: Label = $MoneyLabel
 
+signal start_screen_override
 
 func _ready() -> void:
 	GuiManager.gui = get_node(".") # Tell manager to use this gui

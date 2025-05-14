@@ -16,6 +16,7 @@ func _ready():
 	add_to_group("player")
 	GameState.connect("item_added_to_inventory", _add_following_item)
 	for item_data: Object in GameState.inventory:
+		if "Resource" in item_data.tags: continue
 		var item = Sprite2D.new()
 		item.texture = item_data.texture
 		add_child(item)

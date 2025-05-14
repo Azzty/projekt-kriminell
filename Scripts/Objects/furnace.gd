@@ -60,6 +60,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif furnace_sprite_bounds.has_point(get_global_mouse_position()):
 		dispense_recipe()
 
+## Creates the item from the selected recipe and adds it to the world
 func dispense_recipe():
 	var recipe: String = recipe_button.get_item_text(recipe_button.selected)
 	if not recipes.has(recipe):
@@ -101,6 +102,7 @@ func dispense_recipe():
 	result_item.released_out_of_bounds = true
 	result_item.remove_from_group("shop_items")
 	result_item.add_to_group("resource_items")
+	GameState.add_item_to_inventory(result_item)
 	
 	# Play pop sound
 	pop_sound_effect.pitch_scale = randf_range(0.9, 1.1) 
@@ -156,3 +158,6 @@ func _process(_delta: float) -> void:
 		self_modulate.r = 1.0
 		self_modulate.g = 1.0
 		self_modulate.b = 1.0
+
+func update_rect():
+	furnace_sprite_bounds = Utilities.get_animated_sprite_rect(get_node("."))

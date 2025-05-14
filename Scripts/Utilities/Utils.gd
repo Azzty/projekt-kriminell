@@ -16,6 +16,18 @@ func get_bigger_texture_version(resource_path:String) -> String:
 	
 	return big_file_path
 
+## Like get_bigger_texture version but returns the actual texture instead of name
+func get_bigger_texture_as_texture(item_data):
+	var texture := CompressedTexture2D.new()
+	var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
+	
+	# Change to larger texture version if exists
+	if FileAccess.file_exists(big_file_path):
+		texture = load(big_file_path)
+	else:
+		texture = item_data.texture
+	return texture
+
 ## Returns a rect in [b]global[/b] space for the given animated sprite
 func get_animated_sprite_rect(sprite: AnimatedSprite2D) -> Rect2:
 	if not sprite.sprite_frames or not sprite.animation:

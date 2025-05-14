@@ -9,6 +9,7 @@ var materials: Dictionary
 
 const ITEMS_FOLDER := "res://Assets/sprites/Items"
 
+## Contains the properties for every creatable item
 static var item_data = {
 	"Revolver": {
 		"tags": ["Weapon", "Gun"],
@@ -46,6 +47,7 @@ static var item_data = {
 	}
 }
 
+## Gives the item data for the given ID
 func _init(item_id: String):
 	if item_data.has(item_id):
 		var data = item_data[item_id]
@@ -56,4 +58,4 @@ func _init(item_id: String):
 		#value = data.value
 		#tags = data.tags
 	else:
-		print_debug(item_id, " is not a valid item_id")
+		print(item_id, " is not a valid item_id")
