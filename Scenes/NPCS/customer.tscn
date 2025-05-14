@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcopoany7t2k3"]
+
+[ext_resource type="Script" uid="uid://df0hkwcriuamj" path="res://Scripts/NPCS/customer.gd" id="1_0v30w"]
+[ext_resource type="Texture2D" uid="uid://c0jjgn88ttecf" path="res://Assets/sprites/Ugly guy.png" id="1_fp685"]
+[ext_resource type="PackedScene" uid="uid://deum0uskaguoj" path="res://Scenes/NPCS/speech_bubble.tscn" id="2_7c3kf"]
+
+[sub_resource type="Animation" id="Animation_mrykn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-300, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mp4l2"]
+resource_name = "customer_enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.183333, 0.216667, 0.25, 0.266667, 0.283333, 0.3, 0.316667, 0.333333, 0.35, 0.366667, 0.383333, 0.4, 0.416667, 0.433333, 0.45, 0.466667, 0.483333, 0.5, 0.516667, 0.533333, 0.55, 0.566667, 0.583333, 0.6, 0.616667, 0.633333, 0.65, 0.666667, 0.683333, 0.7, 0.716667, 0.733333, 0.75, 0.766667, 0.783333, 0.8, 0.816667, 0.833333, 0.85, 0.866667, 0.883333, 0.9, 0.916667, 0.933333, 0.95, 0.966667, 0.983333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-300, 0), Vector2(-253.07, 0), Vector2(-229.966, 0), Vector2(-214.795, 0), Vector2(-199.858, 0), Vector2(-185.195, 0), Vector2(-177.979, 0), Vector2(-170.847, 0), Vector2(-163.803, 0), Vector2(-156.852, 0), Vector2(-150, 0), Vector2(-143.25, 0), Vector2(-136.608, 0), Vector2(-130.078, 0), Vector2(-123.664, 0), Vector2(-117.372, 0), Vector2(-111.204, 0), Vector2(-105.166, 0), Vector2(-99.2608, 0), Vector2(-93.4936, 0), Vector2(-87.868, 0), Vector2(-82.3877, 0), Vector2(-77.0565, 0), Vector2(-71.8782, 0), Vector2(-66.8562, 0), Vector2(-61.994, 0), Vector2(-57.2949, 0), Vector2(-52.7621, 0), Vector2(-48.3988, 0), Vector2(-44.2079, 0), Vector2(-40.1924, 0), Vector2(-36.3549, 0), Vector2(-32.698, 0), Vector2(-29.2244, 0), Vector2(-25.9363, 0), Vector2(-22.8362, 0), Vector2(-19.9259, 0), Vector2(-17.2076, 0), Vector2(-14.683, 0), Vector2(-12.3541, 0), Vector2(-10.2223, 0), Vector2(-8.28903, 0), Vector2(-6.55573, 0), Vector2(-5.02353, 0), Vector2(-3.69348, 0), Vector2(-2.56653, 0), Vector2(-1.64343, 0), Vector2(-0.924805, 0), Vector2(-0.411133, 0), Vector2(-0.102814, 0), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpeechBubble")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fade_in"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_0fyir"]
+resource_name = "customer_leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.05, 0.0666667, 0.0833333, 0.1, 0.116667, 0.133333, 0.15, 0.166667, 0.183333, 0.2, 0.216667, 0.233333, 0.25, 0.266667, 0.283333, 0.3, 0.316667, 0.333333, 0.35, 0.366667, 0.383333, 0.4, 0.416667, 0.433333, 0.45, 0.466667, 0.483333, 0.5, 0.516667, 0.533333, 0.55, 0.566667, 0.583333, 0.6, 0.616667, 0.633333, 0.65, 0.666667, 0.683333, 0.7, 0.716667, 0.733333, 0.75, 0.766667, 0.8, 0.833333, 0.883333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.13707, 0), Vector2(0.548186, 0), Vector2(1.23307, 0), Vector2(2.19124, 0), Vector2(3.42206, 0), Vector2(4.92466, 0), Vector2(6.69804, 0), Vector2(8.74096, 0), Vector2(11.052, 0), Vector2(13.6297, 0), Vector2(16.4721, 0), Vector2(19.5774, 0), Vector2(22.9434, 0), Vector2(26.5678, 0), Vector2(30.4482, 0), Vector2(34.5818, 0), Vector2(38.9659, 0), Vector2(43.5974, 0), Vector2(48.4732, 0), Vector2(53.5898, 0), Vector2(58.9439, 0), Vector2(64.5318, 0), Vector2(70.3495, 0), Vector2(76.3932, 0), Vector2(82.6587, 0), Vector2(89.1416, 0), Vector2(95.8376, 0), Vector2(102.742, 0), Vector2(109.85, 0), Vector2(117.157, 0), Vector2(124.658, 0), Vector2(132.348, 0), Vector2(140.221, 0), Vector2(148.272, 0), Vector2(156.495, 0), Vector2(164.886, 0), Vector2(173.438, 0), Vector2(182.144, 0), Vector2(191.001, 0), Vector2(200, 0), Vector2(209.137, 0), Vector2(218.404, 0), Vector2(227.796, 0), Vector2(237.305, 0), Vector2(246.927, 0), Vector2(256.653, 0), Vector2(276.393, 0), Vector2(296.472, 0), Vector2(327.106, 0), Vector2(400, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpeechBubble")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fade_out"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0fyir"]
+_data = {
+&"RESET": SubResource("Animation_mrykn"),
+&"customer_enter": SubResource("Animation_mp4l2"),
+&"customer_leave": SubResource("Animation_0fyir")
+}
+
+[node name="Customer" type="Node2D"]
+script = ExtResource("1_0v30w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-300, 0)
+scale = Vector2(5, 5)
+texture = ExtResource("1_fp685")
+
+[node name="SpeechBubble" parent="." instance=ExtResource("2_7c3kf")]
+offset_left = 63.0
+offset_top = -80.0
+offset_right = 213.0
+offset_bottom = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0fyir")
+}
+autoplay = "customer_enter"
+
+[connection signal="user_clicked" from="SpeechBubble" to="." method="_on_speech_bubble_user_clicked"]

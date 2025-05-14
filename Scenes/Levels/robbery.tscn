@@ -1,0 +1,237 @@
+[gd_scene load_steps=14 format=3 uid="uid://cnr1exbd78fih"]
+
+[ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
+[ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
+[ext_resource type="Texture2D" uid="uid://4jet1eyoym8i" path="res://Assets/sprites/Floors/carpet_floor.png" id="2_i2k26"]
+[ext_resource type="Texture2D" uid="uid://c1xc35r82e6cr" path="res://Assets/sprites/Floors/planks_floor.png" id="2_nqmpn"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="3_qi1i4"]
+[ext_resource type="Texture2D" uid="uid://cs2ajh3dx2gg4" path="res://Assets/sprites/Floors/tiles_floor.png" id="4_5fxgd"]
+[ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="4_nqmpn"]
+[ext_resource type="Shader" uid="uid://cehvvev2uys40" path="res://Scripts/World/tilable.tres" id="5_qi1i4"]
+[ext_resource type="PackedScene" uid="uid://byhyuahc0670n" path="res://Scenes/Objects/Static Objects/wall.tscn" id="7_nqmpn"]
+[ext_resource type="PackedScene" uid="uid://dd7kp4ek1a2yf" path="res://Scenes/Objects/Interactable Objects/door.tscn" id="8_esq8r"]
+[ext_resource type="PackedScene" uid="uid://f7qp4pcjhsr1" path="res://Scenes/Objects/Interactable Objects/locked_door.tscn" id="11_ea7rc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqmpn"]
+shader = ExtResource("5_qi1i4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nqmpn"]
+size = Vector2(3, 501)
+
+[node name="Robbery" type="Node2D"]
+
+[node name="Floors" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Floors"]
+modulate = Color(0.223103, 0.223103, 0.223103, 1)
+z_index = -10
+texture_repeat = 3
+material = SubResource("ShaderMaterial_nqmpn")
+offset_left = -416.0
+offset_top = -241.0
+offset_right = 538.0
+offset_bottom = 426.0
+texture = ExtResource("2_i2k26")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Floors"]
+z_index = -10
+texture_repeat = 3
+material = SubResource("ShaderMaterial_nqmpn")
+offset_left = -169.0
+offset_top = -38.0
+offset_right = 265.0
+offset_bottom = 228.0
+texture = ExtResource("2_nqmpn")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="Floors"]
+modulate = Color(0.429, 0.5522, 0.66, 1)
+z_index = -10
+texture_repeat = 3
+material = SubResource("ShaderMaterial_nqmpn")
+offset_left = -169.0
+offset_top = -38.0
+offset_right = -68.0
+offset_bottom = 228.0
+texture = ExtResource("4_5fxgd")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_g468e")]
+unique_name_in_owner = true
+position = Vector2(152, 157)
+motion_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+position_smoothing_speed = 2.0
+
+[node name="Shelves" type="Node" parent="."]
+
+[node name="Shelf" parent="Shelves" instance=ExtResource("2_evns0")]
+position = Vector2(68, 175)
+
+[node name="Shelf4" parent="Shelves" instance=ExtResource("2_evns0")]
+position = Vector2(68, 119)
+
+[node name="Shelf2" parent="Shelves" instance=ExtResource("2_evns0")]
+position = Vector2(209, 178)
+
+[node name="Shelf3" parent="Shelves" instance=ExtResource("2_evns0")]
+position = Vector2(210, 118)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -749.0
+offset_top = -366.0
+offset_right = -741.0
+offset_bottom = -92.0
+
+[node name="Wall11" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -648.0
+offset_top = -317.0
+offset_right = -640.0
+offset_bottom = -92.0
+
+[node name="Wall12" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -648.0
+offset_top = -365.0
+offset_right = -640.0
+offset_bottom = -337.0
+
+[node name="Wall3" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -316.0
+offset_top = -270.0
+offset_right = -308.0
+offset_bottom = -92.0
+
+[node name="Wall2" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -336.0
+offset_top = -262.0
+offset_right = -328.0
+offset_bottom = -234.0
+rotation = -1.57079
+
+[node name="Wall6" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -465.0
+offset_top = -262.0
+offset_right = -457.0
+offset_bottom = -153.0
+rotation = -1.57079
+
+[node name="Wall7" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -457.0
+offset_top = -262.0
+offset_right = -449.0
+offset_bottom = -158.0
+rotation = -3.14159
+
+[node name="Wall9" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -308.0
+offset_top = -366.0
+offset_right = -300.0
+offset_bottom = -209.0
+rotation = 1.57079
+
+[node name="Wall10" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -316.0
+offset_top = -366.0
+offset_right = -308.0
+offset_bottom = -262.0
+
+[node name="Wall4" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -749.0
+offset_top = -92.0
+offset_right = -741.0
+offset_bottom = 199.0
+rotation = -1.57079
+
+[node name="Wall8" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -749.0
+offset_top = -358.0
+offset_right = -741.0
+offset_bottom = -66.0
+rotation = -1.57079
+
+[node name="Wall5" parent="Walls" instance=ExtResource("7_nqmpn")]
+modulate = Color(0.87, 0.969667, 1, 1)
+offset_left = -418.0
+offset_top = -92.0
+offset_right = -410.0
+offset_bottom = 18.0
+rotation = -1.57079
+
+[node name="Doors" type="Node" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource("8_esq8r")]
+position = Vector2(230, 58)
+
+[node name="Door2" parent="Doors" instance=ExtResource("8_esq8r")]
+position = Vector2(148, 228)
+
+[node name="Door3" parent="Doors" instance=ExtResource("8_esq8r")]
+position = Vector2(128, 228)
+rotation = -3.14159
+
+[node name="LockedDoor" parent="Doors" instance=ExtResource("11_ea7rc")]
+position = Vector2(-68, -3)
+rotation = -1.57079
+required_wins = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 113.0
+offset_top = 10.0
+offset_right = 162.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("3_qi1i4")
+theme_override_font_sizes/font_size = 4
+text = "Change scene"
+script = ExtResource("4_nqmpn")
+scene_to_switch_to = "uid://c1aaqf7xcl2yl"
+
+[node name="Button2" parent="." instance_placeholder="res://Scenes/UI Elements/hold_button.tscn"]
+offset_left = 145.0
+offset_top = 88.0
+offset_right = 155.0
+offset_bottom = 99.0
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(-188.5, 93)
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(61.5, 257)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(64, -75)
+rotation = 1.57079
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(314, 88.9998)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_nqmpn")
+metadata/_edit_lock_ = true

@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://deum0uskaguoj"]
+
+[ext_resource type="Script" uid="uid://mcnqw8wnd507" path="res://Scripts/UI/speech_bubble.gd" id="1_233bx"]
+[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="1_hv8s5"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="2_hv8s5"]
+
+[sub_resource type="Gradient" id="Gradient_f4c0y"]
+colors = PackedColorArray(0.42, 0.42, 0.42, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ioj6"]
+gradient = SubResource("Gradient_f4c0y")
+width = 4
+
+[node name="SpeechBubble" type="Panel"]
+custom_minimum_size = Vector2(150, 80)
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_hv8s5")
+script = ExtResource("1_233bx")
+
+[node name="CharacterName" type="Label" parent="."]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_right = 140.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 6
+text = "Dumbass"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Speech" type="Label" parent="."]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 140.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("2_hv8s5")
+theme_override_font_sizes/font_size = 4
+text = "YOOO HELLO GUYS IM A LABEL N SHIT.
+I am speaking 😈😈😈. Im over here speaking my shit I got ears on my shit rn im a freak fr"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 81.0
+offset_right = 150.0
+offset_bottom = 93.0
+theme_override_fonts/font = ExtResource("2_hv8s5")
+theme_override_font_sizes/font_size = 4
+text = "<CHANGE THIS TO Y/N>"
+icon = SubResource("GradientTexture1D_5ioj6")
+alignment = 2
+expand_icon = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

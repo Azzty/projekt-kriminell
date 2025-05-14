@@ -1,5 +1,5 @@
 {
-	"Default" : {
+	"Default": {
 		"greeting": [
 			"Hello!",
 			"Greetings.",
@@ -32,6 +32,11 @@
 			"What is this? I don't want this.",
 			"Wrong item buddy, I didn't ask for this.",
 			"Huh? I don't want that!"
+		],
+		"leaving": [
+			"All right, that will be all. Goobye!",
+			"Aight imma head out",
+			"Adios brochacho!"
 		]
 	}
 }

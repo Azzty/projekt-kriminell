@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd7kp4ek1a2yf"]
+
+[ext_resource type="Texture2D" uid="uid://7ed0ytg4bspo" path="res://Assets/sprites/door.png" id="1_ba8gm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ba8gm"]
+radius = 1.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ba8gm"]
+radius = 1.0
+
+[node name="Door" type="StaticBody2D"]
+
+[node name="Door" type="RigidBody2D" parent="."]
+mass = 2.0
+gravity_scale = 0.0
+
+[node name="DoorSprite" type="Sprite2D" parent="Door"]
+texture = ExtResource("1_ba8gm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(-1, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_ba8gm")
+debug_color = Color(0, 0.595, 0.7, 0.121569)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 0)
+shape = SubResource("CircleShape2D_ba8gm")
+debug_color = Color(0, 0.595, 0.7, 0.290196)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+visible = false
+position = Vector2(9, 0)
+node_a = NodePath("..")
+node_b = NodePath("../Door")
+bias = 0.9
+angular_limit_lower = -1.5708
+angular_limit_upper = 1.5708
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+visible = false
+position = Vector2(-9, 0)
+rotation = 3.14159
+node_a = NodePath("..")
+node_b = NodePath("../Door")
+length = 1.0
+damping = 0.2

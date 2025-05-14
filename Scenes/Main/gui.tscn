@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://daxy1umtcc4gy"]
+
+[ext_resource type="Script" uid="uid://kn7y26wdpow" path="res://Scripts/UI/gui_updater.gd" id="1_4wgn8"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="1_qyd3e"]
+[ext_resource type="Script" uid="uid://b0ay5lfc53d8a" path="res://Scripts/UI/start_game.gd" id="2_bm56d"]
+[ext_resource type="AudioStream" uid="uid://b4xm0mr2hfcgb" path="res://Assets/Audio/Music/Title Screen.wav" id="4_10pva"]
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_4wgn8")
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = 38.0
+offset_top = 31.0
+offset_right = 494.0
+offset_bottom = 87.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_qyd3e")
+theme_override_font_sizes/font_size = 48
+text = "MONEY: $0"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 382.0
+offset_top = 278.0
+offset_right = 727.0
+offset_bottom = 374.0
+theme_override_font_sizes/font_size = 64
+text = "Start game"
+script = ExtResource("2_bm56d")
+first_scene = "uid://cnr1exbd78fih"
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="." groups=["music"]]
+stream = ExtResource("4_10pva")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="start_screen_override" from="." to="Button" method="_start_button_pressed" flags=6]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
