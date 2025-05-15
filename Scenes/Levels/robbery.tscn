@@ -493,24 +493,26 @@ texture = ExtResource("13_r30e8")
 
 [node name="Plant" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(251, 70)
-region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant2" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(252, -27)
-region_rect = Rect2(16, 0, 16, 16)
+region_rect = Rect2(32, 0, 16, 16)
 
 [node name="Plant3" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(126, -27)
+region_rect = Rect2(32, 0, 16, 16)
 
 [node name="Plant4" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, -28)
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(16, 0, 16, 16)
 
 [node name="Plant6" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, 217)
+region_rect = Rect2(16, 0, 16, 16)
 
 [node name="Plant7" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(253, 217)
+region_rect = Rect2(16, 0, 16, 16)
 
 [node name="IntroSequence" type="Node" parent="."]
 script = ExtResource("15_vum6h")
@@ -518,7 +520,6 @@ script = ExtResource("15_vum6h")
 [node name="Van" parent="IntroSequence" instance=ExtResource("16_vum6h")]
 position = Vector2(9.64993, 605)
 rotation = 0.0
-scale = Vector2(1, 1)
 
 [node name="Smoke" type="GPUParticles2D" parent="IntroSequence"]
 z_index = 5
