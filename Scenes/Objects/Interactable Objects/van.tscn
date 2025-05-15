@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdky23wh40gj4"]
+
+[ext_resource type="Texture2D" uid="uid://df3n2nvwt7ukq" path="res://Assets/sprites/van.png" id="1_ryc88"]
+[ext_resource type="PackedScene" uid="uid://dnnfmc4o2qab6" path="res://Scenes/UI Elements/hold_button.tscn" id="2_2qdgj"]
+[ext_resource type="Script" uid="uid://ccgo62talr1c0" path="res://Scripts/Objects/van.gd" id="2_naobe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vum6h"]
+size = Vector2(42.7001, 80.5901)
+
+[node name="Van" type="Sprite2D"]
+z_index = 4
+rotation = 0.215063
+texture = ExtResource("1_ryc88")
+script = ExtResource("2_naobe")
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_vum6h")
+
+[node name="Hold button" parent="." instance=ExtResource("2_2qdgj")]
+offset_left = -4.82949
+offset_top = 37.9531
+offset_right = 5.17051
+offset_bottom = 47.9531
+text = "F"
+hold_duration = 1.5
+action_name = "interact_f"
+prompt_text = "Place item in van"
+always_upright = true
+
+[connection signal="activated" from="Hold button" to="." method="_on_hold_button_activated"]

@@ -46,7 +46,7 @@ func _ready() -> void:
 		button.activated.connect(_button_pressed.bind(item, button))
 
 func _button_pressed(item: Sprite2D, button: Button) -> void:
-	GameState.add_item_to_inventory(item)
+	GameState.add_item_to_held_items(item)
 	delete_all_descendants(item)
 	button.activated.disconnect(_button_pressed)
 	button.queue_free()

@@ -9,13 +9,15 @@ const PUSH_FORCE = 80.0
 var _following_items := []
 var item_offset_length = 8 # Distance between player and items
 
-var is_picking_up_item := false
+var is_moving_item := false
 var last_picked_up_item_position: Vector2 = Vector2.ZERO
 
 func _ready():
 	add_to_group("player")
-	GameState.connect("item_added_to_inventory", _add_following_item)
-	for item_data: Object in GameState.inventory:
+	#GameState.connect("item_added_to_inventory", _add_following_item)
+	GameState.connect("item_added_to_held_items", _add_following_item)
+	GameState.connect("item_removed_from_held_items", _remove_following_item)
+	for item_data: Object in GameState.held_items:
 		if "Resource" in item_data.tags: continue
 		var item = Sprite2D.new()
 		item.texture = item_data.texture
@@ -49,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 	
 	# Play correct move animation
-	if not is_picking_up_item:
+	if not is_moving_item:
 		if directionX or directionY:
 			animated_sprite.play("Run")
 		else:
@@ -98,7 +100,7 @@ func remove_item_from_inventory(item: Sprite2D) -> void:
 	GameState.remove_item_from_inventory(item)
 
 func _add_following_item(item: Sprite2D):
-	is_picking_up_item = true
+	is_moving_item = true
 	last_picked_up_item_position = item.global_position
 	
 	var item_name = item.name
@@ -108,6 +110,11 @@ func _add_following_item(item: Sprite2D):
 	_following_items.append(item)
 	item_offset_length = 8 + _following_items.size() * 2
 
+func _remove_following_item(item: Sprite2D):
+	is_moving_item = true
+	_following_items.erase(item)
+	item.queue_free()
+	item_offset_length = 8 + _following_items.size() * 2
 
 func _on_animated_sprite_2d_animation_looped() -> void:
-	if animated_sprite.animation == "Pickup": is_picking_up_item = false
+	if animated_sprite.animation == "Pickup": is_moving_item = false

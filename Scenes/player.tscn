@@ -125,7 +125,7 @@ animations = [{
 radius = 5.0
 height = 10.0
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 z_index = 5
 script = ExtResource("2_vgqql")
 

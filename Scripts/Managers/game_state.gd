@@ -4,8 +4,11 @@ var player: CharacterBody2D
 
 # Inventory
 var inventory: Array[Object] = []
+var held_items: Array[Object] = [] ## Items held by player not yet added to inventory (via van or something)
 signal item_added_to_inventory
+signal item_added_to_held_items
 signal item_removed_from_inventory
+signal item_removed_from_held_items
 
 # Change of scene
 @warning_ignore("unused_signal")
@@ -25,6 +28,9 @@ var buttons_in_range: Array[Button] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	debug_add_items()
+
+func debug_add_items():
 	for i in range(2):
 		var item_data = GameItem.new("Crowbar")
 		var item := Sprite2D.new()
@@ -40,13 +46,23 @@ func _ready() -> void:
 		item.set_meta("item_properties", item_data)
 		add_item_to_inventory(item)
 
+func add_item_to_held_items(item: Sprite2D) -> void:
+	held_items.append(item)
+	item_added_to_held_items.emit(item)
+
 func add_item_to_inventory(item: Sprite2D) -> void:
+	if item in held_items: remove_item_from_held_items(item)
 	var item_data = item.get_meta("item_properties")
 	
 	item_data.name = _remove_number_suffix(item_data.name)
 	inventory.append(item_data)
 	print(item_data.name, " added to inventory")
 	item_added_to_inventory.emit(item)
+
+func remove_item_from_held_items(item: Sprite2D) -> void:
+	if item in held_items:
+		held_items.erase(item)
+	item_removed_from_held_items.emit(item)
 
 func remove_item_from_inventory(item: Sprite2D) -> void:
 	var item_name = item.name
@@ -70,7 +86,7 @@ func remove_item_from_inventory(item: Sprite2D) -> void:
 	
 	item_removed_from_inventory.emit(item)
 
-# Removes number suffix from name, example: Crowbar2 -> Crowbar
+## Removes number suffix from name, example: Crowbar2 -> Crowbar
 func _remove_number_suffix(item_name: String):
 	var digits_int = int(item_name)
 	var digits_str = str(digits_int) if digits_int != 0 else ""

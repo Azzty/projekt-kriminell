@@ -7,6 +7,7 @@ extends Button
 		prompt_text = value
 		if not label: call_deferred("update_label_text", value)
 		else: update_label_text(value)
+@export var always_upright := false
 
 signal activated
 
@@ -20,6 +21,8 @@ var border_color = get_theme_stylebox("normal").border_color
 @onready var label: Label = get_node("Panel/Label")
 
 func _ready() -> void:
+	if always_upright:
+		if get_parent() is Node: rotation -= get_parent().rotation
 	visible = false
 	label.text = prompt_text
 	shortcut.events.clear()
@@ -67,12 +70,15 @@ func _on_pressed() -> void:
 func _unhandled_input(event):
 	if event.is_action_released(action_name):
 		_is_pressed = false
+	elif visible and event.is_action_pressed(action_name):
+		_is_pressed = true
 
 func _on_button_up() -> void:
 	_is_pressed = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
+		print("Player in range of button")
 		GameState.buttons_in_range.append(self)
 
 func _on_area_2d_body_exited(body: Node2D) -> void:

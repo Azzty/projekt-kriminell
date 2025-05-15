@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://i0ghktctxu4w"]
+
+[ext_resource type="PackedScene" uid="uid://cdky23wh40gj4" path="res://Scenes/Objects/Interactable Objects/van.tscn" id="1_h21bk"]
+[ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="2_ybjcv"]
+[ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="3_ybjcv"]
+
+[node name="TestingScene" type="Node2D"]
+
+[node name="Van" parent="." instance=ExtResource("1_h21bk")]
+position = Vector2(214, 86)
+
+[node name="Player" parent="." instance=ExtResource("2_ybjcv")]
+position = Vector2(286, 192)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
+[node name="Shelf" parent="." instance=ExtResource("3_ybjcv")]
+position = Vector2(374, 150)
+min_item_amount = 3
+max_item_amount = 5
+
+[node name="Shelf2" parent="." instance=ExtResource("3_ybjcv")]
+position = Vector2(359, 249)
+min_item_amount = 3
+max_item_amount = 5
