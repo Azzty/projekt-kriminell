@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://je1wi04l0u0e" path="res://Assets/sprites/sofa.png" id="12_uquic"]
 [ext_resource type="Texture2D" uid="uid://d07g4qc52gjcy" path="res://Assets/sprites/checkout_counter.png" id="13_r30e8"]
 [ext_resource type="PackedScene" uid="uid://bciwcinivtowc" path="res://Scenes/Objects/Static Objects/Plant.tscn" id="14_r30e8"]
-[ext_resource type="Script" uid="uid://bosrnn57xtire" path="res://Scripts/World/robbery_intro_sequence.gd" id="15_vum6h"]
+[ext_resource type="Script" uid="uid://bosrnn57xtire" path="res://Scripts/World/robbery.gd" id="15_vum6h"]
 [ext_resource type="Texture2D" uid="uid://c7oc45wekc107" path="res://Assets/sprites/smoke.png" id="16_hbk2d"]
 [ext_resource type="PackedScene" uid="uid://cdky23wh40gj4" path="res://Scenes/Objects/Interactable Objects/van.tscn" id="16_vum6h"]
 [ext_resource type="AudioStream" uid="uid://cyvgournwp0o1" path="res://Assets/Audio/SFX/car crash.wav" id="18_r27xa"]
@@ -494,7 +494,6 @@ texture = ExtResource("13_r30e8")
 
 [node name="Plant" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(251, 70)
-region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant2" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(252, -27)
@@ -502,28 +501,45 @@ region_rect = Rect2(32, 0, 16, 16)
 
 [node name="Plant3" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(126, -27)
-region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant4" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, -28)
-region_rect = Rect2(16, 0, 16, 16)
+region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant6" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, 217)
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant7" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(253, 217)
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(16, 0, 16, 16)
 
-[node name="IntroSequence" type="Node" parent="."]
+[node name="Locker" type="Sprite2D" parent="Decorations"]
+position = Vector2(258, 27)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker2" type="Sprite2D" parent="Decorations"]
+position = Vector2(258, 19)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker3" type="Sprite2D" parent="Decorations"]
+position = Vector2(258, 11.5)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker4" type="Sprite2D" parent="Decorations"]
+position = Vector2(258, 4)
+texture = ExtResource("23_r27xa")
+
+[node name="RobberyLogic" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("15_vum6h")
+enabled = false
 
-[node name="Van" parent="IntroSequence" instance=ExtResource("16_vum6h")]
+[node name="Van" parent="RobberyLogic" instance=ExtResource("16_vum6h")]
 position = Vector2(9.64993, 605)
 rotation = 0.0
 
-[node name="Smoke" type="GPUParticles2D" parent="IntroSequence"]
+[node name="Smoke" type="GPUParticles2D" parent="RobberyLogic"]
 z_index = 5
 position = Vector2(15, 225)
 rotation = -1.57079
@@ -535,7 +551,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_hbk2d")
 
-[node name="Fire" type="GPUParticles2D" parent="IntroSequence"]
+[node name="Fire" type="GPUParticles2D" parent="RobberyLogic"]
 modulate = Color(14.364, 3.315, 1.105, 1)
 z_index = 5
 position = Vector2(15, 225)
@@ -548,49 +564,38 @@ one_shot = true
 explosiveness = 0.74
 process_material = SubResource("ParticleProcessMaterial_mkebs")
 
-[node name="IntroAnimation" type="AnimationPlayer" parent="IntroSequence"]
+[node name="IntroAnimation" type="AnimationPlayer" parent="RobberyLogic"]
 unique_name_in_owner = true
 root_node = NodePath("../Van")
 libraries = {
 &"": SubResource("AnimationLibrary_j7k83")
 }
 
-[node name="CarCrash" type="AudioStreamPlayer" parent="IntroSequence"]
+[node name="CarCrash" type="AudioStreamPlayer" parent="RobberyLogic"]
 stream = ExtResource("18_r27xa")
 volume_db = -7.0
 
-[node name="CarAccelerating" type="AudioStreamPlayer" parent="IntroSequence"]
+[node name="CarAccelerating" type="AudioStreamPlayer" parent="RobberyLogic"]
 stream = ExtResource("19_s55f8")
 volume_db = -7.0
 
-[node name="WallBroken" type="Sprite2D" parent="IntroSequence"]
+[node name="WallBroken" type="Sprite2D" parent="RobberyLogic"]
 visible = false
 z_index = 3
 position = Vector2(16, 228)
 texture = ExtResource("20_k70lc")
 
-[node name="TroubleIntro" type="AudioStreamPlayer" parent="IntroSequence"]
+[node name="TroubleIntro" type="AudioStreamPlayer" parent="RobberyLogic"]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("21_fr8k7")
 
-[node name="TroubleMain" type="AudioStreamPlayer" parent="IntroSequence"]
+[node name="TroubleMain" type="AudioStreamPlayer" parent="RobberyLogic"]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("22_2587q")
 
-[node name="Locker" type="Sprite2D" parent="."]
-position = Vector2(258, 27)
-texture = ExtResource("23_r27xa")
-
-[node name="Locker2" type="Sprite2D" parent="."]
-position = Vector2(258, 19)
-texture = ExtResource("23_r27xa")
-
-[node name="Locker3" type="Sprite2D" parent="."]
-position = Vector2(258, 11.5)
-texture = ExtResource("23_r27xa")
-
-[node name="Locker4" type="Sprite2D" parent="."]
-position = Vector2(258, 4)
-texture = ExtResource("23_r27xa")
+[node name="RobberyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+wait_time = 60.0

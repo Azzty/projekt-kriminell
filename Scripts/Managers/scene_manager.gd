@@ -3,8 +3,12 @@ extends Node
 var current_scene: Node # Rotnoden för scenen
 var game_node: Node # Game node reference
 
+signal scene_switched
+
 func _ready() -> void:
 	GameState.change_scene.connect(handle_scene_changed)
+	if not get_tree().root.find_child("Game"):
+		handle_scene_changed(Utilities.find_first_child_of_class(get_tree().root, "Node2D").scene_file_path)
 
 func handle_scene_changed(next_scene_path: String):
 	# Check if "Game" node exists in the scene tree
@@ -15,16 +19,17 @@ func handle_scene_changed(next_scene_path: String):
 		current_scene = Utilities.find_first_child_of_class(get_tree().root, "Node2D")
 		game_node = Node.new()
 		game_node.name = "Game"
-		get_tree().root.add_child(game_node)
+		get_tree().root.add_child.call_deferred(game_node)
 		
-		var GUI = load("res://Scenes/Main/gui.tscn").instantiate()
-		game_node.add_child(GUI)
+		var GUI: CanvasLayer = load("res://Scenes/Main/gui.tscn").instantiate()
+		game_node.add_child.call_deferred(GUI)
+		await GUI.ready
 		GuiManager.gui = GUI
 		GuiManager.override_start_gui()
 	
 	# Load and instantiate the new scene
 	var scene: Node = load(next_scene_path).instantiate()
-	game_node.add_child(scene)
+	game_node.add_child.call_deferred(scene)
 	
 	# Free the current scene if it exists
 	if current_scene:

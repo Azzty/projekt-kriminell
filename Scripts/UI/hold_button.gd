@@ -87,4 +87,5 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	visible = false
 
 func update_label_text(new_text: String):
+	if not label: return # Fix for when loading in from from local scene
 	label.text = new_text

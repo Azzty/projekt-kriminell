@@ -4,6 +4,8 @@ const _lockpick_scene := preload("res://Scenes/UI Elements/lockpick_minigame.tsc
 
 var gui: CanvasLayer
 
+signal timer_value_changed(new_time: float)
+
 func spawn_lockpick_minigame(unlocked_signal: Signal, required_wins := 4, initial_speed := 50.0):
 	if not gui: return
 	

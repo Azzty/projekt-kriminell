@@ -1,15 +1,17 @@
 extends Node
 
-@export var disabled := false
+@export var enabled := true
 
 @onready var trouble_intro = $%TroubleIntro
 @onready var trouble_main = $%TroubleMain
 @onready var player = $%Player
 @onready var intro_animation = $%IntroAnimation
+@onready var robbery_timer = $%RobberyTimer
 
 func _ready() -> void:
-	if disabled:
+	if not enabled:
 		player.global_position = Vector2(-20, 150)
+		robbery_timer.start()
 		return
 	trouble_intro.play()
 	player.set_process(false)
@@ -38,3 +40,13 @@ func _ready() -> void:
 	player.set_process(true)
 	camera.position = Vector2.ZERO
 	camera.align()
+	
+	robbery_timer.start()
+	
+	robbery_timer.timeout.connect()
+
+func end_robbery():
+	GameState.change_scene.emit("res://Scenes/Levels/store.tscn")
+
+func _process(delta: float) -> void:
+	GuiManager.timer_value_changed.emit(robbery_timer.time_left)

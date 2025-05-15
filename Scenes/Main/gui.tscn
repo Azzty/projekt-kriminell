@@ -19,6 +19,21 @@ theme_override_fonts/font = ExtResource("1_qyd3e")
 theme_override_font_sizes/font_size = 48
 text = "MONEY: $0"
 
+[node name="TimeLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_top = 21.0
+offset_right = 105.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("1_qyd3e")
+theme_override_font_sizes/font_size = 48
+text = "60.0 s"
+
 [node name="Button" type="Button" parent="."]
 offset_left = 382.0
 offset_top = 278.0
