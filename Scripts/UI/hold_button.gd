@@ -64,13 +64,14 @@ func _draw() -> void:
 	var rect = Rect2(Vector2.ZERO, size)
 	draw_rect(rect, border_color, false, 1, false)
 
-func _on_pressed() -> void:
-	_is_pressed = true
+#func _on_pressed() -> void:
+	#_is_pressed = true
 
-func _unhandled_input(event):
+func _input(event):
 	if event.is_action_released(action_name):
 		_is_pressed = false
-	elif visible and event.is_action_pressed(action_name):
+	if visible and event.is_action_pressed(action_name):
+		print("pressing")
 		_is_pressed = true
 
 func _on_button_up() -> void:

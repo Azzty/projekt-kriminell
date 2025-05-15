@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cnr1exbd78fih"]
+[gd_scene load_steps=35 format=3 uid="uid://cnr1exbd78fih"]
 
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dip7yjs7t5rjg" path="res://Assets/sprites/wall_broken.png" id="20_k70lc"]
 [ext_resource type="AudioStream" uid="uid://dyvm0btso5ode" path="res://Assets/Audio/Music/Trouble intro.wav" id="21_fr8k7"]
 [ext_resource type="AudioStream" uid="uid://b6tbosjmrydpk" path="res://Assets/Audio/Music/Trouble main.wav" id="22_2587q"]
+[ext_resource type="Texture2D" uid="uid://bi450herxa2lr" path="res://Assets/sprites/locker.png" id="23_r27xa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nqmpn"]
 shader = ExtResource("5_qi1i4")
@@ -500,7 +501,7 @@ region_rect = Rect2(32, 0, 16, 16)
 
 [node name="Plant3" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(126, -27)
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(48, 0, 16, 16)
 
 [node name="Plant4" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, -28)
@@ -508,11 +509,11 @@ region_rect = Rect2(16, 0, 16, 16)
 
 [node name="Plant6" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, 217)
-region_rect = Rect2(16, 0, 16, 16)
+region_rect = Rect2(32, 0, 16, 16)
 
 [node name="Plant7" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(253, 217)
-region_rect = Rect2(16, 0, 16, 16)
+region_rect = Rect2(32, 0, 16, 16)
 
 [node name="IntroSequence" type="Node" parent="."]
 script = ExtResource("15_vum6h")
@@ -576,3 +577,19 @@ stream = ExtResource("21_fr8k7")
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("22_2587q")
+
+[node name="Locker" type="Sprite2D" parent="."]
+position = Vector2(258, 27)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker2" type="Sprite2D" parent="."]
+position = Vector2(258, 19)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker3" type="Sprite2D" parent="."]
+position = Vector2(258, 11.5)
+texture = ExtResource("23_r27xa")
+
+[node name="Locker4" type="Sprite2D" parent="."]
+position = Vector2(258, 4)
+texture = ExtResource("23_r27xa")
