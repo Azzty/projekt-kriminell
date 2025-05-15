@@ -96,6 +96,7 @@ func find_first_parent_of_class(node:Node, class_type: String, exact_match: bool
 ## print(find_first_child_of_class(parent, Camera2D, true, false) # returns null
 ## [/codeblock]
 func find_first_child_of_class(node: Node, class_type: String, exact_match: bool = false, recursive: bool = false):
+	if not node: return
 	var children = node.get_children()
 	for child in children:
 		if exact_match:

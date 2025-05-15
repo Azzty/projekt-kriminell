@@ -4,17 +4,26 @@ extends Node
 
 @onready var trouble_intro = $%TroubleIntro
 @onready var trouble_main = $%TroubleMain
+@onready var mission_failed = $%MissionFailed
 @onready var player = $%Player
 @onready var intro_animation = $%IntroAnimation
 @onready var robbery_timer = $%RobberyTimer
+@onready var sirens = $%Sirens
+
+var camera_position_tween: Tween
+var camera_zoom_tween: Tween
 
 func _ready() -> void:
+	GuiManager.set_timer_visibility(false)
+	robbery_timer.timeout.connect(lose_robbery)
+	
 	if not enabled:
 		player.global_position = Vector2(-20, 150)
 		robbery_timer.start()
+		GuiManager.set_timer_visibility(true)
 		return
 	trouble_intro.play()
-	player.set_process(false)
+	player.set_physics_process(false)
 	
 	var camera: Camera2D = player.find_child("Camera2D")
 	
@@ -33,20 +42,50 @@ func _ready() -> void:
 	camera_tween_2.play()
 	
 	await trouble_intro.finished
-	trouble_main.play()
+	trouble_main.play(30)
+	
+	robbery_timer.start()
+	GuiManager.set_timer_visibility(true)
 	
 	await get_tree().create_timer(0.7).timeout
 	player.global_position = Vector2(-20, 150)
-	player.set_process(true)
+	player.set_physics_process(true)
 	camera.position = Vector2.ZERO
 	camera.align()
-	
-	robbery_timer.start()
-	
-	robbery_timer.timeout.connect()
 
-func end_robbery():
+func lose_robbery():
+	get_tree().paused = false
+	player.set_physics_process(false)
+	player.animated_sprite.play("Idle")
+	
+	var camera: Camera2D = player.find_child("Camera2D")
+	camera_position_tween = get_tree().create_tween()
+	camera_position_tween.set_loops(-1)
+	camera_position_tween.set_ease(Tween.EASE_IN_OUT)
+	camera_position_tween.set_trans(Tween.TRANS_CIRC)
+	camera_position_tween.tween_property(camera, "position", Vector2(10, 10), 1.49)
+	camera_position_tween.tween_property(camera, "position", Vector2(-10, -10), 1.49)
+	camera_position_tween.tween_property(camera, "position", Vector2(0, -10), 1.49)
+	camera_position_tween.tween_property(camera, "position", Vector2(-10, 0), 1.49)
+	
+	camera_zoom_tween = get_tree().create_tween()
+	camera_zoom_tween.tween_property(camera, "zoom", Vector2(2, 2), 6)
+	
+	mission_failed.play()
+	sirens.play()
+	camera_position_tween.play()
+	camera_zoom_tween.play()
+	
+	GuiManager.spawn_mission_failed_screen()
+
+func win_robbery():
 	GameState.change_scene.emit("res://Scenes/Levels/store.tscn")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	GuiManager.timer_value_changed.emit(robbery_timer.time_left)
+
+func _exit_tree():
+	if camera_position_tween:
+		camera_position_tween.stop()
+	if camera_zoom_tween:
+		camera_zoom_tween.stop()

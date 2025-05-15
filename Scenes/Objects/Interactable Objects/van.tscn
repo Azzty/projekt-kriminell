@@ -18,7 +18,7 @@ script = ExtResource("2_naobe")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_vum6h")
 
-[node name="Hold button" parent="." instance=ExtResource("2_2qdgj")]
+[node name="PutInVanButton" parent="." instance=ExtResource("2_2qdgj")]
 offset_left = -4.82949
 offset_top = 37.9531
 offset_right = 5.17051
@@ -29,4 +29,16 @@ action_name = "interact_f"
 prompt_text = "Place item in van"
 always_upright = true
 
-[connection signal="activated" from="Hold button" to="." method="_on_hold_button_activated"]
+[node name="ExfiltrateButton" parent="." instance=ExtResource("2_2qdgj")]
+offset_left = -24.9978
+offset_top = -16.0346
+offset_right = -14.9978
+offset_bottom = -6.03464
+text = "G"
+hold_duration = 1.5
+action_name = "interact_g"
+prompt_text = "Exfiltrate"
+always_upright = true
+
+[connection signal="activated" from="PutInVanButton" to="." method="_on_hold_button_activated"]
+[connection signal="activated" from="ExfiltrateButton" to="." method="_on_hold_button_activated"]

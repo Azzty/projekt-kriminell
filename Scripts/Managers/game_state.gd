@@ -12,7 +12,7 @@ signal item_removed_from_held_items
 
 # Change of scene
 @warning_ignore("unused_signal")
-signal change_scene(file_path: String)
+signal change_scene(file_path: String, restart_current_scene: bool)
 
 # Money !!! 🦀🦀🦀😈😈🤸🦽🏌️
 var _final_money_multiplier := 1

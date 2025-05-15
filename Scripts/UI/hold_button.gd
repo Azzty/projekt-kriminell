@@ -58,6 +58,10 @@ func _process(delta: float) -> void:
 	if _time_held >= hold_duration and not _is_activated:
 		_is_activated = true
 		activated.emit()
+		_is_pressed = false
+		_time_held = 0
+		progress_stylebox.texture.fill_from = Vector2(0, 1)
+		progress_stylebox.texture.fill_to = Vector2(0, 1)
 
 # If it doesnt want to draw a border, ill do it myself
 func _draw() -> void:

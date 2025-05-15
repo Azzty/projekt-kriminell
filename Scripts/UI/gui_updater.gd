@@ -16,3 +16,6 @@ func update_money_label():
 
 func update_time_label(new_time: float):
 	time_label.text = str(snapped(new_time, 0.1)) + " s"
+
+func set_timer_visibility(value: bool):
+	time_label.visible = value

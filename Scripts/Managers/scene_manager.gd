@@ -8,9 +8,11 @@ signal scene_switched
 func _ready() -> void:
 	GameState.change_scene.connect(handle_scene_changed)
 	if not get_tree().root.find_child("Game"):
-		handle_scene_changed(Utilities.find_first_child_of_class(get_tree().root, "Node2D").scene_file_path)
+		var scene = Utilities.find_first_child_of_class(get_tree().root, "Node2D")
+		if not scene: scene = Utilities.find_first_child_of_class(get_tree().root, "Control")
+		if scene: handle_scene_changed(scene.scene_file_path)
 
-func handle_scene_changed(next_scene_path: String):
+func handle_scene_changed(next_scene_path: String, restart_current_scene := false):
 	# Check if "Game" node exists in the scene tree
 	game_node = get_tree().root.get_node_or_null("Game")
 	
@@ -27,6 +29,10 @@ func handle_scene_changed(next_scene_path: String):
 		GuiManager.gui = GUI
 		GuiManager.override_start_gui()
 	
+	if restart_current_scene:
+		next_scene_path = current_scene.scene_file_path
+		current_scene.queue_free()
+		
 	# Load and instantiate the new scene
 	var scene: Node = load(next_scene_path).instantiate()
 	game_node.add_child.call_deferred(scene)
@@ -37,3 +43,4 @@ func handle_scene_changed(next_scene_path: String):
 	
 	# Update current scene reference
 	current_scene = scene
+	scene_switched.emit()
