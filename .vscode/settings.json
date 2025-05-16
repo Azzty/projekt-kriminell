@@ -1,3 +1,12 @@
 {
-    "godotTools.editorPath.godot4": "c:\\Users\\Anton Asp\\Downloads\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe"
+    "godotTools.editorPath.godot4": "c:\\Users\\Anton Asp\\Downloads\\Godot_v4.4.1-stable_win64.exe\\Godot_v4.4.1-stable_win64.exe",
+    "[gdscript]": {
+        "editor.defaultFormatter": "geequlim.godot-tools",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.formatOnPaste": true,
+        "editor.insertSpaces": false,
+        "editor.tabSize": 4,
+        "editor.detectIndentation": false,
+    }
 }

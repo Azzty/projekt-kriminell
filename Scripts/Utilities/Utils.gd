@@ -13,14 +13,14 @@ func get_bigger_texture_version(resource_path:String) -> String:
 	var file_name = item_texture_name.split(".", false)[0]
 	var file_extension = item_texture_name.split(".", false)[1]
 	var big_file_path: String = base_path + file_name + "_big." + file_extension
-	
+
 	return big_file_path
 
 ## Like get_bigger_texture version but returns the actual texture instead of name
 func get_bigger_texture_as_texture(item_data):
 	var texture := CompressedTexture2D.new()
 	var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
-	
+
 	# Change to larger texture version if exists
 	if FileAccess.file_exists(big_file_path):
 		texture = load(big_file_path)
@@ -32,23 +32,23 @@ func get_bigger_texture_as_texture(item_data):
 func get_animated_sprite_rect(sprite: AnimatedSprite2D) -> Rect2:
 	if not sprite.sprite_frames or not sprite.animation:
 		return Rect2() # Return empty if no frames/animation
-	
+
 	# Get current frame texture (returns null if no frame)
 	var frame_texture = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	if not frame_texture:
 		return Rect2()
-	
+
 	var texture_size = frame_texture.get_size()
 	var rect_position = sprite.global_position - (texture_size * sprite.scale * 0.5)
 	var rect_size = texture_size * sprite.scale
-	
+
 	return Rect2(rect_position, rect_size)
 
 ## Returns a rect in [b]global[/b] space for the given sprite
 func get_sprite_rect(sprite: Sprite2D) -> Rect2:
 	if not sprite.texture:
 		return Rect2() # Return empty rect if no texture
-	
+
 	var texture_size = sprite.texture.get_size()
 	var rect_position = sprite.global_position - (texture_size * sprite.scale * 0.5)
 	var rect_size = texture_size * sprite.scale

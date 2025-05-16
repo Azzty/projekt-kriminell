@@ -40,5 +40,5 @@ action_name = "interact_g"
 prompt_text = "Exfiltrate"
 always_upright = true
 
-[connection signal="activated" from="PutInVanButton" to="." method="_on_hold_button_activated"]
-[connection signal="activated" from="ExfiltrateButton" to="." method="_on_hold_button_activated"]
+[connection signal="activated" from="PutInVanButton" to="." method="_on_put_in_van_button_activated"]
+[connection signal="activated" from="ExfiltrateButton" to="." method="_on_exfiltrate_button_activated"]

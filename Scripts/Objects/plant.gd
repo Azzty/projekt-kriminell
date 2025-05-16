@@ -1,11 +1,18 @@
 @tool
 extends Sprite2D
 
-const COL_COUNT := 3 # Amount of columns in spritesheet (starting from 0)
-const ROW_COUNT := 0 # Amount of rows in spritesheet
+const COL_COUNT := 3
+const ROW_COUNT := 0
 
-# Called when the node enters the scene tree for the first time.
+@export var region_index := -1
+
 func _ready() -> void:
 	region_enabled = true
-	var plant_texture_postion = Vector2(randi_range(0, COL_COUNT) * 16, randi_range(0, ROW_COUNT) * 16)
-	region_rect = Rect2(plant_texture_postion, Vector2(16, 16))
+	if region_index == -1:
+		# Only randomize once, then store the result
+		var col = randi_range(0, COL_COUNT)
+		var row = randi_range(0, ROW_COUNT)
+		region_index = col + row * (COL_COUNT + 1)
+	@warning_ignore("integer_division")
+	var plant_texture_position = Vector2((region_index % (COL_COUNT + 1)) * 16, int(region_index / (COL_COUNT + 1)) * 16)
+	region_rect = Rect2(plant_texture_position, Vector2(16, 16))

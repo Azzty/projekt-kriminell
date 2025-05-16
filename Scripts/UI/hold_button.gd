@@ -28,17 +28,17 @@ func _ready() -> void:
 	shortcut.events.clear()
 	var shortcut_keys := InputMap.action_get_events(action_name)
 	shortcut.events.append_array(shortcut_keys)
-	
+
 	progress_stylebox = StyleBoxTexture.new()
 	var style_texture = GradientTexture2D.new()
 	var default_style: StyleBoxFlat = get_theme_stylebox("normal")
 
-	style_texture.fill_from = Vector2(0,1)
-	style_texture.fill_to = Vector2(0,1)
+	style_texture.fill_from = Vector2(0, 1)
+	style_texture.fill_to = Vector2(0, 1)
 	style_texture.gradient = Gradient.new()
 	style_texture.gradient.set_color(0, default_style.bg_color)
 	style_texture.gradient.set_color(1, default_style.bg_color.lightened(0.3))
-	
+
 	progress_stylebox.texture = style_texture
 	add_theme_stylebox_override("pressed", progress_stylebox)
 	add_theme_stylebox_override("normal", progress_stylebox)
@@ -47,14 +47,14 @@ func _process(delta: float) -> void:
 	if _is_pressed:
 		grab_focus()
 		_time_held += delta
-		progress_stylebox.texture.fill_from = Vector2(0, 1 - _time_held/hold_duration)
-		progress_stylebox.texture.fill_to = Vector2(0, 1 - _time_held/hold_duration + 0.01)
+		progress_stylebox.texture.fill_from = Vector2(0, 1 - _time_held / hold_duration)
+		progress_stylebox.texture.fill_to = Vector2(0, 1 - _time_held / hold_duration + 0.01)
 	else:
 		_is_activated = false
 		_time_held = 0
 		progress_stylebox.texture.fill_from = Vector2(0, 1)
 		progress_stylebox.texture.fill_to = Vector2(0, 1)
-	
+
 	if _time_held >= hold_duration and not _is_activated:
 		_is_activated = true
 		activated.emit()
@@ -72,6 +72,8 @@ func _draw() -> void:
 	#_is_pressed = true
 
 func _input(event):
+	if GuiManager.ui_locked:
+		return
 	if event.is_action_released(action_name):
 		_is_pressed = false
 	if visible and event.is_action_pressed(action_name):

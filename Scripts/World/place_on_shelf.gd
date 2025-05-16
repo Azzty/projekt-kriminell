@@ -25,7 +25,7 @@ func _ready() -> void:
 		var shelf: CollisionShape2D = [shelfshape_0, shelfshape_1][randi() % 2]
 		var itemTexture: CompressedTexture2D = ITEMS[randi() % ITEMS.size()]
 		var shelfRect = shelf.shape.get_rect()
-		
+
 		# Skapa ett föremål
 		var item := Sprite2D.new()
 		item.texture = itemTexture
@@ -37,7 +37,7 @@ func _ready() -> void:
 		var item_data = GameItem.new(item_name)
 		item.set_meta("item_properties", item_data)
 		item.name = item_name # Do this here so godot adds a suffix instead of breaking name
-		
+
 		var button = hold_button.instantiate()
 		button.prompt_text = "Pick up " + str(item_name)
 		item.add_child(button)
@@ -46,7 +46,7 @@ func _ready() -> void:
 		button.activated.connect(_button_pressed.bind(item, button))
 
 func _button_pressed(item: Sprite2D, button: Button) -> void:
-	GameState.add_item_to_held_items(item)
+	if not GameState.add_item_to_held_items(item): return
 	delete_all_descendants(item)
 	button.activated.disconnect(_button_pressed)
 	button.queue_free()

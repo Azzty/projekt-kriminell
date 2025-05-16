@@ -33,7 +33,7 @@ func _ready() -> void:
 	track_rect = track.get_rect()
 	green_start_position = green_part.position
 	_randomize_green_part_position()
-	
+
 	#connect("hit_green_part", _on_green_part_hit)
 
 func _process(delta: float) -> void:
@@ -46,12 +46,12 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("spacebar"): return
 	var sucess := false
-	
+
 	# Slightly increase size to show that user clicked
 	cursor.size += Vector2(0, 4)
 	cursor.position -= Vector2(0, 2)
 	can_move = false
-	
+
 	# Check if hit or miss
 	if cursor.get_global_rect().intersects(green_part.get_global_rect()):
 		sucess = true
@@ -59,14 +59,14 @@ func _input(event: InputEvent) -> void:
 	if sucess:
 		_on_green_part_hit()
 	else: _on_green_part_missed()
-	
+
 	# Wait for dramatic effect
 	await get_tree().create_timer(0.2).timeout
 	green_part.modulate = Color.GREEN
 	if points >= required_wins:
 		minigame_won.emit()
 		queue_free()
-	
+
 	# Back to normal
 	_randomize_green_part_position()
 	cursor.size -= Vector2(0, 4)
