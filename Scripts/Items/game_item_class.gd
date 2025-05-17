@@ -44,7 +44,14 @@ static var item_data = {
 		"name": "Iron ingot",
 		"value": 20,
 		"materials": {"iron": 2}
-	}
+	},
+	"Pistol": {
+		"tags": ["Weapon", "Gun"],
+		"texture": load(ITEMS_FOLDER + "/Weapons/Guns/pistol.png"),
+		"name": "Pistol",
+		"value": 150,
+		"materials": {"iron": 4}
+	},
 }
 
 ## Gives the item data for the given ID

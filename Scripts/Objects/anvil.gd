@@ -4,7 +4,8 @@ extends Sprite2D
 
 const item_template := preload("res://Scenes/Objects/Interactable Objects/movable_item.tscn")
 const recipes := {
-	"Crowbar": ["Iron ingot", "Iron ingot", "Iron ingot"]
+	"Crowbar": ["Iron ingot", "Iron ingot", "Iron ingot"],
+	"Pistol": ["Iron ingot", "Iron ingot"]
 }
 
 var current_recipe: String
@@ -24,7 +25,7 @@ func _ready() -> void:
 func _on_item_slot_entered(area: Area2D, slot: Area2D) -> void:
 	var item: Sprite2D = Utilities.find_first_parent_of_class(area, "Sprite2D")
 	if not item.has_meta("item_properties") or not item.is_in_group("resource_items"): return
-	
+
 	held_item = item
 	if active_slots.size() > 0: active_slots[0].modulate = Color(1,1,1,1)
 	active_slots.push_front(slot)
@@ -33,10 +34,10 @@ func _on_item_slot_entered(area: Area2D, slot: Area2D) -> void:
 ## Removes slot from active_slots and reverts highlight color
 func _on_item_slot_exited(area: Area2D, slot: Area2D) -> void:
 	if active_slots.size() == 0: return
-	
+
 	var item: Sprite2D = Utilities.find_first_parent_of_class(area, "Sprite2D")
 	if not item.has_meta("item_properties") or not item.is_in_group("resource_items"): return
-	
+
 	active_slots[0].modulate = Color(1,1,1,1)
 	active_slots.erase(slot)
 	if active_slots.size() > 0: active_slots[0].modulate = Color(1.5,1.5,1.5,1)
@@ -44,26 +45,26 @@ func _on_item_slot_exited(area: Area2D, slot: Area2D) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index != MOUSE_BUTTON_LEFT: return
-	
+
 	var mouse_position = get_global_mouse_position()
-	
+
 	# Remove item from slot when clicking on it
 	for slot: Area2D in items_in_slots:
 		var item: Sprite2D = items_in_slots[slot]
 		if not item: continue
-		
+
 		var item_rect := item.get_rect()
 		if item_rect.has_point(item.to_local(mouse_position)):
 			item.set_process(true)
 			item.modulate = Color(1,1,1,1)
 			slot.monitoring = true
 			items_in_slots[slot] = null
-	
+
 	if can_craft and anvil_sprite_bounds.has_point(to_local(mouse_position)):
 		dispense_current_recipe() # Craft the item
-	
+
 	place_held_item_in_slot()
-	
+
 	# Check current setup for matching recipes
 	var items_in_slot_names = []
 	for item in items_in_slots.values():
@@ -87,7 +88,7 @@ func dispense_current_recipe():
 	var item_data := GameItem.new(current_recipe)
 	if not item_data:
 		return
-	
+
 	# Create the item
 	var result_item := item_template.instantiate()
 	result_item.set_meta("item_properties", item_data)
@@ -104,9 +105,9 @@ func dispense_current_recipe():
 	result_item.customer_drop_shape = reference_shop_item.customer_drop_shape
 	result_item.customer_requested_tags = reference_shop_item.customer_requested_tags
 	result_item.add_to_group("shop_items")
-	
+
 	GameState.add_item_to_inventory(result_item)
-	
+
 	# Remove the materials from the anvil
 	remove_items_from_slots()
 
@@ -116,6 +117,7 @@ func remove_items_from_slots():
 		var item: Sprite2D = items_in_slots[slot]
 		if not item: continue
 		items_in_slots[slot] = null
+		slot.monitoring = true
 		GameState.remove_item_from_inventory(item)
 		item.queue_free()
 
@@ -140,13 +142,13 @@ func _process(_delta: float) -> void:
 		self_modulate.r = 1.0
 		self_modulate.g = 1.0
 		self_modulate.b = 1.0
-	
+
 	for item: Sprite2D in items_in_slots.values():
 		if not item: continue
-		
+
 		var item_rect := item.get_rect()
 		#item_rect.position = item.position
-		
+
 		if item_rect.has_point(item.to_local(mouse_position)):
 			item.modulate = Color(0.8,0.8,0.8,1)
 		else:

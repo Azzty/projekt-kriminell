@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://i0ghktctxu4w"]
+[gd_scene load_steps=5 format=3 uid="uid://i0ghktctxu4w"]
 
 [ext_resource type="PackedScene" uid="uid://cdky23wh40gj4" path="res://Scenes/Objects/Interactable Objects/van.tscn" id="1_h21bk"]
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="2_ybjcv"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="3_ybjcv"]
+[ext_resource type="PackedScene" uid="uid://ym1uw582xxbb" path="res://Scenes/Objects/Static Objects/crate.tscn" id="4_s6pog"]
 
 [node name="TestingScene" type="Node2D"]
 
@@ -24,3 +25,6 @@ max_item_amount = 5
 position = Vector2(359, 249)
 min_item_amount = 3
 max_item_amount = 5
+
+[node name="Crate" parent="." instance=ExtResource("4_s6pog")]
+position = Vector2(245, 234)

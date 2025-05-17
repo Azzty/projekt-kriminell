@@ -2,7 +2,7 @@ extends Node
 
 ## Returns a file path that is the same path but with a _big suffix to the file name
 ## Used to get more detailed versions of sprites
-func get_bigger_texture_version(resource_path:String) -> String:
+func get_bigger_texture_version(resource_path: String) -> String:
 	# Get path and file name
 	var path := resource_path.rsplit("/", false, 1)
 	var item_texture_path := path[0]
@@ -17,7 +17,7 @@ func get_bigger_texture_version(resource_path:String) -> String:
 	return big_file_path
 
 ## Like get_bigger_texture version but returns the actual texture instead of name
-func get_bigger_texture_as_texture(item_data):
+func get_bigger_texture_as_texture(item_data) -> Texture:
 	var texture := CompressedTexture2D.new()
 	var big_file_path: String = get_bigger_texture_version(item_data.texture.resource_path)
 
@@ -65,7 +65,7 @@ func get_sprite_rect(sprite: Sprite2D) -> Rect2:
 ## print(find_first_parent_of_class(child, Node, false) # returns parent
 ## print(find_first_parent_of_class(child, Node, true) # returns null
 ## [/codeblock]
-func find_first_parent_of_class(node:Node, class_type: String, exact_match: bool = false):
+func find_first_parent_of_class(node: Node, class_type: String, exact_match: bool = false):
 	var parent = node.get_parent()
 	if parent:
 		if exact_match:
@@ -109,3 +109,20 @@ func find_first_child_of_class(node: Node, class_type: String, exact_match: bool
 		for child in children:
 			var result = find_first_child_of_class(child, class_type, exact_match, recursive)
 			if result: return result
+
+## Picks a random key from a dictionary where values are weights (probabilities).
+## Example: {"A": 0.1, "B": 0.3, "C": 0.6}
+func pick_weighted_random(weighted_dict: Dictionary) -> Variant:
+	var total_weight := 0.0
+	for weight in weighted_dict.values():
+		total_weight += float(weight)
+	if total_weight == 0.0:
+		return null
+
+	var rand := randf() * total_weight
+	var cumulative := 0.0
+	for key in weighted_dict.keys():
+		cumulative += float(weighted_dict[key])
+		if rand < cumulative:
+			return key
+	return null

@@ -9,9 +9,9 @@ radius = 5.0
 [node name="Plant" type="Sprite2D"]
 texture = ExtResource("1_ij2iw")
 region_enabled = true
-region_rect = Rect2(32, 0, 16, 16)
+region_rect = Rect2(48, 0, 16, 16)
 script = ExtResource("2_qqgqg")
-region_index = null
+region_index = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false

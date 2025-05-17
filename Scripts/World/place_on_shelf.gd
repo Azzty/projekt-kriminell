@@ -1,16 +1,16 @@
 extends Node
 
 const APPLE = preload("res://Assets/sprites/Items/Misc/apple.png")
-const CROWBAR = preload("res://Assets/sprites/Items/Weapons/Melee/crowbar.png")
-const REVOLVER = preload("res://Assets/sprites/Items/Weapons/Guns/revolver.png")
-const DOCUMENT = preload("res://Assets/sprites/Items/Special/document.png")
+#const CROWBAR = preload("res://Assets/sprites/Items/Weapons/Melee/crowbar.png")
+#const REVOLVER = preload("res://Assets/sprites/Items/Weapons/Guns/revolver.png")
+#const DOCUMENT = preload("res://Assets/sprites/Items/Special/document.png")
 ## TODO: ^^ Add and reference these items to the inventory singleton or something because
 ## this looks like it could get very problematic very fast
 
 @export var min_item_amount: int = 0
 @export var max_item_amount: int = 2
 
-const ITEMS = [APPLE, CROWBAR, REVOLVER, DOCUMENT]
+const ITEMS = [APPLE]
 
 @onready var shelfshape_0: CollisionShape2D = $Shelf/Shelfshape0
 @onready var shelfshape_1: CollisionShape2D = $Shelf/Shelfshape1

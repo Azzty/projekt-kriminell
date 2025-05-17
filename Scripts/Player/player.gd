@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+const DAMAGE := 20
 const SPEED = 150.0
 const JUMP_VELOCITY = -400.0
 const PUSH_FORCE = 80.0
@@ -12,18 +13,30 @@ var item_offset_length = 8 # Distance between player and items
 var is_moving_item := false
 var last_picked_up_item_position: Vector2 = Vector2.ZERO
 
+var _punch_side := "l"
+var _can_punch := true
+var _is_punching := false
+
 func _ready():
 	add_to_group("player")
-	#GameState.connect("item_added_to_inventory", _add_following_item)
 	GameState.connect("item_added_to_held_items", _add_following_item)
 	GameState.connect("item_removed_from_held_items", _remove_following_item)
-	#for item: Sprite2D in GameState.held_items:
-		#if "Resource" in item_data.tags: continue
-		#var item = Sprite2D.new()
-		#item.texture = item_data.texture
-		#add_child(item)
-		#item.name = item_data.name
-		#_add_following_item(item)
+
+	# Alternate punch side
+	animated_sprite.animation_looped.connect(func():
+		if animated_sprite.animation == "Punch_r":
+			_punch_side = "l"
+			_is_punching = false
+			$Hurtbox.monitoring = false
+		elif animated_sprite.animation == "Punch_l":
+			_punch_side = "r"
+			_is_punching = false
+			$Hurtbox.monitoring = false
+		)
+
+	$PunchCooldown.timeout.connect(func():
+		_can_punch = true
+		)
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -52,9 +65,11 @@ func _physics_process(delta: float) -> void:
 
 	# Play correct move animation
 	if not is_moving_item:
-		if directionX or directionY:
+		if Input.is_action_pressed("spacebar") and _can_punch:
+			punch()
+		elif not _is_punching and (directionX or directionY):
 			animated_sprite.play("Run")
-		else:
+		elif not _is_punching:
 			animated_sprite.play("Idle")
 	else:
 		look_at(last_picked_up_item_position)
@@ -93,6 +108,14 @@ func _physics_process(delta: float) -> void:
 		button.visible = false
 		if button == closest_button: button.visible = true
 
+func punch():
+	$Hurtbox.monitoring = true
+	_can_punch = false
+	_is_punching = true
+	if _punch_side == "r": animated_sprite.play("Punch_r")
+	else: animated_sprite.play("Punch_l")
+	$PunchCooldown.start()
+
 func add_item_to_inventory(item: Sprite2D) -> void:
 	GameState.add_item_to_inventory(item)
 
@@ -118,3 +141,7 @@ func _remove_following_item(item: Sprite2D):
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite.animation == "Pickup": is_moving_item = false
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	var parent := body.get_parent()
+	if parent.has_signal("take_damage"): parent.take_damage.emit(DAMAGE)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cnr1exbd78fih"]
+[gd_scene load_steps=38 format=3 uid="uid://cnr1exbd78fih"]
 
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://byhyuahc0670n" path="res://Scenes/Objects/Static Objects/wall.tscn" id="7_nqmpn"]
 [ext_resource type="PackedScene" uid="uid://dd7kp4ek1a2yf" path="res://Scenes/Objects/Interactable Objects/door.tscn" id="8_esq8r"]
 [ext_resource type="PackedScene" uid="uid://f7qp4pcjhsr1" path="res://Scenes/Objects/Interactable Objects/locked_door.tscn" id="11_ea7rc"]
-[ext_resource type="Texture2D" uid="uid://je1wi04l0u0e" path="res://Assets/sprites/sofa.png" id="12_uquic"]
-[ext_resource type="Texture2D" uid="uid://d07g4qc52gjcy" path="res://Assets/sprites/checkout_counter.png" id="13_r30e8"]
+[ext_resource type="PackedScene" uid="uid://clgnm8bmyeyev" path="res://Scenes/Objects/Static Objects/sofa.tscn" id="12_k70lc"]
+[ext_resource type="PackedScene" uid="uid://cki8lh4npquvd" path="res://Scenes/Objects/Static Objects/checkout_counter.tscn" id="13_k70lc"]
 [ext_resource type="PackedScene" uid="uid://bciwcinivtowc" path="res://Scenes/Objects/Static Objects/Plant.tscn" id="14_r30e8"]
+[ext_resource type="PackedScene" uid="uid://bn02jji30kvnx" path="res://Scenes/Objects/Static Objects/locker.tscn" id="15_fr8k7"]
+[ext_resource type="PackedScene" uid="uid://ym1uw582xxbb" path="res://Scenes/Objects/Static Objects/crate.tscn" id="16_fr8k7"]
 [ext_resource type="Texture2D" uid="uid://c7oc45wekc107" path="res://Assets/sprites/smoke.png" id="16_hbk2d"]
 [ext_resource type="Script" uid="uid://bosrnn57xtire" path="res://Scripts/World/robbery.gd" id="16_r27xa"]
 [ext_resource type="PackedScene" uid="uid://cdky23wh40gj4" path="res://Scenes/Objects/Interactable Objects/van.tscn" id="16_vum6h"]
@@ -22,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://dip7yjs7t5rjg" path="res://Assets/sprites/wall_broken.png" id="20_k70lc"]
 [ext_resource type="AudioStream" uid="uid://dyvm0btso5ode" path="res://Assets/Audio/Music/Trouble intro.wav" id="21_fr8k7"]
 [ext_resource type="AudioStream" uid="uid://b6tbosjmrydpk" path="res://Assets/Audio/Music/Trouble main.wav" id="22_2587q"]
-[ext_resource type="Texture2D" uid="uid://bi450herxa2lr" path="res://Assets/sprites/locker.png" id="23_r27xa"]
 [ext_resource type="AudioStream" uid="uid://dmmsprigle8pi" path="res://Assets/Audio/Music/Mission failed.wav" id="24_s55f8"]
 [ext_resource type="AudioStream" uid="uid://c72fpko6xmtim" path="res://Assets/Audio/SFX/police sirens.mp3" id="25_k70lc"]
 
@@ -279,6 +280,7 @@ offset_right = 767.0
 offset_bottom = 649.0
 texture = ExtResource("2_i2k26")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="Floors"]
 z_index = -10
@@ -483,13 +485,11 @@ metadata/_edit_lock_ = true
 
 [node name="Decorations" type="Node" parent="."]
 
-[node name="Sofa" type="Sprite2D" parent="Decorations"]
+[node name="Sofa" parent="Decorations" instance=ExtResource("12_k70lc")]
 position = Vector2(220, -26)
-texture = ExtResource("12_uquic")
 
-[node name="CheckoutCounter" type="Sprite2D" parent="Decorations"]
+[node name="CheckoutCounter" parent="Decorations" instance=ExtResource("13_k70lc")]
 position = Vector2(155, 80)
-texture = ExtResource("13_r30e8")
 
 [node name="Plants" type="Node" parent="Decorations"]
 
@@ -505,6 +505,7 @@ region_index = 1
 
 [node name="Plant3" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(126, -27)
+region_rect = Rect2(0, 0, 16, 16)
 region_index = 0
 
 [node name="Plant4" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
@@ -514,29 +515,38 @@ region_index = 1
 
 [node name="Plant6" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(-57, 217)
-region_rect = Rect2(48, 0, 16, 16)
-region_index = 3
 
 [node name="Plant7" parent="Decorations/Plants" instance=ExtResource("14_r30e8")]
 position = Vector2(253, 217)
-region_rect = Rect2(48, 0, 16, 16)
-region_index = 3
 
-[node name="Locker" type="Sprite2D" parent="Decorations"]
+[node name="Locker" parent="Decorations" instance=ExtResource("15_fr8k7")]
 position = Vector2(258, 27)
-texture = ExtResource("23_r27xa")
 
-[node name="Locker2" type="Sprite2D" parent="Decorations"]
+[node name="Locker2" parent="Decorations" instance=ExtResource("15_fr8k7")]
 position = Vector2(258, 19)
-texture = ExtResource("23_r27xa")
 
-[node name="Locker3" type="Sprite2D" parent="Decorations"]
-position = Vector2(258, 11.5)
-texture = ExtResource("23_r27xa")
+[node name="Locker3" parent="Decorations" instance=ExtResource("15_fr8k7")]
+position = Vector2(258, 11)
 
-[node name="Locker4" type="Sprite2D" parent="Decorations"]
-position = Vector2(258, 4)
-texture = ExtResource("23_r27xa")
+[node name="Locker4" parent="Decorations" instance=ExtResource("15_fr8k7")]
+position = Vector2(258, 3)
+
+[node name="Crate" parent="Decorations" instance=ExtResource("16_fr8k7")]
+position = Vector2(-81, 215)
+
+[node name="Crate2" parent="Decorations" instance=ExtResource("16_fr8k7")]
+position = Vector2(-149, 193)
+rotation = -0.533307
+
+[node name="Crate3" parent="Decorations" instance=ExtResource("16_fr8k7")]
+position = Vector2(-138, 215)
+
+[node name="Crate5" parent="Decorations" instance=ExtResource("16_fr8k7")]
+position = Vector2(-81, 194)
+
+[node name="Crate4" parent="Decorations" instance=ExtResource("16_fr8k7")]
+position = Vector2(-152, 144)
+rotation = 0.232991
 
 [node name="RobberyLogic" type="Node" parent="."]
 process_mode = 3

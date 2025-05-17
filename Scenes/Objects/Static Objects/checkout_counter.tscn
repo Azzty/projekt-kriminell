@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cki8lh4npquvd"]
+
+[ext_resource type="Texture2D" uid="uid://d07g4qc52gjcy" path="res://Assets/sprites/checkout_counter.png" id="1_igohy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igohy"]
+size = Vector2(46, 9)
+
+[node name="CheckoutCounter" type="Sprite2D"]
+texture = ExtResource("1_igohy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_igohy")
