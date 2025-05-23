@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b31o3k82w6koe" path="res://Assets/sprites/Items/Misc/apple.png" id="5_y64e2"]
 [ext_resource type="Texture2D" uid="uid://ckkuj38vmpyvo" path="res://Assets/sprites/Items/Weapons/Guns/revolver_big.png" id="6_gm4dq"]
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="7_1o4dj"]
-[ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="8_vkau3"]
+[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="7_6cqx3"]
 [ext_resource type="PackedScene" uid="uid://byr6kguuaclem" path="res://Scenes/Effects/sparkle_explosion.tscn" id="9_v6o73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a54sg"]
@@ -76,19 +76,20 @@ position = Vector2(-21, 47)
 scale = Vector2(2, 2)
 texture = ExtResource("6_gm4dq")
 
-[node name="Button" type="Button" parent="."]
-offset_left = -140.0
-offset_top = -38.0
-offset_right = -91.0
-offset_bottom = -26.0
+[node name="FinishDayButton" type="Button" parent="."]
+offset_left = -143.0
+offset_top = 68.0
+offset_right = -94.0
+offset_bottom = 80.0
+theme = ExtResource("7_6cqx3")
 theme_override_fonts/font = ExtResource("7_1o4dj")
 theme_override_font_sizes/font_size = 4
-text = "Change scene"
-script = ExtResource("8_vkau3")
-scene_to_switch_to = "uid://cnr1exbd78fih"
+text = "Finish day"
 
 [node name="SparkleExplosion" parent="." instance=ExtResource("9_v6o73")]
 position = Vector2(-285, -14)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
+
+[connection signal="pressed" from="FinishDayButton" to="." method="_finish_day"]

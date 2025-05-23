@@ -115,9 +115,9 @@ func dispense_current_recipe():
 func remove_items_from_slots():
 	for slot in items_in_slots:
 		var item: Sprite2D = items_in_slots[slot]
-		if not item: continue
 		items_in_slots[slot] = null
 		slot.monitoring = true
+		if not item: continue
 		GameState.remove_item_from_inventory(item)
 		item.queue_free()
 
@@ -144,7 +144,7 @@ func _process(_delta: float) -> void:
 		self_modulate.b = 1.0
 
 	for item: Sprite2D in items_in_slots.values():
-		if not item: continue
+		if not is_instance_valid(item): continue
 
 		var item_rect := item.get_rect()
 		#item_rect.position = item.position

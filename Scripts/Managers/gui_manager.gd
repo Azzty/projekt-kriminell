@@ -2,6 +2,7 @@ extends Node
 
 const _lockpick_scene := preload("res://Scenes/UI Elements/lockpick_minigame.tscn")
 const _mission_failed_scene := preload("res://Scenes/UI Elements/mission_failed_screen.tscn")
+const _upgrade_screen := preload("res://Scenes/UI Elements/upgrade_screen.tscn")
 
 var ui_locked := false
 var gui: CanvasLayer
@@ -43,6 +44,15 @@ func spawn_mission_failed_screen():
 	gui.add_child(scene)
 	scene.find_child("RetryButton").grab_focus()
 	_active_extra_scenes.append(scene)
+
+func spawn_upgrade_screen():
+	if not gui: return
+	
+	get_tree().paused = true
+	var scene = _upgrade_screen.instantiate()
+	gui.add_child(scene)
+	scene.global_position = get_viewport().get_visible_rect().get_center()
+	scene.global_position -= scene.get_rect().size * 0.5
 
 func override_start_gui():
 	if not gui: return

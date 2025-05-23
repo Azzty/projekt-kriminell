@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const DAMAGE := 20
-const SPEED = 150.0
+var speed := GameState.player_speed
 const JUMP_VELOCITY = -400.0
 const PUSH_FORCE = 80.0
 
@@ -45,14 +45,14 @@ func _physics_process(delta: float) -> void:
 
 	# Handle movement in X and Y direction
 	if directionX:
-		velocity.x = directionX * SPEED
+		velocity.x = directionX * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 	if directionY:
-		velocity.y = directionY * SPEED
+		velocity.y = directionY * speed
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-	velocity = velocity.normalized() * SPEED
+		velocity.y = move_toward(velocity.y, 0, speed)
+	velocity = velocity.normalized() * speed
 
 	look_at(position + velocity)
 	if velocity.length() > 0: rotate(0.5 * PI)
@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		if deltaPosition.length() < 5: continue
 
 		# Move and look at player
-		item.global_position += deltaPosition.normalized() * SPEED * delta * 0.95
+		item.global_position += deltaPosition.normalized() * speed * delta * 0.95
 		item.look_at(position)
 
 	var closest_button = GameState.get_closest_button_to_player()

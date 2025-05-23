@@ -551,6 +551,7 @@ rotation = 0.232991
 [node name="RobberyLogic" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("16_r27xa")
+enabled = false
 
 [node name="Van" parent="RobberyLogic" instance=ExtResource("16_vum6h")]
 position = Vector2(9.64993, 605)

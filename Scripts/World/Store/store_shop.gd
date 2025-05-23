@@ -68,3 +68,12 @@ func customer_left():
 
 func _on_item_sold(item: Sprite2D):
 	spawned_items.erase(item)
+
+func _finish_day():
+	print(get_tree().root.find_child("Game"))
+	for child in Utilities.find_first_child_of_class(get_tree().root.find_child("Game"), "Node2D").get_children():
+		print(child)
+		if child.get("visible"):
+			print(child, " has visible property")
+			child.visible = false
+	GuiManager.spawn_upgrade_screen()

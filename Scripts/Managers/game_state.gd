@@ -1,6 +1,10 @@
 extends Node
 
+const DEFAULT_PLAYER_SPEED := 150
+
+# Playerstats
 var player: CharacterBody2D
+var player_speed := DEFAULT_PLAYER_SPEED
 
 # Inventory
 var inventory: Array[Object] = []
@@ -16,10 +20,18 @@ signal item_removed_from_held_items
 signal change_scene(file_path: String, restart_current_scene: bool)
 
 # Money !!! 🦀🦀🦀😈😈🤸🦽🏌️
-var _final_money_multiplier := 1
-var money: int = 0:
+var multiplier_upgrade := 1.0:
+	set(value):
+		multiplier_upgrade = value
+		_update_final_money_multiplier()
+var _final_money_multiplier := 1.0
+var money: int = 500:
 	set(value):
 		var added_value = value - money
+		if added_value < 0:
+			money = value
+			money_changed.emit()
+			return
 		money += added_value * _final_money_multiplier
 		money_changed.emit()
 signal money_changed
@@ -115,3 +127,8 @@ func get_closest_button_to_player():
 			closest_button = button
 
 	return closest_button
+
+## Update the multiplier by combining all other multipliers
+func _update_final_money_multiplier():
+	_final_money_multiplier = 1.0
+	_final_money_multiplier *= multiplier_upgrade

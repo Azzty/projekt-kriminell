@@ -64,9 +64,9 @@ unique_name_in_owner = true
 modulate = Color(0.0166667, 1, 0, 1)
 z_index = 1
 layout_mode = 0
-offset_left = 16.0
+offset_left = 15.0
 offset_top = 6.0
-offset_right = 19.0
+offset_right = 20.0
 offset_bottom = 10.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_75yt0")
 

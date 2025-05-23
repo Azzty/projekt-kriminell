@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq47yq2j6q2pq"]
+
+[ext_resource type="Script" uid="uid://ttmg8775rcy6" path="res://Scripts/UI/upgrade_screen.gd" id="1_ugf2n"]
+[ext_resource type="Theme" uid="uid://difjd64jhu5hr" path="res://Assets/Themes/Main.tres" id="2_lg0xc"]
+[ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="3_6gmwl"]
+[ext_resource type="Script" uid="uid://dtny2tvtdvjk7" path="res://Scripts/UI/button_change_scene.gd" id="4_qcjig"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gmwl"]
+bg_color = Color(0.11, 0.406667, 1, 1)
+
+[node name="UpgradeScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ugf2n")
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -282.5
+offset_top = -210.0
+offset_right = 282.5
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_lg0xc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gmwl")
+
+[node name="SpeedUpgrade" type="Control" parent="Panel"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 26.0
+offset_right = 564.0
+offset_bottom = 70.0
+
+[node name="Label" type="Label" parent="Panel/SpeedUpgrade"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 19.0
+offset_right = 202.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 16
+text = "Increase speed"
+
+[node name="Button" type="Button" parent="Panel/SpeedUpgrade"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 16.0
+offset_right = 514.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 16
+text = "Cost: $100"
+
+[node name="SellUpgrade" type="Control" parent="Panel"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 87.0
+offset_right = 564.0
+offset_bottom = 131.0
+
+[node name="Label" type="Label" parent="Panel/SellUpgrade"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 19.0
+offset_right = 202.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 16
+text = "Increase speed"
+
+[node name="Button" type="Button" parent="Panel/SellUpgrade"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 16.0
+offset_right = 514.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 16
+text = "Cost: $100"
+
+[node name="GotoStoreButton" type="Button" parent="Panel"]
+offset_left = 136.0
+offset_top = 364.0
+offset_right = 416.0
+offset_bottom = 386.0
+theme = ExtResource("2_lg0xc")
+theme_override_fonts/font = ExtResource("3_6gmwl")
+theme_override_font_sizes/font_size = 16
+text = "Go rob the store again"
+script = ExtResource("4_qcjig")
+scene_to_switch_to = "uid://cnr1exbd78fih"
+
+[connection signal="pressed" from="Panel/SpeedUpgrade/Button" to="." method="_upgrade_speed"]
+[connection signal="pressed" from="Panel/SellUpgrade/Button" to="." method="_upgrade_sell_multiplier"]
