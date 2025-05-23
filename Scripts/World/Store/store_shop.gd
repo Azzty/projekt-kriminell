@@ -1,5 +1,7 @@
 extends Node2D
 
+signal day_finished
+
 @onready var counter: Area2D = $Counter
 @onready var counter_collisionshape: CollisionShape2D = $Counter/Counter_shape
 
@@ -26,18 +28,18 @@ func _ready() -> void:
 		if "Resource" in item_data.tags: continue
 		var texture := CompressedTexture2D.new()
 		var big_file_path: String = Utilities.get_bigger_texture_version(item_data.texture.resource_path)
-		
+
 		# Change to larger texture version if exists
 		if FileAccess.file_exists(big_file_path):
 			texture = load(big_file_path)
 		else:
 			texture = item_data.texture
-		
+
 		var item := movable_item_scene.instantiate()
 		item.texture = texture
-		
+
 		var counterRect = counter_collisionshape.shape.get_rect()
-		
+
 		# Random position on counter (divided by 3 instead of 2 for padding)
 		item.position = Vector2(counterRect.get_center() + Vector2(randf_range(-counterRect.size.x/3, counterRect.size.x/3), randf_range(-counterRect.size.y/3, counterRect.size.y/3)))
 		item.z_index = 2
@@ -70,10 +72,10 @@ func _on_item_sold(item: Sprite2D):
 	spawned_items.erase(item)
 
 func _finish_day():
-	print(get_tree().root.find_child("Game"))
-	for child in Utilities.find_first_child_of_class(get_tree().root.find_child("Game"), "Node2D").get_children():
+	for child in Utilities.find_first_child_of_class(get_tree().root.find_child("Game", false, false), "Node2D").get_children():
 		print(child)
 		if child.get("visible"):
 			print(child, " has visible property")
 			child.visible = false
 	GuiManager.spawn_upgrade_screen()
+	day_finished.emit()

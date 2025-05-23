@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var shop_node := $Shop
 @onready var workshop_node := $Workshop
+@onready var shop_theme: AudioStreamPlayer = %ShopTheme
 
 ## TODO: Hide button when reaching edge
 
@@ -19,14 +20,14 @@ func _on_button_to_workshop_pressed() -> void:
 func move_scenes(delta_position: Vector2):
 	is_switching_scenes = true
 	var shop_items := get_tree().get_nodes_in_group("shop_items")
-	
+
 	for item in shop_items:
 		var tween := item.create_tween()
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_CIRC)
 		tween.tween_property(item, "position", item.position + Vector2(0, 100), 1.0)
 		tween.play()
-	
+
 	# Create a tween to move from one scene to the other
 	var move_tween := create_tween()
 	move_tween.set_trans(Tween.TRANS_SINE)
@@ -35,9 +36,9 @@ func move_scenes(delta_position: Vector2):
 	move_tween.tween_property(shop_node, "position", shop_node.position - delta_position, 1.0)
 	move_tween.tween_property(workshop_node, "position", workshop_node.position - delta_position, 1.0)
 	move_tween.play()
-	
+
 	await move_tween.finished
-	
+
 	for item in shop_items:
 		#item.position += Vector2(MOVE_AMOUNT)
 		var tween := item.create_tween()
@@ -45,7 +46,7 @@ func move_scenes(delta_position: Vector2):
 		tween.set_trans(Tween.TRANS_CIRC)
 		tween.tween_property(item, "position", item.position - Vector2(0, 100), 0.5)
 		tween.play()
-	
+
 	match shop_node.position:
 		Vector2(0,0):
 			current_scene = "shop"
@@ -76,3 +77,8 @@ func _input(event: InputEvent) -> void:
 	if not is_switching_scenes: return
 	if event.is_action("left_click"):
 		get_viewport().set_input_as_handled()
+
+func _on_day_finished() -> void:
+	shop_theme.pitch_scale = 0.9
+	shop_theme.volume_db = -12
+	shop_theme.bus = "Muffled"

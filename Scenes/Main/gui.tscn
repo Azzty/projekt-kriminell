@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://daxy1umtcc4gy"]
+[gd_scene load_steps=6 format=3 uid="uid://daxy1umtcc4gy"]
 
 [ext_resource type="Script" uid="uid://kn7y26wdpow" path="res://Scripts/UI/gui_updater.gd" id="1_4wgn8"]
 [ext_resource type="FontFile" uid="uid://c6bxrr21jks66" path="res://Assets/fonts/dogicapixel.ttf" id="1_qyd3e"]
 [ext_resource type="Script" uid="uid://b0ay5lfc53d8a" path="res://Scripts/UI/start_game.gd" id="2_bm56d"]
 [ext_resource type="AudioStream" uid="uid://b4xm0mr2hfcgb" path="res://Assets/Audio/Music/Title Screen.wav" id="4_10pva"]
+[ext_resource type="PackedScene" uid="uid://bomieppn02rpb" path="res://Scenes/UI Elements/transition_screen.tscn" id="5_2sa0m"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_4wgn8")
@@ -20,6 +21,7 @@ theme_override_font_sizes/font_size = 48
 text = "MONEY: $0"
 
 [node name="TimeLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -48,6 +50,11 @@ first_scene = "uid://cnr1exbd78fih"
 stream = ExtResource("4_10pva")
 volume_db = -5.0
 autoplay = true
+
+[node name="TransitionScreen" parent="." instance=ExtResource("5_2sa0m")]
+unique_name_in_owner = true
+offset = Vector2(575, 320)
+transform = Transform2D(1, 0, 0, 1, 575, 320)
 
 [connection signal="start_screen_override" from="." to="Button" method="_start_button_pressed" flags=6]
 [connection signal="pressed" from="Button" to="Button" method="_start_button_pressed"]

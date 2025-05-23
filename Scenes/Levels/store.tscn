@@ -355,9 +355,12 @@ theme = ExtResource("11_fs4vs")
 text = "<"
 
 [node name="ShopTheme" type="AudioStreamPlayer" parent="." groups=["music"]]
+unique_name_in_owner = true
+process_mode = 3
 stream = ExtResource("10_prq2a")
 volume_db = -8.0
 autoplay = true
 
+[connection signal="day_finished" from="Shop" to="." method="_on_day_finished"]
 [connection signal="pressed" from="ButtonToShop" to="." method="_on_button_to_shop_pressed"]
 [connection signal="pressed" from="ButtonToWorkshop" to="." method="_on_button_to_workshop_pressed"]

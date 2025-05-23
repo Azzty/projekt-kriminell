@@ -22,6 +22,11 @@ func _ready() -> void:
 		robbery_timer.start()
 		GuiManager.set_timer_visibility(true)
 		return
+
+	$CarStart.play()
+	await get_tree().create_timer(0.5).timeout
+
+	GuiManager.fade_in()
 	trouble_intro.play()
 	player.set_physics_process(false)
 
@@ -79,8 +84,8 @@ func lose_robbery():
 
 	GuiManager.spawn_mission_failed_screen()
 
-func win_robbery():
-	GameState.change_scene.emit("res://Scenes/Levels/store.tscn")
+#func win_robbery():
+	#GameState.change_scene.emit("res://Scenes/Levels/store.tscn")
 
 func _process(_delta: float) -> void:
 	GuiManager.timer_value_changed.emit(robbery_timer.time_left)
@@ -90,3 +95,7 @@ func _exit_tree():
 		camera_position_tween.stop()
 	if camera_zoom_tween:
 		camera_zoom_tween.stop()
+
+func _on_van_exfiltrated() -> void:
+	robbery_timer.stop()
+	if GuiManager.gui: GuiManager.gui.set_timer_visibility(false)

@@ -25,7 +25,7 @@ var multiplier_upgrade := 1.0:
 		multiplier_upgrade = value
 		_update_final_money_multiplier()
 var _final_money_multiplier := 1.0
-var money: int = 500:
+var money: int = 0:
 	set(value):
 		var added_value = value - money
 		if added_value < 0:
@@ -40,8 +40,8 @@ signal money_changed
 var buttons_in_range: Array[Button] = []
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	debug_add_items()
+#func _ready() -> void:
+	#debug_add_items()
 
 func debug_add_items():
 	for i in range(2):

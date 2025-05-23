@@ -1,6 +1,9 @@
 extends Sprite2D
 
+signal exfiltrated
+
 func _on_exfiltrate_button_activated() -> void:
+	exfiltrated.emit()
 	for item in GameState.held_items.duplicate():
 		print("Looping")
 		GameState.add_item_to_inventory(item)

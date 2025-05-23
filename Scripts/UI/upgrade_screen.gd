@@ -9,6 +9,8 @@ var sell_upgrade_cost: int
 signal exit
 
 func _ready() -> void:
+	exit.connect(func(): queue_free())
+
 	_update_speed_button()
 	_update_sell_button()
 

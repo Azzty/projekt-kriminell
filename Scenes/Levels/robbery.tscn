@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cnr1exbd78fih"]
+[gd_scene load_steps=39 format=3 uid="uid://cnr1exbd78fih"]
 
 [ext_resource type="PackedScene" uid="uid://b6uoij4y6jble" path="res://Scenes/player.tscn" id="1_g468e"]
 [ext_resource type="PackedScene" uid="uid://bjqpbkbxs070q" path="res://Scenes/Objects/Static Objects/shelf.tscn" id="2_evns0"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://cyvgournwp0o1" path="res://Assets/Audio/SFX/car crash.wav" id="18_r27xa"]
 [ext_resource type="AudioStream" uid="uid://bm8kfp0ndwaa7" path="res://Assets/Audio/SFX/car accelerating short.wav" id="19_s55f8"]
 [ext_resource type="Texture2D" uid="uid://dip7yjs7t5rjg" path="res://Assets/sprites/wall_broken.png" id="20_k70lc"]
+[ext_resource type="AudioStream" uid="uid://bkf7aj1wa4oa1" path="res://Assets/Audio/SFX/car starting.mp3" id="21_2587q"]
 [ext_resource type="AudioStream" uid="uid://dyvm0btso5ode" path="res://Assets/Audio/Music/Trouble intro.wav" id="21_fr8k7"]
 [ext_resource type="AudioStream" uid="uid://b6tbosjmrydpk" path="res://Assets/Audio/Music/Trouble main.wav" id="22_2587q"]
 [ext_resource type="AudioStream" uid="uid://dmmsprigle8pi" path="res://Assets/Audio/Music/Mission failed.wav" id="24_s55f8"]
@@ -173,7 +174,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_hbk2d"]
 resource_name = "entry"
-length = 5.0
+length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -181,7 +182,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.3, 2.33333, 2.36667, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.73333, 2.76667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666666, 0.0999999, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1, 1.03333, 1.06667, 1.1, 1.13333, 1.16667, 1.2, 1.23333, 1.26667, 1.3, 1.33333, 1.36667, 1.4, 1.43333, 1.46667, 1.5, 1.53333, 1.56667, 1.6, 1.63333, 1.66667, 1.7, 1.73333, 1.76667, 1.8, 1.83333, 1.86667, 1.9, 1.93333, 1.96667, 2, 2.03333, 2.06667, 2.1, 2.13333, 2.16667, 2.2, 2.23333, 2.26667, 2.3, 2.33333, 2.36667, 2.4, 2.43333, 2.46667, 2.5, 2.53333, 2.56667, 2.6, 2.63333, 2.66667, 2.7, 2.73333, 2.76667, 2.8, 2.83333, 2.86667, 2.9, 2.93333, 2.96667, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(9.64993, 605), Vector2(9.64993, 604.998), Vector2(9.64993, 604.988), Vector2(9.64993, 604.959), Vector2(9.64993, 604.902), Vector2(9.64993, 604.809), Vector2(9.64993, 604.67), Vector2(9.64993, 604.476), Vector2(9.64993, 604.218), Vector2(9.64993, 603.886), Vector2(9.64993, 603.472), Vector2(9.64993, 602.967), Vector2(9.64993, 602.36), Vector2(9.64993, 601.643), Vector2(9.64993, 600.808), Vector2(9.64993, 599.844), Vector2(9.64993, 598.742), Vector2(9.64993, 597.494), Vector2(9.64993, 596.09), Vector2(9.64993, 594.521), Vector2(9.64993, 592.778), Vector2(9.64993, 590.851), Vector2(9.64993, 588.732), Vector2(9.64993, 586.411), Vector2(9.64993, 583.88), Vector2(9.64993, 581.128), Vector2(9.64993, 578.148), Vector2(9.64993, 574.929), Vector2(9.64993, 571.462), Vector2(9.64993, 567.739), Vector2(9.64993, 563.75), Vector2(9.64993, 559.486), Vector2(9.64993, 554.938), Vector2(9.64993, 550.096), Vector2(9.64993, 544.952), Vector2(9.64993, 539.497), Vector2(9.64993, 533.72), Vector2(9.64993, 527.613), Vector2(9.64993, 521.168), Vector2(9.64993, 514.374), Vector2(9.64993, 507.222), Vector2(9.64993, 499.704), Vector2(9.64993, 491.81), Vector2(9.64993, 483.531), Vector2(9.64993, 474.858), Vector2(9.64993, 465.781), Vector2(9.64993, 456.292), Vector2(9.64993, 446.382), Vector2(9.64993, 436.04), Vector2(9.64993, 425.258), Vector2(9.64993, 414.028), Vector2(9.64993, 402.339), Vector2(9.64993, 390.182), Vector2(9.64993, 377.549), Vector2(9.64993, 364.43), Vector2(9.64993, 350.816), Vector2(9.64993, 336.698), Vector2(9.64993, 322.066), Vector2(9.64993, 306.912), Vector2(9.64993, 291.227), Vector2(9.64993, 275), Vector2(10.9409, 263.879), Vector2(12.1459, 253.499), Vector2(13.2678, 243.835), Vector2(14.3096, 234.861), Vector2(15.2743, 226.551), Vector2(16.1648, 218.88), Vector2(16.9841, 211.822), Vector2(17.7351, 205.353), Vector2(18.4209, 199.445), Vector2(19.0444, 194.074), Vector2(19.6086, 189.214), Vector2(20.1164, 184.84), Vector2(20.5708, 180.926), Vector2(20.9748, 177.446), Vector2(21.3312, 174.375), Vector2(21.6432, 171.687), Vector2(21.9137, 169.358), Vector2(22.1456, 167.36), Vector2(22.3419, 165.669), Vector2(22.5056, 164.259), Vector2(22.6396, 163.105), Vector2(22.7468, 162.181), Vector2(22.8304, 161.461), Vector2(22.8932, 160.92), Vector2(22.9382, 160.532), Vector2(22.9684, 160.273), Vector2(22.9867, 160.115), Vector2(22.9961, 160.034), Vector2(22.9995, 160.004), Vector2(23, 160)]
@@ -551,7 +552,6 @@ rotation = 0.232991
 [node name="RobberyLogic" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("16_r27xa")
-enabled = false
 
 [node name="Van" parent="RobberyLogic" instance=ExtResource("16_vum6h")]
 position = Vector2(9.64993, 605)
@@ -593,6 +593,10 @@ libraries = {
 stream = ExtResource("18_r27xa")
 volume_db = -12.0
 
+[node name="CarStart" type="AudioStreamPlayer" parent="RobberyLogic"]
+stream = ExtResource("21_2587q")
+volume_db = -12.0
+
 [node name="CarAccelerating" type="AudioStreamPlayer" parent="RobberyLogic"]
 stream = ExtResource("19_s55f8")
 volume_db = -7.0
@@ -631,3 +635,5 @@ unique_name_in_owner = true
 process_mode = 3
 wait_time = 30.0
 one_shot = true
+
+[connection signal="exfiltrated" from="RobberyLogic/Van" to="RobberyLogic" method="_on_van_exfiltrated"]
